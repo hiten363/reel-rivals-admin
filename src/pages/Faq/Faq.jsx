@@ -33,18 +33,18 @@ const Faq = ({ notify }) => {
     {
       name: 'Question',
       selector: row => row.question,
-      sortable: true
+      // sortable: true
     },
     {
       name: 'Answer',
       selector: row => <span className='my-2 block'>{`${row.answer.slice(0,140)} ${row.answer?.length>140 && '...'}`}</span>,
       wrap: true,
-      sortable: true
+      // sortable: true
     },
     {
       name: 'Status',
       selector: row => row.status === 'true' ? <span className='text-green-500 font-semibold'>Active</span> : <span className='text-red-500 font-semibold'>Deleted</span>,
-      sortable: true,
+      // sortable: true,
       // grow: 0.1
     },
     {

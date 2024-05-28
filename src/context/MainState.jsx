@@ -565,11 +565,12 @@ const MainState = (props) => {
     }
   };
 
-  const createUser = async ({ name, email, phone, password, role, userPermissions, address, file }) => {
+  const createUser = async ({ name, email, userName, phone, password, role, userPermissions, address, file }) => {
     try {
       const formdata=new FormData();
       formdata.append('name', name);
       formdata.append('email', email);
+      formdata.append('userName', userName);
       formdata.append('phone', phone);
       formdata.append('password', password);
       formdata.append('role', role);
@@ -583,9 +584,9 @@ const MainState = (props) => {
     }
   };
 
-  const updateUser = async ({ _id, name, phone }) => {
+  const updateUser = async ({ _id, name, phone, userName }) => {
     try {
-      const data = await putRequest(`${baseUrl}/user/updateUser/${_id}`, { name, phone }, false, props, false);
+      const data = await putRequest(`${baseUrl}/user/updateUser/${_id}`, { name, phone, userName }, false, props, false);
       return data;
     } catch (error) {
       console.log(error);

@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 const schema = Yup.object().shape({
   name: Yup.string().required().matches(/^\D*$/, 'Name should not contain integers').min(3).max(30),
   email: Yup.string().email().required(),
-  phone: Yup.string().matches(/^[0-9]+$/, 'Must contain only numbers').min(10).max(10).required(),
+  // phone: Yup.string().notRequired().matches(/^[0-9]+$/, 'Phone Number must contain only numbers').min(10).max(10).required(),
   password: Yup.string().required().matches(
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).+$/,
     'Password must contain at least one lowercase letter, one uppercase letter, and one special character'
@@ -22,6 +22,7 @@ const AddUserModal = (props) => {
     name: '',
     email: '',
     phone: '',
+    userName: '',
     password: '',
     password1: '',
     role: 'USER',
@@ -68,6 +69,7 @@ const AddUserModal = (props) => {
             name: '',
             email: '',
             phone: '',
+            userName: '',
             password: '',
             password1: '',
             role: 'SUBADMIN',
@@ -113,10 +115,16 @@ const AddUserModal = (props) => {
                     <Spinner />
                   </div>
                   <div className="grid gap-6 px-0.5 py-0.5 mb-6 md:grid-cols-2">
-                    <div className='relative h-10'>
+                    <div className=''>
                       <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Name</label>
-                      <input type="text" id="name" name="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter User Name .." onChange={handleChange} value={value.name} required />
+                      <input type="text" id="name" name="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Name .." onChange={handleChange} value={value.name} required />
                     </div>
+
+                    <div className=''>
+                      <label htmlFor="userName" className="block mb-2 text-sm font-medium text-gray-900 ">Username</label>
+                      <input type="text" id="userName" name="userName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter User Name .." onChange={handleChange} value={value.userName} required />
+                    </div>
+
                     <div>
                       <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 ">Email</label>
                       <input type="email" id="email" name='email' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter User Email .." onChange={handleChange} value={value.email} required />

@@ -49,7 +49,8 @@ const Contact = ({ notify }) => {
     {
       name: 'Message',
       selector: row => row.message,
-      sortable: true
+      sortable: true,
+      wrap: true
     },
     {
       name: 'Status',
