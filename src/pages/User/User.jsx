@@ -40,7 +40,7 @@ const User = ({ notify }) => {
       selector: row => <ModalImage
         small={row?.img ? row?.img : '/img/user.png'}
         large={row?.img ? row?.img : '/img/user.png'}
-        className='w-16 h-16 object-cover'
+        className='w-12 h-12 object-cover'
       />,
       sortable: true,
       grow: 0.4
@@ -49,6 +49,12 @@ const User = ({ notify }) => {
       name: 'Name',
       // selector: row => <NavLink to={`/dashboard/user/${row._id}/${row.name}/0/0`}>{row.name}</NavLink>,
       selector: row => row.name,
+      sortable: true
+    },
+    {
+      name: 'Username',
+      // selector: row => <NavLink to={`/dashboard/user/${row._id}/${row.name}/0/0`}>{row.name}</NavLink>,
+      selector: row => row.userName,
       sortable: true
     },
     {
