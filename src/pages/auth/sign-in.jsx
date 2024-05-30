@@ -41,14 +41,15 @@ export function SignIn({notify}) {
 
   return (
     <section className="m-8 flex gap-4">
-      <div className="w-full mt-24">
+      <div className="w-full mt-6">
         <div className="text-center">
-          <Typography variant="h2" className="font-bold mb-4">Reel Rivals Admin</Typography>
-          <Typography variant="h4" className="font-bold mb-4">Sign In</Typography>
+          <img className="mx-auto" src="/img/logo.png" />
+
+          <Typography variant="h4" className="font-bold mb-1 mt-6">Admin Sign In</Typography>
           <Typography variant="paragraph" color="blue-gray" className="text-lg font-normal">Enter your email and password to Sign In.</Typography>
         </div>
 
-        <form className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg" onSubmit={handleSubmit}>
+        <form className="mt-3 mb-2 mx-auto w-80 max-w-screen-lg" onSubmit={handleSubmit}>
           <div className="mb-1 flex flex-col gap-6">
             <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
               Your email
