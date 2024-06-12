@@ -47,7 +47,7 @@ const User = ({ notify }) => {
     },
     {
       name: 'Name',
-      // selector: row => <NavLink to={`/dashboard/user/${row._id}/${row.name}/0/0`}>{row.name}</NavLink>,
+      // selector: row => <NavLink to={`/dashboard/user/${row._id}/${row.name}`}>{row.name}</NavLink>,
       selector: row => row.name,
       sortable: true
     },
@@ -65,6 +65,16 @@ const User = ({ notify }) => {
     {
       name: 'Phone',
       selector: row => row.phone && row.phone !== "undefined" ? row.phone : ' - ',
+      sortable: true
+    },
+    {
+      name: 'Country',
+      selector: row => row.country && row.country !== "undefined" && row.country.label ? row.country.label : ' - ',
+      sortable: true
+    },
+    {
+      name: 'State',
+      selector: row => row.state && row.state !== "undefined" && row.state.label ? row.state.label : ' - ',
       sortable: true
     },
     // {

@@ -29,10 +29,12 @@ import Winners1 from "@/pages/Winners/Winners";
 import Media from "@/pages/Media/Media";
 import Testimonial from "@/pages/Testimonial/Testimonial";
 import Statistics from "@/pages/Statistics/Statistics";
-import EventUsers from "@/pages/User/EventUsers";
+import EventUsers from "@/pages/User/ContestUsers";
 import UserDetails1 from "@/pages/User/UserDetails1";
 import Category from "@/pages/Category/Category";
 import Contest from "@/pages/Contest/Contest";
+import Reels from "@/pages/Reels/Reels";
+import ContestUsers from "@/pages/User/ContestUsers";
 
 export function Dashboard({ notify }) {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -63,11 +65,12 @@ export function Dashboard({ notify }) {
         <Routes>
           <Route path={'/home'} element={<Home notify={notify} />} />
           <Route path={'/users'} element={<User notify={notify} />} />
-          <Route path={'/user/:id/:name/:eventId/:eventName'} element={<UserDetails notify={notify} />} />
+          <Route path={'/user/:id/:name'} element={<ContestUsers notify={notify} />} />
           <Route path={'/user/:id/:name/:eventId/:eventName/:flag'} element={<UserDetails1 notify={notify} />} />
           <Route path={'/blogs'} element={<Blog notify={notify} />} />
           <Route path={'/categories'} element={<Category notify={notify} />} />
           <Route path={'/contests'} element={<Contest notify={notify} />} />
+          <Route path={'/reels'} element={<Reels notify={notify} />} />
           <Route path={'/user-enquiry'} element={<Contact notify={notify} />} />
           <Route path={'/faq'} element={<Faq notify={notify} />} />
           <Route path={'/news-media'} element={<Media notify={notify} />} />

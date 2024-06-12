@@ -11,80 +11,77 @@ import { NavLink, useParams } from 'react-router-dom';
 import ModalImage from "react-modal-image";
 import xlsx from "json-as-xlsx";
 
-const EventUsers = ({ notify }) => {
-  const { getUsers, getDraws } = useMain();
+const ContestUsers = ({ notify }) => {
+  const { getUsers, getContests, getCategorys } = useMain();
 
-  const { eventId, name } = useParams();
+  const { userId, name } = useParams();
 
   const [data, setData] = useState([]);
   const [refreshFlag, setRefreshFlag] = useState(false);
   const [value, setValue] = useState({
     role: '',
     status: '',
-    query: '',
-    userFilter: ''
+    category: ''
   });
   const [loadFlag, setLoadFlag] = useState(true);
   const [totalRows, setTotalRows] = useState(0);
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
-  const [eventDetail, setEventDetail] = useState({});
-  const [winners, setWinners] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     getData();
   }, [refreshFlag, page, perPage]);
 
+  useEffect(()=>{
+    getData1();
+  },[]);
+
   const columns = [
+    // {
+    //   name: 'Image',
+    //   selector: row => <ModalImage
+    //     small={row?.img ? row?.img : '/img/user.png'}
+    //     large={row?.img ? row?.img : '/img/user.png'}
+    //     className='w-14'
+    //   />,
+    //   sortable: true,
+    //   grow: 0.4
+    // },
     {
-      name: 'Profile',
-      // selector: row => <img src={row?.img ? row?.img : '/img/user.png'} style={{width: '50px', padding:'5px 0px'}} />,
-      selector: row => <ModalImage
-        small={row?.img ? row?.img : '/img/user.png'}
-        large={row?.img ? row?.img : '/img/user.png'}
-        className='w-14'
-      />,
-      sortable: true,
-      grow: 0.4
-    },
-    {
-      name: 'Name',
-      selector: row => <NavLink to={value?.userFilter === 'true' ? `/dashboard/user/${row._id}/${row.name}/${eventId}/${name}/true` : `/dashboard/user/${row._id}/${row.name}/${eventId}/${name}`}>{row.name}</NavLink>,
+      name: 'Contest Name',
+      selector: row => row.title,
       sortable: true
     },
     {
-      name: 'Email',
+      name: 'Contest Category',
       selector: row => row.email,
       sortable: true
     },
     {
-      name: 'Phone',
-      selector: row => row.phone && row.phone !== "undefined" ? row.phone : ' - ',
-      sortable: true
+      name: 'Start Date',
+      selector: row => new Date(Number(row.startDate)).toLocaleDateString('en-GB'),
+      // sortable: true,
+      wrap: true
+    },
+    {
+      name: 'End Date',
+      selector: row => new Date(Number(row.endDate)).toLocaleDateString('en-GB'),
+      // sortable: true,
+      wrap: true
     }
   ];
 
   const getData = async () => {
     setLoadFlag(true);
-    const ans = await getUsers(value.status, value.role, value.query, page, perPage, '', eventId);
-    const ans1 = await getDraws(eventId);
-
-    setEventDetail(ans1.data?.[0]);
-    let t = [];
-    for (let i of ans1.data?.[0]?.events) {
-      for (let j of i?.users) {
-        t.push(j?.user?._id);
-      }
-    }
-    setWinners(t);
-
-    // console.log(ans);
-    setTotalRows(ans.count);
-    setData([...ans.data.sort((a, b) => {
-      return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
-    })]);
-
+    const ans = await getContests('', '', page, perPage, '', value.category, '', '', value.status, userId);
+    setData(ans.data);
     setLoadFlag(false);
+  };
+
+  const getData1=async()=>{
+    const ans2 = await getCategorys('', true);
+    setCategories(ans2.data);
   };
 
   const handleChange = (e, name = '') => {
@@ -99,16 +96,11 @@ const EventUsers = ({ notify }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(value);
-    const ans = await getUsers(value.status, value.role, value.query, 1, perPage, '', eventId);
+    const ans = await getContests('', '', page, perPage, '', value.category, '', '', value.status, userId);
     setTotalRows(ans.count);
     setPage(1);
     // console.log(ans);
-    if (value?.userFilter === "true") {
-      setData(ans.data.filter(x => winners.includes(x._id)));
-    }
-    else {
-      setData(ans.data);
-    }
+    setData(ans.data);
   };
 
   // const fetchUsers = async page => {
@@ -159,27 +151,39 @@ const EventUsers = ({ notify }) => {
           <CardHeader variant="gradient" color="gray" className="mb-8 p-6">
             <div className="flex items-center justify-between">
               <Typography variant="h6" color="white">
-                Manage Event Users
+                Manage User Contests
               </Typography>
 
-              <Button color="red" className='ml-2' onClick={handleExport} children="Export Users">Export Users</Button>
+              {/* <Button color="red" className='ml-2' onClick={handleExport} children="Export Users">Export Users</Button> */}
             </div>
           </CardHeader>
 
           <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
             {!loadFlag && <form className="flex items-center justify-end px-10 pt-3" onSubmit={handleSubmit}>
-              <div className='mx-2'>
+              {/* <div className='mx-2'>
                 <Input label="Search .." name="query" onChange={handleChange} value={value.query} />
+              </div> */}
+
+              <div className='mx-2 mb-2'>
+                <select id="category" name="category" onChange={handleChange} value={value?.category} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-52 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <option value=''>Select Category</option>
+                  {categories?.map((e, index) => {
+                    return (
+                      <option key={index} value={e._id}>{e?.title}</option>
+                    );
+                  })}
+                </select>
               </div>
 
-              {eventDetail?.status === "false" && <div className="flex items-center mr-2">
-                <Select label="Filter Users" children={<p>Filter Users</p>} onChange={(e) => {
-                  handleChange(e, 'userFilter');
+              <div className="flex items-center mr-2">
+                <Select label="Filter Contests" children={<p>Filter Contests</p>} onChange={(e) => {
+                  handleChange(e, 'status');
                 }}>
-                  <Option value="false" children={<p>All Users</p>}>All Users</Option>
-                  <Option value="true" children={<p>Winners</p>}>Winners</Option>
+                  <Option value="" children={<p>All Contests</p>}>All Contests</Option>
+                  <Option value="false" children={<p>Active Contests</p>}>Active Contests</Option>
+                  <Option value="true" children={<p>Inactive Contests</p>}>Inactive Contests</Option>
                 </Select>
-              </div>}
+              </div>
 
               <Button type='submit' children="Filter" size='sm' className='ml-3'>Filter</Button>
             </form>}
@@ -192,7 +196,7 @@ const EventUsers = ({ notify }) => {
               columns={columns}
               data={data}
               striped={true}
-              title="Users"
+              title="User Contests"
               progressPending={loadFlag}
               pagination
               paginationServer
@@ -208,4 +212,4 @@ const EventUsers = ({ notify }) => {
   );
 };
 
-export default EventUsers;
+export default ContestUsers;

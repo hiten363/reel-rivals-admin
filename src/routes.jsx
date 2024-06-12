@@ -7,6 +7,7 @@ import {
   QuestionMarkCircleIcon,
   ClipboardDocumentIcon,
   NewspaperIcon,
+  VideoCameraIcon,
   EllipsisHorizontalCircleIcon,
   PresentationChartLineIcon,
   TicketIcon,
@@ -48,6 +49,7 @@ import Media from "./pages/Media/Media";
 import Testimonial from "./pages/Testimonial/Testimonial";
 import Statistics from "./pages/Statistics/Statistics";
 import Winners from "./pages/DrawResults/Winner";
+import Reels from "./pages/Reels/Reels";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -87,6 +89,12 @@ export const routes = [
       //   path: "/charity",
       //   element:(notify)=>  <Charity notify={notify} />
       // },
+      {
+        icon: <VideoCameraIcon {...icon} />,
+        name: "Reels",
+        path: "/reels",
+        element:(notify)=>  <Reels notify={notify} />
+      },
       {
         icon: <QueueListIcon {...icon} />,
         name: "Categories",

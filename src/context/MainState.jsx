@@ -450,9 +450,9 @@ const MainState = (props) => {
     }
   };
 
-  const getContests = async (id, status, page, perPage, deleted, category, startDate, endDate) => {
+  const getContests = async (id, status, page, perPage, deleted, category, startDate, endDate, activeOnly, user) => {
     try {
-      const data = await getRequest(`${baseUrl}/contest/getContests?id=${id}&status=${status}&page=${page}&perPage=${perPage}&deleted=${deleted}&category=${category}&startDate=${startDate}&endDate=${endDate}`, false, props);
+      const data = await getRequest(`${baseUrl}/contest/getContests?id=${id}&status=${status}&page=${page}&perPage=${perPage}&deleted=${deleted}&category=${category}&startDate=${startDate}&endDate=${endDate}&activeOnly=${activeOnly}&user=${user}`, false, props);
       return data;
     } catch (error) {
       console.log(error);
@@ -1074,8 +1074,205 @@ const MainState = (props) => {
     }
   };
 
+  const getVideos = async (id, category, contest, isActive, user, status, query, activeFlag, page, perPage) => {
+    try {
+        const data = await getRequest(`${baseUrl}/video/getVideos?id=${id}&category=${category}&contest=${contest}&isActive=${isActive}&user=${user}&status=${status}&query=${query}&page=${page}&activeFlag=${activeFlag}&perPage=${perPage}`, false, props);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const postVideo = async ({ caption, category, contest, regionCountry, regionState, file }) => {
+    try {
+        let formdata=new FormData();
+        formdata.append('caption', caption);
+        formdata.append('category', category);
+        formdata.append('contest', contest);
+        formdata.append('regionCountry', JSON.stringify(regionCountry));
+        formdata.append('regionState', JSON.stringify(regionState));
+        formdata.append('file', file);
+        const data = await postRequest(`${baseUrl}/video/postVideo`, formdata, true, props, true);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const updateVideo = async ({ id, caption, category, contest, regionCountry, regionState, isActive }) => {
+    try {
+        let formdata=new FormData();
+        formdata.append('caption', caption);
+        formdata.append('category', category);
+        formdata.append('contest', contest);
+        formdata.append('regionCountry', JSON.stringify(regionCountry));
+        formdata.append('regionState', JSON.stringify(regionState));
+        formdata.append('isActive', JSON.stringify(isActive));
+        formdata.append('file', file);
+        const data = await putRequest(`${baseUrl}/video/updateVideo/${id}`, formdata, true, props, false);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const undoVideo = async ({ id }) => {
+    try {
+        const data = await putRequest(`${baseUrl}/video/undoVideo/${id}`, {}, true, props, false);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const deleteVideo = async (id) => {
+    try {
+        const data = await deleteRequest(`${baseUrl}/video/deleteVideo/${id}`, {}, true, props);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const getComment = async (id, video, user, status, page, perPage) => {
+    try {
+        const data = await getRequest(`${baseUrl}/comment/getComments?status=${status}&id=${id}&video=${video}&user=${user}&page=${page}&perPage=${perPage}`, false, props);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const postComment = async ({ video, text }) => {
+    try {
+        const data = await postRequest(`${baseUrl}/comment/postComment`, { video, text }, true, props, true);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const updateComment = async ({ id, text, likes }) => {
+    try {
+        const data = await putRequest(`${baseUrl}/comment/updateComment/${id}`, { likes, text }, true, props, false);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const undoComment = async ({ id }) => {
+    try {
+        const data = await putRequest(`${baseUrl}/comment/undoComment/${id}`, {}, true, props, false);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const deleteComment = async (id) => {
+    try {
+        const data = await deleteRequest(`${baseUrl}/comment/deleteComment/${id}`, {}, true, props);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const getReplys = async (id, comment, video, user, status, page, perPage) => {
+    try {
+        const data = await getRequest(`${baseUrl}/reply/getReplys?status=${status}&id=${id}&comment=${comment}&video=${video}&user=${user}&page=${page}&perPage=${perPage}`, false, props);
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const postReply1 = async ({ comment, video, text, parent, parentUser }) => {
+    try {
+        const data = await postRequest(`${baseUrl}/reply/postReply`, { comment, video, text, parent, parentUser }, true, props, false);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const updateReply = async ({ id }) => {
+    try {
+        const data = await putRequest(`${baseUrl}/reply/updateReply/${id}`, { title, subtitle, desc, coupanOffered, type, period, amount, discount }, true, props, false);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const undoReply = async ({ id }) => {
+    try {
+        const data = await putRequest(`${baseUrl}/reply/undoReply/${id}`, {}, true, props, false);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const deleteReply = async (id) => {
+    try {
+        const data = await deleteRequest(`${baseUrl}/reply/deleteReply/${id}`, {}, true, props);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const getNotifications = async (id, type, user, status, page, perPage) => {
+    try {
+        const data = await getRequest(`${baseUrl}/notification/getNotifications?status=${status}&id=${id}}&perPage=${perPage}}&page=${page}}&user=${user}}&type=${type}`, false, props);
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const postNotification = async ({ type, video, text, userReceiver }) => {
+    try {
+        const data = await postRequest(`${baseUrl}/notification/postNotification`, { type, video, text, userReceiver }, true, props, true);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const updateNotification = async ({ id, status }) => {
+    try {
+        const data = await putRequest(`${baseUrl}/notification/updateNotification/${id}`, { status }, true, props, false);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const undoNotification = async ({ id }) => {
+    try {
+        const data = await putRequest(`${baseUrl}/notification/undoNotification/${id}`, {}, true, props, false);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const deleteNotification = async (id) => {
+    try {
+        const data = await deleteRequest(`${baseUrl}/notification/deleteNotification/${id}`, {}, true, props);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
   return (
-    <MainContext.Provider value={{ getBlogs, postBlog, updateBlog, deleteBlog, deleteAllBlogs, getContacts, deleteContact, signup, login, adminLogin, getUsers, createUser, updateUser, updateUserStatus, uploadImage, undoBlog, getFaqs, postFaq, updateFaq, deleteFaq, getTermss, postTerms, updateTerms, postReply, undoFaq, getPrivacys, postPrivacy, updatePrivacy, getSubscriptions, postSubscription, updateSubscription, undoSubscription, deleteSubscription, getCoupans, postCoupan, postCoupanBulk, assignCoupansToUser, updateCoupan, revealCoupan, undoCoupan, deleteCoupan, getPayments, getThemeControls, postThemeControls, updateThemeControls, deletePayment, getDashboardData, getCategorys, postCategory, updateCategory, deleteCategoryImage, deleteCategory, deleteAllCategorys, getContests, postContest, drawResults, updateContest, deleteContest, deleteAllContests, getCareers, postCareer, updateCareer, deleteCareer, deleteAllCareers, getPartners, postPartner, updatePartner, deletePartner, deleteAllPartners, getCharitys, postCharity, updateCharity, deleteCharity, deleteAllCharitys, getRuless, postRules, updateRules, undoGiftCard, getGiftCards, postGiftCard, updateGiftCard, deleteGiftCard, getNewsLetters, undoContest, undoCareer, undoPartner, undoCharity, undoCategory, undoMedia, getMedias, postMedia, deleteMedia, getTestimonials, postTestimonial, undoTestimonial, deleteTestimonial, updateTestimonial, deleteAllTestimonials, getStatisticss, postStatistics, updateStatistics }}>
+    <MainContext.Provider value={{ getBlogs, postBlog, updateBlog, deleteBlog, deleteAllBlogs, getContacts, deleteContact, signup, login, adminLogin, getUsers, createUser, updateUser, updateUserStatus, uploadImage, undoBlog, getFaqs, postFaq, updateFaq, deleteFaq, getTermss, postTerms, updateTerms, postReply, undoFaq, getPrivacys, postPrivacy, updatePrivacy, getSubscriptions, postSubscription, updateSubscription, undoSubscription, deleteSubscription, getCoupans, postCoupan, postCoupanBulk, assignCoupansToUser, updateCoupan, revealCoupan, undoCoupan, deleteCoupan, getPayments, getThemeControls, postThemeControls, updateThemeControls, deletePayment, getDashboardData, getCategorys, postCategory, updateCategory, deleteCategoryImage, deleteCategory, deleteAllCategorys, getContests, postContest, drawResults, updateContest, deleteContest, deleteAllContests, getCareers, postCareer, updateCareer, deleteCareer, deleteAllCareers, getPartners, postPartner, updatePartner, deletePartner, deleteAllPartners, getCharitys, postCharity, updateCharity, deleteCharity, deleteAllCharitys, getRuless, postRules, updateRules, undoGiftCard, getGiftCards, postGiftCard, updateGiftCard, deleteGiftCard, getNewsLetters, undoContest, undoCareer, undoPartner, undoCharity, undoCategory, undoMedia, getMedias, postMedia, deleteMedia, getTestimonials, postTestimonial, undoTestimonial, deleteTestimonial, updateTestimonial, deleteAllTestimonials, getStatisticss, postStatistics, updateStatistics, getVideos, postVideo, updateVideo, undoVideo, deleteVideo, getComment, postComment, updateComment, undoComment, deleteComment, getReplys, postReply1, updateReply, undoReply, deleteReply, getNotifications, postNotification, updateNotification, undoNotification, deleteNotification }}>
       {props.children}
     </MainContext.Provider>
   );
