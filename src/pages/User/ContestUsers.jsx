@@ -7,7 +7,7 @@ import EditUserModal from './Modals/EditUserModal';
 import DeleteModal from '../../Util/DeleteModal';
 import useMain from '../../hooks/useMain';
 import { Button, Card, CardBody, CardHeader, Typography, Select, Option, Input } from '@material-tailwind/react';
-import { NavLink, useParams } from 'react-router-dom';
+import { Link, NavLink, useParams } from 'react-router-dom';
 import ModalImage from "react-modal-image";
 import xlsx from "json-as-xlsx";
 
@@ -50,12 +50,12 @@ const ContestUsers = ({ notify }) => {
     // },
     {
       name: 'Contest Name',
-      selector: row => row.title,
+      selector: row => <Link to={`/dashboard/reels/${name}/${userId}/${row.title}/${row._id}`}>{row.title}</Link>,
       sortable: true
     },
     {
       name: 'Contest Category',
-      selector: row => row.email,
+      selector: row => row.category.title,
       sortable: true
     },
     {
@@ -164,7 +164,7 @@ const ContestUsers = ({ notify }) => {
                 <Input label="Search .." name="query" onChange={handleChange} value={value.query} />
               </div> */}
 
-              <div className='mx-2 mb-2'>
+              <div className='mx-2 mb-0'>
                 <select id="category" name="category" onChange={handleChange} value={value?.category} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-52 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                   <option value=''>Select Category</option>
                   {categories?.map((e, index) => {
@@ -180,23 +180,23 @@ const ContestUsers = ({ notify }) => {
                   handleChange(e, 'status');
                 }}>
                   <Option value="" children={<p>All Contests</p>}>All Contests</Option>
-                  <Option value="false" children={<p>Active Contests</p>}>Active Contests</Option>
-                  <Option value="true" children={<p>Inactive Contests</p>}>Inactive Contests</Option>
+                  <Option value="true" children={<p>Active Contests</p>}>Active Contests</Option>
+                  <Option value="false" children={<p>Past Contests</p>}>Past Contests</Option>
                 </Select>
               </div>
 
               <Button type='submit' children="Filter" size='sm' className='ml-3'>Filter</Button>
             </form>}
 
-            <div className='ml-4 mt-2'>
+            {/* <div className='ml-4 mt-2'>
               <h3 className='text-2xl text-black'>{name}</h3>
-            </div>
+            </div> */}
 
             <DataTable
               columns={columns}
               data={data}
               striped={true}
-              title="User Contests"
+              title={`${name}'s Contests`}
               progressPending={loadFlag}
               pagination
               paginationServer

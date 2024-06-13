@@ -7,6 +7,7 @@ import useMain from '../../hooks/useMain';
 import { Button, Card, CardBody, CardHeader, Typography } from '@material-tailwind/react';
 import { Select, Option, Input } from "@material-tailwind/react";
 import ModalImage from 'react-modal-image';
+import { Link } from 'react-router-dom';
 
 const Category = ({ notify }) => {
   const { getCategorys, deleteCategory, undoCategory } = useMain();
@@ -42,7 +43,7 @@ const Category = ({ notify }) => {
     },
     {
       name: 'Title',
-      selector: row => <p>{row.title}</p>,
+      selector: row => <Link to={`/dashboard/contests-categories/${row.title}/${row._id}`}>{row.title}</Link>,
       // sortable: true
     },
     {

@@ -638,9 +638,9 @@ const MainState = (props) => {
     }
   };
 
-  const getUsers = async (status, role, query, page, perPage, user, event) => {
+  const getUsers = async (status, role, query, page, perPage, user, contest) => {
     try {
-      const data = await getRequest(`${baseUrl}/user/getUsers?status=${status}&role=${role}&query=${query}&page=${page}&perPage=${perPage}&user=${user}&event=${event}`, true, props);
+      const data = await getRequest(`${baseUrl}/user/getUsers?status=${status}&role=${role}&query=${query}&page=${page}&perPage=${perPage}&user=${user}&contest=${contest}`, true, props);
       return data;
     } catch (error) {
       console.log(error);

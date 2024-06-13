@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
-import AddContestModal from './Modals/AddContestModal';
-import EditContestModal from './Modals/EditContestModal';
 import DeleteModal from '../../Util/DeleteModal';
 import useMain from '../../hooks/useMain';
 import { Button, Card, CardBody, CardHeader, Typography } from '@material-tailwind/react';
 import { Select, Option, Input } from "@material-tailwind/react";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ModalImage from "react-modal-image";
 import xlsx from "json-as-xlsx";
 
@@ -93,9 +91,10 @@ const WinnerList = ({ data }) => {
   );
 };
 
-const Contest = ({ notify }) => {
+const CategoryContests = ({ notify }) => {
   const { getContests, deleteContest, undoContest, getCategorys } = useMain();
-  // console.log('yes');
+
+  const {categoryName, categoryId}=useParams();
 
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
@@ -173,7 +172,7 @@ const Contest = ({ notify }) => {
     {
       name: "Actions",
       selector: row => <div className="flex justify-center">
-        {row?.deleted === 'false' && <div onClick={() => {
+        {/* {row?.deleted === 'false' && <div onClick={() => {
           setData1(row);
 
           document.getElementById('editContestModal').classList.toggle('hidden');
@@ -182,7 +181,7 @@ const Contest = ({ notify }) => {
             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
             <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
           </svg>
-        </div>}
+        </div>} */}
 
         <div onClick={async () => {
           if (row.deleted === "false") {
@@ -211,13 +210,14 @@ const Contest = ({ notify }) => {
           </svg>}
         </div>
       </div>,
-      grow: 0.5
+      grow: 0.5,
+      center: true
     }
   ];
 
   const getData = async () => {
     setLoadFlag(true);
-    const ans = await getContests('', value.status, page, perPage, value.deleted);
+    const ans = await getContests('', value.status, page, perPage, value.deleted, categoryId);
     setData(ans.data);
     setTotalRows(ans.count);
 
@@ -253,7 +253,7 @@ const Contest = ({ notify }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(value);
-    const ans = await getContests('', value.status, 1, perPage, value.deleted, value.category, value.startDate && value.startDate!=="" ? new Date(value.startDate).getTime() : '', value.endDate && value.endDate!=="" ? new Date(value.endDate).getTime() : "");
+    const ans = await getContests('', value.status, 1, perPage, value.deleted, value.category, value.startDate && value.startDate !== "" ? new Date(value.startDate).getTime() : '', value.endDate && value.endDate !== "" ? new Date(value.endDate).getTime() : "");
     setTotalRows(ans.count);
     setPage(1);
     console.log(ans);
@@ -296,8 +296,6 @@ const Contest = ({ notify }) => {
 
   return (
     <>
-      <AddContestModal setRefreshFlag={setRefreshFlag} refreshFlag={refreshFlag} notify={notify} />
-      <EditContestModal data={data1} setRefreshFlag={setRefreshFlag} refreshFlag={refreshFlag} notify={notify} />
       <DeleteModal msg={msg} handleDelete={handleDelete} />
 
       <div className="mt-12 mb-8 flex flex-col gap-12">
@@ -309,9 +307,9 @@ const Contest = ({ notify }) => {
               </Typography>
 
               <div>
-                <Button color="red" onClick={() => {
+                {/* <Button color="red" onClick={() => {
                   document.getElementById('addContestModal').classList.toggle('hidden');
-                }} children="Add Contest +">Add Contest +</Button>
+                }} children="Add Contest +">Add Contest +</Button> */}
                 {/* <Button color="red" className='ml-2' onClick={handleExport} children="Export Users">Export Contests</Button> */}
               </div>
             </div>
@@ -324,28 +322,6 @@ const Contest = ({ notify }) => {
               </div> */}
 
               <div className='flex items-center justify-end px-10 pt-3'>
-                <div className="flex items-center mr-2 max-w-sm">
-                  {/* <Select label="Category" children={<p>Category</p>} onChange={(e) => {
-                  handleChange(e, 'category');
-                }} value={value?.category}>
-                  <Option value="" children={<p>Select Category</p>}>Select Category</Option>
-                  {categories?.map((e, index) => {
-                    return (
-                      <Option key={index} value={e._id} children={<p>{e?.title}</p>}>{e?.title}</Option>
-                    );
-                  })}
-                </Select> */}
-
-                  <select id="category" name="category" onChange={handleChange} value={value?.category} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-52 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option value=''>Select Category</option>
-                    {categories?.map((e, index) => {
-                      return (
-                        <option key={index} value={e._id}>{e?.title}</option>
-                      );
-                    })}
-                  </select>
-                </div>
-
                 <div className="flex items-center mr-2">
                   <Select label="Is Deleted?" children={<p>Is Deleted?</p>} onChange={(e) => {
                     handleChange(e, 'deleted');
@@ -376,7 +352,7 @@ const Contest = ({ notify }) => {
               columns={columns}
               data={data}
               striped={true}
-              title="Contests"
+              title={`${categoryName} Contests`}
               progressPending={loadFlag}
               pagination
               paginationServer
@@ -394,4 +370,4 @@ const Contest = ({ notify }) => {
   );
 };
 
-export default Contest;
+export default CategoryContests;

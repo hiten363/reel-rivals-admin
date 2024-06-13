@@ -9,8 +9,7 @@ import PlayReelModal from './Modals/PlayReelModal';
 
 const Reels = ({ notify }) => {
   const { getVideos, getUsers, getContests, getCategorys, deleteVideo, undoVideo } = useMain();
-  // console.log('yes');
-
+ 
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
   const [id, setId] = useState(0);

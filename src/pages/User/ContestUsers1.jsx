@@ -7,12 +7,14 @@ import EditUserModal from './Modals/EditUserModal';
 import DeleteModal from '../../Util/DeleteModal';
 import useMain from '../../hooks/useMain';
 import { Button, Card, CardBody, CardHeader, Typography, Select, Option, Input } from '@material-tailwind/react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import ModalImage from "react-modal-image";
 import xlsx from "json-as-xlsx";
 
-const User = ({ notify }) => {
+const ContestUser1 = ({ notify }) => {
   const { getUsers, deleteUser, updateUserStatus } = useMain();
+
+  const {contestName, contestId }=useParams();
 
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
@@ -47,7 +49,7 @@ const User = ({ notify }) => {
     },
     {
       name: 'Name',
-      selector: row => <NavLink to={`/dashboard/user/${row._id}/${row.name}`}>{row.name}</NavLink>,
+      selector: row => <NavLink to={`/dashboard/reels/${row.name}/${row._id}/${contestName}/${contestId}`}>{row.name}</NavLink>,
       // selector: row => row.name,
       sortable: true
     },
@@ -138,7 +140,7 @@ const User = ({ notify }) => {
 
   const getData = async () => {
     setLoadFlag(true);
-    const ans = await getUsers(value.status, value.role, value.query, page, perPage);
+    const ans = await getUsers(value.status, value.role, value.query, page, perPage, '', contestId);
     // console.log(ans);
     setTotalRows(ans.count);
     setData([...ans.data.sort((a, b) => {
@@ -159,7 +161,7 @@ const User = ({ notify }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(value);
-    const ans = await getUsers(value.status, value.role, value.query, 1, perPage);
+    const ans = await getUsers(value.status, value.role, value.query, 1, perPage, '', contestId);
     setTotalRows(ans.count);
     setPage(1);
     // console.log(ans);
@@ -190,7 +192,7 @@ const User = ({ notify }) => {
   };
 
   const handleExport = async () => {
-    const ans = await getUsers();
+    const ans = await getUsers(value.status, value.role, value.query, 1, perPage, '', contestId);
     let data = [
       {
         sheet: "Users",
@@ -227,10 +229,6 @@ const User = ({ notify }) => {
               </Typography>
 
               <div>
-                <Button color="red" onClick={() => {
-                  document.getElementById('addUserModal').classList.toggle('hidden');
-                }} children="Add User +">Add User +</Button>
-
                 <Button color="red" className='ml-2' onClick={handleExport} children="Export Users">Export Users</Button>
               </div>
             </div>
@@ -257,7 +255,7 @@ const User = ({ notify }) => {
               columns={columns}
               data={data}
               striped={true}
-              title="Users"
+              title={`${contestName} Pariticipants`}
               progressPending={loadFlag}
               pagination
               paginationServer
@@ -273,4 +271,4 @@ const User = ({ notify }) => {
   );
 };
 
-export default User;
+export default ContestUser1;
