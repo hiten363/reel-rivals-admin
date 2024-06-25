@@ -167,7 +167,7 @@ const ContestReels = ({ notify }) => {
       grow: 0.1
     },
     {
-      name: 'Votes',
+      name: 'Star Points',
       selector: row => row.tokensCount,
       grow: 0.5
     },
