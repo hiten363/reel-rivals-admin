@@ -216,7 +216,7 @@ const EditCharityModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
 
     try {
       let validate=await schema.validate(value);
-      const ans = await updateCharity({ ...value, desc: `<div class="quill-component">${desc.richText}</div>`, tags: temp });
+      const ans = await updateCharity({ ...value, desc: `<div className="quill-component">${desc.richText}</div>`, tags: temp });
       if (ans.status) {
         notify('success', ans.message);
         setRefreshFlag(!refreshFlag);

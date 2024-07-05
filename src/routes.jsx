@@ -131,12 +131,12 @@ export const routes = [
       //   path: "/gift-card",
       //   element:(notify)=>  <GiftCard notify={notify} />
       // },
-      // {
-      //   icon: <CurrencyRupeeIcon {...icon} />,
-      //   name: "payment plans",
-      //   path: "/payment-plans",
-      //   element:(notify)=>  <Subscription notify={notify} />
-      // },
+      {
+        icon: <CurrencyRupeeIcon {...icon} />,
+        name: "payment plans",
+        path: "/payment-plans",
+        element:(notify)=>  <Subscription notify={notify} />
+      },
       // {
       //   icon: <BanknotesIcon {...icon} />,
       //   name: "payment logs",

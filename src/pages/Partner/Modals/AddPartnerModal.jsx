@@ -153,7 +153,7 @@ const AddPartnerModal = (props) => {
     }
     console.log(temp);
 
-    const ans = await postPartner({ ...value, desc: `<div class="quill-component">${value.desc.richText}</div>`, tags: temp });
+    const ans = await postPartner({ ...value, desc: `<div className="quill-component">${value.desc.richText}</div>`, tags: temp });
     console.log(ans);
     if (ans.status) {
       setValue({

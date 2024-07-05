@@ -114,7 +114,7 @@ const AddPrivacyModal = (props) => {
       return;
     }
 
-    const ans = await postPrivacy({ ...value, desc: `<div class="quill-component">${value.desc.richText}</div>` });
+    const ans = await postPrivacy({ ...value, desc: `<div className="quill-component">${value.desc.richText}</div>` });
     console.log(ans);
     if (ans.status) {
       setValue({

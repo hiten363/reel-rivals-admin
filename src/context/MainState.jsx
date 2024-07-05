@@ -816,18 +816,18 @@ const MainState = (props) => {
     }
   };
 
-  const postSubscription = async ({ title, subtitle, desc, coupanOffered, amount, discount }) => {
+  const postSubscription = async ({ title, subtitle, desc, desc1, desc2, desc3, starPointsOffered, amount, discount, type, subType }) => {
     try {
-      const data = await postRequest(`${baseUrl}/subscription/postSubscription`, {title, subtitle, desc, coupanOffered, amount, discount}, true, props, false);
+      const data = await postRequest(`${baseUrl}/subscription/postSubscription`, {title, subtitle, desc, desc1, desc2, desc3, starPointsOffered, amount, discount, type, subType}, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
     }
   };
 
-  const updateSubscription = async ({ id, title, subtitle, desc, coupanOffered, amount, discount }) => {
+  const updateSubscription = async ({ id, title, subtitle, desc, desc1, desc2, desc3, starPointsOffered, amount, discount, type, subType }) => {
     try {
-      const data = await putRequest(`${baseUrl}/subscription/updateSubscription/${id}`, { title, subtitle, desc, coupanOffered, amount, discount }, true, props, false);
+      const data = await putRequest(`${baseUrl}/subscription/updateSubscription/${id}`, { title, subtitle, desc, desc1, desc2, desc3, starPointsOffered, amount, discount, type, subType }, true, props, false);
       return data;
     } catch (error) {
       console.log(error);

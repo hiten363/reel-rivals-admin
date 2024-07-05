@@ -113,7 +113,7 @@ const AddRulesModal = (props) => {
       return;
     }
 
-    const ans = await postRules({ ...value, desc: `<div class="quill-component">${value.desc.richText}</div>` });
+    const ans = await postRules({ ...value, desc: `<div className="quill-component">${value.desc.richText}</div>` });
     console.log(ans);
     if (ans.status) {
       setValue({

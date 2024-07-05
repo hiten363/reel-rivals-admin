@@ -228,7 +228,7 @@ const EditPartnerModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
     // console.log(temp);
     // console.log(desc);
 
-    const ans = await updatePartner({ ...value, desc: `<div class="quill-component">${desc.richText}</div>`, tags: temp });
+    const ans = await updatePartner({ ...value, desc: `<div className="quill-component">${desc.richText}</div>`, tags: temp });
     if (ans.status) {
       notify('success', ans.message);
       setRefreshFlag(!refreshFlag);

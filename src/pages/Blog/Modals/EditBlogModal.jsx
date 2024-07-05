@@ -214,7 +214,7 @@ const EditBlogModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
     // console.log(desc);
 
     try {let validate=await schema.validate(value);
-      const ans = await updateBlog({ ...value, desc: `<div class="quill-component">${desc.richText}</div>`, tags: temp });
+      const ans = await updateBlog({ ...value, desc: `<div className="quill-component">${desc.richText}</div>`, tags: temp });
       if (ans.status) {
         notify('success', ans.message);
         setRefreshFlag(!refreshFlag);

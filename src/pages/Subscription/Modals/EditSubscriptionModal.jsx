@@ -13,9 +13,14 @@ const EditSubscriptionModal = ({ data, setRefreshFlag, refreshFlag, notify }) =>
     title: '',
     subtitle: '',
     desc: '',
-    coupanOffered: '',
+    desc1: '',
+    desc2: '',
+    desc3: '',
+    starPointsOffered: '',
     amount: '',
-    discount: ''
+    discount: '',
+    type: '', 
+    subType: ''
   });
 
   const [loadFlag, setLoadFlag] = useState(false);
@@ -23,15 +28,20 @@ const EditSubscriptionModal = ({ data, setRefreshFlag, refreshFlag, notify }) =>
   useEffect(() => {
     if (data) {
       if (Object.keys(data).length > 0) {
-        // console.log(data);
+        console.log(data);
         setValue({
           id: data._id,
           title: data.title,
           subtitle: data.subtitle,
           desc: data.desc,
-          coupanOffered: data.coupanOffered,
+          desc1: data.desc1,
+          desc2: data.desc2,
+          desc3: data.desc3,
+          starPointsOffered: data.starPointsOffered,
           amount: data.amount,
-          discount: data.discount
+          discount: data.discount,
+          type: data.type,
+          subType: data.subType
         });
       }
     }
@@ -89,13 +99,29 @@ const EditSubscriptionModal = ({ data, setRefreshFlag, refreshFlag, notify }) =>
                       <label htmlFor="subtitle" className="block mb-2 text-sm font-medium text-gray-900 ">Sub Title</label>
                       <input type="text" id="subtitle" name='subtitle' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Sub Title .." onChange={handleChange} value={value.subtitle} required />
                     </div>
+
                     <div>
-                      <label htmlFor="desc" className="block mb-2 text-sm font-medium text-gray-900 ">Description</label>
-                      <input type="text" id="desc" name='desc' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Description .." onChange={handleChange} value={value.desc} required />
+                      <label htmlFor="type" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Plan Type</label>
+                      <select id="type" onChange={handleChange} value={value.type} name="type" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <option value="">Choose a type</option>
+                        <option value="SUBSCRIPTIONS">Subscription</option>
+                        <option value="VOTES">Votes</option>
+                      </select>
                     </div>
+
                     <div>
-                      <label htmlFor="coupanOffered" className="block mb-2 text-sm font-medium text-gray-900 ">Vouchers Offered</label>
-                      <input type="number" id="coupanOffered" name='coupanOffered' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Voucher Count .." onChange={handleChange} value={value.coupanOffered} required />
+                      <label htmlFor="subType" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Interval</label>
+                      <select id="subType" onChange={handleChange} value={value.subType} name="subType" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <option value="">Choose an interval</option>
+                        {value?.type!=="VOTES" && <option value="MONTHLY">Monthly</option>}
+                        {value?.type!=="SUBSCRIPTIONS" && <option value="BIWEEKLY">Bi-Weekly</option>}
+                        {value?.type!=="SUBSCRIPTIONS" && <option value="FIXED">Fixed</option>}
+                      </select>
+                    </div>
+                    
+                    <div>
+                      <label htmlFor="starPointsOffered" className="block mb-2 text-sm font-medium text-gray-900 ">Star Points Offered</label>
+                      <input type="number" id="starPointsOffered" name='starPointsOffered' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Voucher Count .." onChange={handleChange} value={value.starPointsOffered} required />
                     </div>
                     <div>
                       <label htmlFor="amount" className="block mb-2 text-sm font-medium text-gray-900 ">Amount</label>
@@ -104,6 +130,26 @@ const EditSubscriptionModal = ({ data, setRefreshFlag, refreshFlag, notify }) =>
                     <div>
                       <label htmlFor="discount" className="block mb-2 text-sm font-medium text-gray-900 ">Discount</label>
                       <input type="number" id="discount" name='discount' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Discount .." onChange={handleChange} value={value.discount} required />
+                    </div>
+
+                    <div>
+                      <label htmlFor="desc" className="block mb-2 text-sm font-medium text-gray-900 ">Description 1</label>
+                      <input type="text" id="desc" name='desc' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Description 1 .." onChange={handleChange} value={value.desc} required />
+                    </div>
+
+                    <div>
+                      <label htmlFor="desc1" className="block mb-2 text-sm font-medium text-gray-900 ">Description 2</label>
+                      <input type="text" id="desc1" name='desc1' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Description 2 .." onChange={handleChange} value={value.desc1} />
+                    </div>
+
+                    <div>
+                      <label htmlFor="desc2" className="block mb-2 text-sm font-medium text-gray-900 ">Description 3</label>
+                      <input type="text" id="desc2" name='desc2' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Description 3 .." onChange={handleChange} value={value.desc2} />
+                    </div>
+
+                    <div>
+                      <label htmlFor="desc3" className="block mb-2 text-sm font-medium text-gray-900 ">Description 4</label>
+                      <input type="text" id="desc3" name='desc3' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Description 4 .." onChange={handleChange} value={value.desc3} />
                     </div>
                   </div>
 

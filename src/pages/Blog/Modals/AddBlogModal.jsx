@@ -161,7 +161,7 @@ const AddBlogModal = (props) => {
 
     try {
       let validate=await schema.validate(value);
-      const ans = await postBlog({ ...value, desc: `<div class="quill-component">${value.desc.richText}</div>`, tags: temp });
+      const ans = await postBlog({ ...value, desc: `<div className="quill-component">${value.desc.richText}</div>`, tags: temp });
       console.log(ans);
   
       if (ans.status) {

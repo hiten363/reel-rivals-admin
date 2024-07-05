@@ -32,22 +32,27 @@ const Subscription = ({ notify }) => {
   const columns = [
     {
       name: 'Title',
-      selector: row => row.title,
+      selector: row => row.title && row?.title!=="" ? row?.title : " - ",
       sortable: true
     },
     {
       name: 'Sub Title',
-      selector: row => row.subtitle,
+      selector: row => row.subtitle && row.subtitle!=="" ? row.subtitle : " - ",
       sortable: true
     },
     {
-      name: 'Description',
-      selector: row => row.desc,
+      name: 'Type',
+      selector: row => row.type==='SUBSCRIPTIONS' ? 'Subscription' : 'Star Points',
       sortable: true
     },
     {
-      name: 'Vouchers Offered',
-      selector: row => row.coupanOffered,
+      name: 'Interval',
+      selector: row => row.subType==='MONTHLY' ? 'Monthly' : row.subType==='BIWEEKLY' ? 'Bi-Weekly' : 'Fixed',
+      sortable: true
+    },
+    {
+      name: 'Star Points Offered',
+      selector: row => row.starPointsOffered,
       sortable: true
     },
     {

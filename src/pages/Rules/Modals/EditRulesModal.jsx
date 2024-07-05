@@ -121,7 +121,7 @@ const EditRulesModal = ({ flag, data, setRefreshFlag, refreshFlag, notify }) => 
       return;
     }
 
-    const ans = await updateRules({ ...value, desc: `<div class="quill-component">${desc.richText}</div>` });
+    const ans = await updateRules({ ...value, desc: `<div className="quill-component">${desc.richText}</div>` });
     if (ans.status) {
       notify('success', ans.message);
       setRefreshFlag(!refreshFlag);
