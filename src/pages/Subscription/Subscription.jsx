@@ -18,7 +18,9 @@ const Subscription = ({ notify }) => {
   const [refreshFlag, setRefreshFlag] = useState(false);
   const [value, setValue] = useState({
     status: '',
-    query: ''
+    query: '',
+    type: '',
+    subType: ''
   });
   const [loadFlag, setLoadFlag] = useState(true);
   const [totalRows, setTotalRows] = useState(0);
@@ -115,7 +117,7 @@ const Subscription = ({ notify }) => {
 
   const getData = async () => {
     setLoadFlag(true);
-    const ans = await getSubscriptions(value.status, value.query, page, perPage);
+    const ans = await getSubscriptions(value.status, value.query, value.type, value.subType, page, perPage);
     console.log(ans);
     setData(ans.data);
     setTotalRows(ans.count);
@@ -148,7 +150,7 @@ const Subscription = ({ notify }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(value);
-    const ans = await getSubscriptions(value.status, value.query, 1, perPage);
+    const ans = await getSubscriptions(value.status, value.query, value.type, value.subType, 1, perPage);
     setTotalRows(ans.count);
     setPage(1);
     console.log(ans);
@@ -185,10 +187,11 @@ const Subscription = ({ notify }) => {
           </CardHeader>
 
           <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
-            <form className="flex items-center justify-end px-10 pt-3" onSubmit={handleSubmit}>
-              <div className='mx-2'>
+            <form className="flex flex-wrap gap-2 items-center justify-end px-10 pt-3" onSubmit={handleSubmit}>
+              <div className=''>
                 <Input label="Search .." name="query" onChange={handleChange} value={value.query} />
               </div>
+              
               <div className="flex items-center">
                 <Select label="Status" children={<p>Status</p>} onChange={(e) => {
                   handleChange(e, 'status');
@@ -196,6 +199,27 @@ const Subscription = ({ notify }) => {
                   <Option value="" children={<p>Select Status</p>}>Select Status</Option>
                   <Option value="true" children={<p>Active</p>}>Active</Option>
                   <Option value="false" children={<p>Deleted</p>}>Deleted</Option>
+                </Select>
+              </div>
+
+              <div className="flex items-center">
+                <Select label="Type" children={<p>Type</p>} onChange={(e) => {
+                  handleChange(e, 'type');
+                }}>
+                  <Option value="" children={<p>Select Type</p>}>Select Type</Option>
+                  <Option value="VOTES" children={<p>Star Points</p>}>Star Points</Option>
+                  <Option value="SUBSCRIPTIONS" children={<p>Subscription</p>}>Subscription</Option>
+                </Select>
+              </div>
+
+              <div className="flex items-center">
+                <Select label="Interval" children={<p>Interval</p>} onChange={(e) => {
+                  handleChange(e, 'subType');
+                }}>
+                  <Option value="" children={<p>Select Interval</p>}>Select Interval</Option>
+                  <Option value="BIWEEKLY" children={<p>Bi-Weekly</p>}>Bi-Weekly</Option>
+                  <Option value="MONTHLY" children={<p>Monthly</p>}>Monthly</Option>
+                  <Option value="FIXED" children={<p>Fixed</p>}>Fixed</Option>
                 </Select>
               </div>
               

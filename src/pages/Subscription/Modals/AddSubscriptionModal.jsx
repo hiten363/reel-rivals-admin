@@ -18,7 +18,7 @@ const AddSubscriptionModal = (props) => {
     subType: '',
     starPointsOffered: '',
     amount: '',
-    discount: ''
+    discount: 0
   });
 
   const handleChange = (e, type = '') => {
@@ -36,9 +36,14 @@ const AddSubscriptionModal = (props) => {
         title: '',
         subtitle: '',
         desc: '',
+        desc1: '',
+        desc2: '',
+        desc3: '',
+        type: '',
+        subType: '',
         starPointsOffered: '',
         amount: '',
-        discount: ''
+        discount: 0
       });
       props.notify('success', ans.message);
       props.setRefreshFlag(!props.refreshFlag);
@@ -77,11 +82,11 @@ const AddSubscriptionModal = (props) => {
                   <div className="grid gap-6 px-0.5 py-0.5 mb-6 md:grid-cols-2">
                     <div>
                       <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-900 ">Title</label>
-                      <input type="text" id="title" name="title" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Title .." onChange={handleChange} value={value.title} required />
+                      <input type="text" id="title" name="title" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Title .." onChange={handleChange} value={value.title} />
                     </div>
                     <div>
                       <label htmlFor="subtitle" className="block mb-2 text-sm font-medium text-gray-900 ">Sub Title</label>
-                      <input type="text" id="subtitle" name='subtitle' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Sub Title .." onChange={handleChange} value={value.subtitle} required />
+                      <input type="text" id="subtitle" name='subtitle' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Sub Title .." onChange={handleChange} value={value.subtitle} />
                     </div>
 
                     <div>
@@ -114,11 +119,11 @@ const AddSubscriptionModal = (props) => {
                     </div>
                     <div>
                       <label htmlFor="discount" className="block mb-2 text-sm font-medium text-gray-900 ">Discount</label>
-                      <input type="number" id="discount" name='discount' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Discount .." onChange={handleChange} value={value.discount} required />
+                      <input type="number" id="discount" name='discount' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Discount .." onChange={handleChange} value={value.discount} />
                     </div>
                     <div>
                       <label htmlFor="desc" className="block mb-2 text-sm font-medium text-gray-900 ">Description 1</label>
-                      <input type="text" id="desc" name='desc' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Description 1 .." onChange={handleChange} value={value.desc} required />
+                      <input type="text" id="desc" name='desc' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Description 1 .." onChange={handleChange} value={value.desc} />
                     </div>
                     <div>
                       <label htmlFor="desc1" className="block mb-2 text-sm font-medium text-gray-900 ">Description 2</label>

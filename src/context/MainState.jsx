@@ -806,9 +806,9 @@ const MainState = (props) => {
     }
   };
 
-  const getSubscriptions = async (status, query, page, perPage) => {
+  const getSubscriptions = async (status, query, type, subType, page, perPage) => {
     try {
-      const data = await getRequest(`${baseUrl}/subscription/getSubscriptions?status=${status}&query=${query}&page=${page}&perPage=${perPage}`, false, props);
+      const data = await getRequest(`${baseUrl}/subscription/getSubscriptions?status=${status}&query=${query}&type=${type}&subType=${subType}&page=${page}&perPage=${perPage}`, false, props);
       console.log(data);
       return data;
     } catch (error) {
