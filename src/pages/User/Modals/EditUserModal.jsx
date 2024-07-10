@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 
 const schema = Yup.object().shape({
   name: Yup.string().required().matches(/^\D*$/, 'Name should not contain integers').min(3).max(30),
-  // email: Yup.string().email().required(),
+  email: Yup.string().email().required(),
   // phone: Yup.string().notRequired().matches(/^[0-9]+$/, 'Phone Number must contain only numbers').min(10).max(10).required(),
   // password: Yup.string().required().matches(
   //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).+$/,
@@ -21,6 +21,7 @@ const EditUserModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
 
   const [value, setValue] = useState({
     name: '',
+    email: '',
     phone: '',
     userName: ''
   });
@@ -32,6 +33,7 @@ const EditUserModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
         setValue({
           _id: data._id,
           name: data?.name,
+          email: data?.email,
           userName: data?.userName,
           phone: data?.phone && data?.phone!=="undefined" ? data?.phone : ''
         });
@@ -55,6 +57,7 @@ const EditUserModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
       if (ans.status) {
         setValue({
           name: '',
+          email: '',
           phone: '',
           userName: ''
         });
@@ -87,6 +90,7 @@ const EditUserModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                 <span className="sr-only">Close modal</span>
               </button>
             </div>
+            
             <div className="p-6 space-y-6">
               <form onSubmit={handleSubmit}>
                 <div className="bus-form">
@@ -98,6 +102,10 @@ const EditUserModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                     <div>
                       <label htmlFor="name1" className="block mb-2 text-sm font-medium text-gray-900 ">Name</label>
                       <input type="text" id="name1" name="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Name .." onChange={handleChange} value={value.name} required />
+                    </div>
+                    <div>
+                      <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 ">Email</label>
+                      <input type="email" id="email" name="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Email .." onChange={handleChange} value={value.email} required />
                     </div>
                     <div className='relative h-10'>
                       <label htmlFor="userName" className="block mb-2 text-sm font-medium text-gray-900 ">Username</label>
