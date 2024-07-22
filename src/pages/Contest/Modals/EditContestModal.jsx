@@ -137,7 +137,7 @@ const EditContestModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                     </div>}
 
                     <div>
-                      <label htmlFor="startDate" className="block mb-2 text-sm font-medium text-gray-900 ">Start Date & Time </label>
+                      <label htmlFor="startDate" className="block mb-2 text-sm font-medium text-gray-900 ">Start Date </label>
                       <input type="date" id="startDate" name="startDate" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " onChange={handleChange} value={value.startDate} required />
 
                       {/* <DateTimePicker locale="en-GB" format='dd-MM-y h:mm:ss a' onChange={(e) => {
@@ -165,7 +165,7 @@ const EditContestModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                     </div>
 
                     <div>
-                      <label htmlFor="endDate" className="block mb-2 text-sm font-medium text-gray-900 ">End Date & Time </label>
+                      <label htmlFor="endDate" className="block mb-2 text-sm font-medium text-gray-900 ">End Date </label>
                       <input type="date" id="endDate" name="endDate" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " onChange={handleChange} value={value.endDate} required />
 
                       {/* <DateTimePicker locale="en-GB" format='dd-MM-y h:mm:ss a' onChange={(e) => {
