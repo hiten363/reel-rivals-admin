@@ -78,6 +78,60 @@ const MainState = (props) => {
     }
   };
 
+  const getAbouts = async (id, slug, status, query, page, perPage) => {
+    try {
+      const data = await getRequest(`${baseUrl}/about/getAbouts?id=${id}&slug=${slug}&status=${status}&query=${query}&page=${page}&perPage=${perPage}`, false, props);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const postAbout = async ({ title, img, desc, subImg1, subDesc1, subImg2, subDesc2, subImg3, subDesc3 }) => {
+    try {
+      const data = await postRequest(`${baseUrl}/about/postAbout`, { title, img, desc, subImg1, subDesc1, subImg2, subDesc2, subImg3, subDesc3 }, false, props, false);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateAbout = async ({ id, title, img, desc, subImg1, subDesc1, subImg2, subDesc2, subImg3, subDesc3 }) => {
+    try {
+      const data = await putRequest(`${baseUrl}/about/updateAbout/${id}`, { title, img, desc, subImg1, subDesc1, subImg2, subDesc2, subImg3, subDesc3 }, false, props, false);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteAbout = async (id) => {
+    try {
+      const data = await deleteRequest(`${baseUrl}/about/deleteAbout/${id}`, {}, true, props);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const undoAbout = async ({ id }) => {
+    try {
+      const data = await putRequest(`${baseUrl}/about/undoAbout/${id}`, {}, true, props, false);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteAllAbouts = async () => {
+    try {
+      const data = await deleteRequest(`${baseUrl}/About/deleteAllAbouts`, true, props);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const getTestimonials = async (id, status, query, page, perPage) => {
     try {
       const data = await getRequest(`${baseUrl}/testimonial/getTestimonials?id=${id}&status=${status}&query=${query}&page=${page}&perPage=${perPage}`, false, props);
@@ -281,7 +335,7 @@ const MainState = (props) => {
       console.log(error);
     }
   };
-  
+
   const getCharitys = async (id, slug, status, query, page, perPage) => {
     try {
       const data = await getRequest(`${baseUrl}/charity/getCharitys?id=${id}&slug=${slug}&status=${status}&query=${query}&page=${page}&perPage=${perPage}`, false, props);
@@ -461,13 +515,13 @@ const MainState = (props) => {
 
   const postContest = async ({ title, img, startDate, endDate, winning, category }) => {
     try {
-      let formdata=new FormData();
+      let formdata = new FormData();
       formdata.append('title', title);
       formdata.append('startDate', startDate);
       formdata.append('endDate', endDate);
       formdata.append('winning', winning);
       formdata.append('category', category);
-      
+
       formdata.append('file', img);
       const data = await postRequest(`${baseUrl}/contest/postContest`, formdata, true, props, true);
       return data;
@@ -487,7 +541,7 @@ const MainState = (props) => {
 
   const updateContest = async ({ id, title, img, startDate, endDate, winning, contestants, category }) => {
     try {
-      let formdata=new FormData();
+      let formdata = new FormData();
       formdata.append('title', title);
       formdata.append('startDate', startDate);
       formdata.append('endDate', endDate);
@@ -532,7 +586,7 @@ const MainState = (props) => {
 
   const signup = async ({ firstName, lastName, email, phone, password, address, file }) => {
     try {
-      const formdata=new FormData();
+      const formdata = new FormData();
       formdata.append('firstName', firstName);
       formdata.append('lastName', lastName);
       formdata.append('email', email);
@@ -567,7 +621,7 @@ const MainState = (props) => {
 
   const createUser = async ({ name, email, userName, phone, password, role, userPermissions, address, file }) => {
     try {
-      const formdata=new FormData();
+      const formdata = new FormData();
       formdata.append('name', name);
       formdata.append('email', email);
       formdata.append('userName', userName);
@@ -604,7 +658,7 @@ const MainState = (props) => {
 
   const deleteUser = async (id) => {
     try {
-      const data = await deleteRequest(`${baseUrl}/user/deleteUser/${id}`, {  }, false, props);
+      const data = await deleteRequest(`${baseUrl}/user/deleteUser/${id}`, {}, false, props);
       return data;
     } catch (error) {
       console.log(error);
@@ -707,7 +761,7 @@ const MainState = (props) => {
 
   const postFaq = async ({ question, answer }) => {
     try {
-      const data = await postRequest(`${baseUrl}/faq/postFaq`, {question, answer}, true, props, false);
+      const data = await postRequest(`${baseUrl}/faq/postFaq`, { question, answer }, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -753,7 +807,7 @@ const MainState = (props) => {
 
   const postMedia = async ({ url }) => {
     try {
-      const data = await postRequest(`${baseUrl}/media/postMedia`, {url}, true, props, false);
+      const data = await postRequest(`${baseUrl}/media/postMedia`, { url }, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -790,7 +844,7 @@ const MainState = (props) => {
 
   const postGiftCard = async ({ User, Subscription }) => {
     try {
-      const data = await postRequest(`${baseUrl}/giftCard/postGiftCard`, {User, Subscription}, true, props, false);
+      const data = await postRequest(`${baseUrl}/giftCard/postGiftCard`, { User, Subscription }, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -827,7 +881,7 @@ const MainState = (props) => {
 
   const postSubscription = async ({ title, subtitle, desc, desc1, desc2, desc3, starPointsOffered, amount, discount, type, subType }) => {
     try {
-      const data = await postRequest(`${baseUrl}/subscription/postSubscription`, {title, subtitle, desc, desc1, desc2, desc3, starPointsOffered, amount, discount, type, subType}, true, props, false);
+      const data = await postRequest(`${baseUrl}/subscription/postSubscription`, { title, subtitle, desc, desc1, desc2, desc3, starPointsOffered, amount, discount, type, subType }, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -845,7 +899,7 @@ const MainState = (props) => {
 
   const undoSubscription = async ({ id }) => {
     try {
-      const data = await putRequest(`${baseUrl}/subscription/undoSubscription/${id}`, {  }, true, props, false);
+      const data = await putRequest(`${baseUrl}/subscription/undoSubscription/${id}`, {}, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -872,7 +926,7 @@ const MainState = (props) => {
 
   const postCoupan = async ({ prizeWon, offer, expiryDate, startDate, subscription }) => {
     try {
-      const data = await postRequest(`${baseUrl}/coupan/postCoupan`, {prizeWon, offer, expiryDate, startDate, subscription}, true, props, false);
+      const data = await postRequest(`${baseUrl}/coupan/postCoupan`, { prizeWon, offer, expiryDate, startDate, subscription }, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -881,7 +935,7 @@ const MainState = (props) => {
 
   const postCoupanBulk = async ({ coupanCount, expiryDate, startDate, offer, subscription, prizeWonCount }) => {
     try {
-      const data = await postRequest(`${baseUrl}/coupan/postCoupanBulk`, {coupanCount, expiryDate, startDate, offer, subscription, prizeWonCount}, true, props, false);
+      const data = await postRequest(`${baseUrl}/coupan/postCoupanBulk`, { coupanCount, expiryDate, startDate, offer, subscription, prizeWonCount }, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -890,7 +944,7 @@ const MainState = (props) => {
 
   const assignCoupansToUser = async ({ subscription }) => {
     try {
-      const data = await postRequest(`${baseUrl}/coupan/assignCoupansToUser`, {subscription}, true, props, false);
+      const data = await postRequest(`${baseUrl}/coupan/assignCoupansToUser`, { subscription }, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -917,7 +971,7 @@ const MainState = (props) => {
 
   const undoCoupan = async ({ id }) => {
     try {
-      const data = await putRequest(`${baseUrl}/coupan/undoCoupan/${id}`, {  }, true, props, false);
+      const data = await putRequest(`${baseUrl}/coupan/undoCoupan/${id}`, {}, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -945,7 +999,7 @@ const MainState = (props) => {
 
   const postTerms = async ({ desc }) => {
     try {
-      const data = await postRequest(`${baseUrl}/terms/postTerms`, {desc}, true, props, false);
+      const data = await postRequest(`${baseUrl}/terms/postTerms`, { desc }, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -973,7 +1027,7 @@ const MainState = (props) => {
 
   const postRules = async ({ desc }) => {
     try {
-      const data = await postRequest(`${baseUrl}/rule/postRule`, {desc}, true, props, false);
+      const data = await postRequest(`${baseUrl}/rule/postRule`, { desc }, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -1001,7 +1055,7 @@ const MainState = (props) => {
 
   const postThemeControls = async ({ colorCode }) => {
     try {
-      const data = await postRequest(`${baseUrl}/theme/postTheme`, {colorCode}, true, props, false);
+      const data = await postRequest(`${baseUrl}/theme/postTheme`, { colorCode }, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -1029,7 +1083,7 @@ const MainState = (props) => {
 
   const postPrivacy = async ({ desc }) => {
     try {
-      const data = await postRequest(`${baseUrl}/privacy/postPrivacy`, {desc}, true, props, false);
+      const data = await postRequest(`${baseUrl}/privacy/postPrivacy`, { desc }, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -1054,7 +1108,7 @@ const MainState = (props) => {
       console.log(error);
     }
   };
-  
+
   const getStatisticss = async () => {
     try {
       const data = await getRequest(`${baseUrl}/statistics/getStatisticss`, false, props);
@@ -1067,7 +1121,7 @@ const MainState = (props) => {
 
   const postStatistics = async ({ count1, count2, count3, count4 }) => {
     try {
-      const data = await postRequest(`${baseUrl}/statistics/postStatistics`, {count1, count2, count3, count4}, true, props, false);
+      const data = await postRequest(`${baseUrl}/statistics/postStatistics`, { count1, count2, count3, count4 }, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -1085,203 +1139,203 @@ const MainState = (props) => {
 
   const getVideos = async (id, category, contest, isActive, user, status, query, activeFlag, page, perPage) => {
     try {
-        const data = await getRequest(`${baseUrl}/video/getVideos?id=${id}&category=${category}&contest=${contest}&isActive=${isActive}&user=${user}&status=${status}&query=${query}&page=${page}&activeFlag=${activeFlag}&perPage=${perPage}`, false, props);
-        return data;
+      const data = await getRequest(`${baseUrl}/video/getVideos?id=${id}&category=${category}&contest=${contest}&isActive=${isActive}&user=${user}&status=${status}&query=${query}&page=${page}&activeFlag=${activeFlag}&perPage=${perPage}`, false, props);
+      return data;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
-const postVideo = async ({ caption, category, contest, regionCountry, regionState, file }) => {
+  const postVideo = async ({ caption, category, contest, regionCountry, regionState, file }) => {
     try {
-        let formdata=new FormData();
-        formdata.append('caption', caption);
-        formdata.append('category', category);
-        formdata.append('contest', contest);
-        formdata.append('regionCountry', JSON.stringify(regionCountry));
-        formdata.append('regionState', JSON.stringify(regionState));
-        formdata.append('file', file);
-        const data = await postRequest(`${baseUrl}/video/postVideo`, formdata, true, props, true);
-        return data;
+      let formdata = new FormData();
+      formdata.append('caption', caption);
+      formdata.append('category', category);
+      formdata.append('contest', contest);
+      formdata.append('regionCountry', JSON.stringify(regionCountry));
+      formdata.append('regionState', JSON.stringify(regionState));
+      formdata.append('file', file);
+      const data = await postRequest(`${baseUrl}/video/postVideo`, formdata, true, props, true);
+      return data;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
-const updateVideo = async ({ id, caption, category, contest, regionCountry, regionState, isActive }) => {
+  const updateVideo = async ({ id, caption, category, contest, regionCountry, regionState, isActive }) => {
     try {
-        let formdata=new FormData();
-        formdata.append('caption', caption);
-        formdata.append('category', category);
-        formdata.append('contest', contest);
-        formdata.append('regionCountry', JSON.stringify(regionCountry));
-        formdata.append('regionState', JSON.stringify(regionState));
-        formdata.append('isActive', JSON.stringify(isActive));
-        formdata.append('file', file);
-        const data = await putRequest(`${baseUrl}/video/updateVideo/${id}`, formdata, true, props, false);
-        return data;
+      let formdata = new FormData();
+      formdata.append('caption', caption);
+      formdata.append('category', category);
+      formdata.append('contest', contest);
+      formdata.append('regionCountry', JSON.stringify(regionCountry));
+      formdata.append('regionState', JSON.stringify(regionState));
+      formdata.append('isActive', JSON.stringify(isActive));
+      formdata.append('file', file);
+      const data = await putRequest(`${baseUrl}/video/updateVideo/${id}`, formdata, true, props, false);
+      return data;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
-const undoVideo = async ({ id }) => {
+  const undoVideo = async ({ id }) => {
     try {
-        const data = await putRequest(`${baseUrl}/video/undoVideo/${id}`, {}, true, props, false);
-        return data;
+      const data = await putRequest(`${baseUrl}/video/undoVideo/${id}`, {}, true, props, false);
+      return data;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
-const deleteVideo = async (id) => {
+  const deleteVideo = async (id) => {
     try {
-        const data = await deleteRequest(`${baseUrl}/video/deleteVideo/${id}`, {}, true, props);
-        return data;
+      const data = await deleteRequest(`${baseUrl}/video/deleteVideo/${id}`, {}, true, props);
+      return data;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
-const getComment = async (id, video, user, status, page, perPage) => {
+  const getComment = async (id, video, user, status, page, perPage) => {
     try {
-        const data = await getRequest(`${baseUrl}/comment/getComments?status=${status}&id=${id}&video=${video}&user=${user}&page=${page}&perPage=${perPage}`, false, props);
-        return data;
+      const data = await getRequest(`${baseUrl}/comment/getComments?status=${status}&id=${id}&video=${video}&user=${user}&page=${page}&perPage=${perPage}`, false, props);
+      return data;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
-const postComment = async ({ video, text }) => {
+  const postComment = async ({ video, text }) => {
     try {
-        const data = await postRequest(`${baseUrl}/comment/postComment`, { video, text }, true, props, true);
-        return data;
+      const data = await postRequest(`${baseUrl}/comment/postComment`, { video, text }, true, props, true);
+      return data;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
-const updateComment = async ({ id, text, likes }) => {
+  const updateComment = async ({ id, text, likes }) => {
     try {
-        const data = await putRequest(`${baseUrl}/comment/updateComment/${id}`, { likes, text }, true, props, false);
-        return data;
+      const data = await putRequest(`${baseUrl}/comment/updateComment/${id}`, { likes, text }, true, props, false);
+      return data;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
-const undoComment = async ({ id }) => {
+  const undoComment = async ({ id }) => {
     try {
-        const data = await putRequest(`${baseUrl}/comment/undoComment/${id}`, {}, true, props, false);
-        return data;
+      const data = await putRequest(`${baseUrl}/comment/undoComment/${id}`, {}, true, props, false);
+      return data;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
-const deleteComment = async (id) => {
+  const deleteComment = async (id) => {
     try {
-        const data = await deleteRequest(`${baseUrl}/comment/deleteComment/${id}`, {}, true, props);
-        return data;
+      const data = await deleteRequest(`${baseUrl}/comment/deleteComment/${id}`, {}, true, props);
+      return data;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
-const getReplys = async (id, comment, video, user, status, page, perPage) => {
+  const getReplys = async (id, comment, video, user, status, page, perPage) => {
     try {
-        const data = await getRequest(`${baseUrl}/reply/getReplys?status=${status}&id=${id}&comment=${comment}&video=${video}&user=${user}&page=${page}&perPage=${perPage}`, false, props);
-        console.log(data);
-        return data;
+      const data = await getRequest(`${baseUrl}/reply/getReplys?status=${status}&id=${id}&comment=${comment}&video=${video}&user=${user}&page=${page}&perPage=${perPage}`, false, props);
+      console.log(data);
+      return data;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
-const postReply1 = async ({ comment, video, text, parent, parentUser }) => {
+  const postReply1 = async ({ comment, video, text, parent, parentUser }) => {
     try {
-        const data = await postRequest(`${baseUrl}/reply/postReply`, { comment, video, text, parent, parentUser }, true, props, false);
-        return data;
+      const data = await postRequest(`${baseUrl}/reply/postReply`, { comment, video, text, parent, parentUser }, true, props, false);
+      return data;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
-const updateReply = async ({ id }) => {
+  const updateReply = async ({ id }) => {
     try {
-        const data = await putRequest(`${baseUrl}/reply/updateReply/${id}`, { title, subtitle, desc, coupanOffered, type, period, amount, discount }, true, props, false);
-        return data;
+      const data = await putRequest(`${baseUrl}/reply/updateReply/${id}`, { title, subtitle, desc, coupanOffered, type, period, amount, discount }, true, props, false);
+      return data;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
-const undoReply = async ({ id }) => {
+  const undoReply = async ({ id }) => {
     try {
-        const data = await putRequest(`${baseUrl}/reply/undoReply/${id}`, {}, true, props, false);
-        return data;
+      const data = await putRequest(`${baseUrl}/reply/undoReply/${id}`, {}, true, props, false);
+      return data;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
-const deleteReply = async (id) => {
+  const deleteReply = async (id) => {
     try {
-        const data = await deleteRequest(`${baseUrl}/reply/deleteReply/${id}`, {}, true, props);
-        return data;
+      const data = await deleteRequest(`${baseUrl}/reply/deleteReply/${id}`, {}, true, props);
+      return data;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
-const getNotifications = async (id, type, user, status, page, perPage) => {
+  const getNotifications = async (id, type, user, status, page, perPage) => {
     try {
-        const data = await getRequest(`${baseUrl}/notification/getNotifications?status=${status}&id=${id}}&perPage=${perPage}}&page=${page}}&user=${user}}&type=${type}`, false, props);
-        console.log(data);
-        return data;
+      const data = await getRequest(`${baseUrl}/notification/getNotifications?status=${status}&id=${id}}&perPage=${perPage}}&page=${page}}&user=${user}}&type=${type}`, false, props);
+      console.log(data);
+      return data;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
-const postNotification = async ({ type, video, text, userReceiver }) => {
+  const postNotification = async ({ type, video, text, userReceiver }) => {
     try {
-        const data = await postRequest(`${baseUrl}/notification/postNotification`, { type, video, text, userReceiver }, true, props, true);
-        return data;
+      const data = await postRequest(`${baseUrl}/notification/postNotification`, { type, video, text, userReceiver }, true, props, true);
+      return data;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
-const updateNotification = async ({ id, status }) => {
+  const updateNotification = async ({ id, status }) => {
     try {
-        const data = await putRequest(`${baseUrl}/notification/updateNotification/${id}`, { status }, true, props, false);
-        return data;
+      const data = await putRequest(`${baseUrl}/notification/updateNotification/${id}`, { status }, true, props, false);
+      return data;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
-const undoNotification = async ({ id }) => {
+  const undoNotification = async ({ id }) => {
     try {
-        const data = await putRequest(`${baseUrl}/notification/undoNotification/${id}`, {}, true, props, false);
-        return data;
+      const data = await putRequest(`${baseUrl}/notification/undoNotification/${id}`, {}, true, props, false);
+      return data;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
-const deleteNotification = async (id) => {
+  const deleteNotification = async (id) => {
     try {
-        const data = await deleteRequest(`${baseUrl}/notification/deleteNotification/${id}`, {}, true, props);
-        return data;
+      const data = await deleteRequest(`${baseUrl}/notification/deleteNotification/${id}`, {}, true, props);
+      return data;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
   return (
-    <MainContext.Provider value={{ getBlogs, postBlog, updateBlog, deleteBlog, deleteAllBlogs, getContacts, deleteContact, signup, login, adminLogin, getUsers, createUser, updateUser, updateUserStatus, uploadImage, undoBlog, getFaqs, postFaq, updateFaq, deleteFaq, getTermss, postTerms, updateTerms, postReply, undoFaq, getPrivacys, postPrivacy, updatePrivacy, getSubscriptions, postSubscription, updateSubscription, undoSubscription, deleteSubscription, getCoupans, postCoupan, postCoupanBulk, assignCoupansToUser, updateCoupan, revealCoupan, undoCoupan, deleteCoupan, getPayments, getThemeControls, postThemeControls, updateThemeControls, deletePayment, getDashboardData, getCategorys, postCategory, updateCategory, deleteCategoryImage, deleteCategory, deleteAllCategorys, getContests, postContest, drawResults, updateContest, deleteContest, deleteAllContests, getCareers, postCareer, updateCareer, deleteCareer, deleteAllCareers, getPartners, postPartner, updatePartner, deletePartner, deleteAllPartners, getCharitys, postCharity, updateCharity, deleteCharity, deleteAllCharitys, getRuless, postRules, updateRules, undoGiftCard, getGiftCards, postGiftCard, updateGiftCard, deleteGiftCard, getNewsLetters, undoContest, undoCareer, undoPartner, undoCharity, undoCategory, undoMedia, getMedias, postMedia, deleteMedia, getTestimonials, postTestimonial, undoTestimonial, deleteTestimonial, updateTestimonial, deleteAllTestimonials, getStatisticss, postStatistics, updateStatistics, getVideos, postVideo, updateVideo, undoVideo, deleteVideo, getComment, postComment, updateComment, undoComment, deleteComment, getReplys, postReply1, updateReply, undoReply, deleteReply, getNotifications, postNotification, updateNotification, undoNotification, deleteNotification, deleteUser }}>
+    <MainContext.Provider value={{ getBlogs, postBlog, updateBlog, deleteBlog, deleteAllBlogs, getContacts, deleteContact, signup, login, adminLogin, getUsers, createUser, updateUser, updateUserStatus, uploadImage, undoBlog, getFaqs, postFaq, updateFaq, deleteFaq, getTermss, postTerms, updateTerms, postReply, undoFaq, getPrivacys, postPrivacy, updatePrivacy, getSubscriptions, postSubscription, updateSubscription, undoSubscription, deleteSubscription, getCoupans, postCoupan, postCoupanBulk, assignCoupansToUser, updateCoupan, revealCoupan, undoCoupan, deleteCoupan, getPayments, getThemeControls, postThemeControls, updateThemeControls, deletePayment, getDashboardData, getCategorys, postCategory, updateCategory, deleteCategoryImage, deleteCategory, deleteAllCategorys, getContests, postContest, drawResults, updateContest, deleteContest, deleteAllContests, getCareers, postCareer, updateCareer, deleteCareer, deleteAllCareers, getPartners, postPartner, updatePartner, deletePartner, deleteAllPartners, getCharitys, postCharity, updateCharity, deleteCharity, deleteAllCharitys, getRuless, postRules, updateRules, undoGiftCard, getGiftCards, postGiftCard, updateGiftCard, deleteGiftCard, getNewsLetters, undoContest, undoCareer, undoPartner, undoCharity, undoCategory, undoMedia, getMedias, postMedia, deleteMedia, getTestimonials, postTestimonial, undoTestimonial, deleteTestimonial, updateTestimonial, deleteAllTestimonials, getStatisticss, postStatistics, updateStatistics, getVideos, postVideo, updateVideo, undoVideo, deleteVideo, getComment, postComment, updateComment, undoComment, deleteComment, getReplys, postReply1, updateReply, undoReply, deleteReply, getNotifications, postNotification, updateNotification, undoNotification, deleteNotification, deleteUser, getAbouts, postAbout, updateAbout, deleteAbout, undoAbout, deleteAllAbouts }}>
       {props.children}
     </MainContext.Provider>
   );

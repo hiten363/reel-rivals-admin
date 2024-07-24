@@ -38,6 +38,7 @@ import ContestUsers from "@/pages/User/ContestUsers";
 import ContestReels from "@/pages/Contest/ContestReels";
 import ContestUser1 from "@/pages/User/ContestUsers1";
 import CategoryContests from "@/pages/Category/CategoryContests";
+import About from "@/pages/About/About";
 
 export function Dashboard({ notify }) {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -71,6 +72,7 @@ export function Dashboard({ notify }) {
           <Route path={'/user/:userId/:name'} element={<ContestUsers notify={notify} />} />
           <Route path={'/user/:id/:name/:eventId/:eventName/:flag'} element={<UserDetails1 notify={notify} />} />
           <Route path={'/blogs'} element={<Blog notify={notify} />} />
+          <Route path={'/about-us'} element={<About notify={notify} />} />
           <Route path={'/categories'} element={<Category notify={notify} />} />
           <Route path={'/contests'} element={<Contest notify={notify} />} />
           <Route path={'/contests-categories/:categoryName/:categoryId'} element={<CategoryContests notify={notify} />} />

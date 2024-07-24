@@ -22,7 +22,8 @@ import {
   InboxArrowDownIcon,
   BriefcaseIcon,
   ShieldExclamationIcon,
-  CameraIcon
+  CameraIcon,
+  InformationCircleIcon
 } from "@heroicons/react/24/solid";
 import { Home, Profile, Tables, Notifications } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
@@ -50,6 +51,7 @@ import Testimonial from "./pages/Testimonial/Testimonial";
 import Statistics from "./pages/Statistics/Statistics";
 import Winners from "./pages/DrawResults/Winner";
 import Reels from "./pages/Reels/Reels";
+import About from "./pages/About/About";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -209,12 +211,12 @@ export const routes = [
       //   path: "/statistics",
       //   element:(notify)=>  <Statistics notify={notify} />
       // },
-      // {
-      //   icon: <InformationCircleIcon {...icon} />,
-      //   name: "notifications",
-      //   path: "/notifications",
-      //   element: <Notifications />
-      // },
+      {
+        icon: <InformationCircleIcon {...icon} />,
+        name: "About Us ",
+        path: "/about-us",
+        element: <About />
+      },
     ],
   },
   // {
