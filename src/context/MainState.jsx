@@ -1288,9 +1288,55 @@ const MainState = (props) => {
     }
   };
 
+  const getRewardPools = async (contest) => {
+    try {
+      const data = await getRequest(`${baseUrl}/rewardPool/getRewardPools?contest=${contest}`, false, props);
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const postRewardPool = async ({ contest, rewards, countryRewards, stateRewards }) => {
+    try {
+      const data = await postRequest(`${baseUrl}/rewardPool/postRewardPool`, { contest, rewards, countryRewards, stateRewards }, true, props, true);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateRewardPool = async ({ id, status }) => {
+    try {
+      const data = await putRequest(`${baseUrl}/rewardPool/updateRewardPool/${id}`, { status }, true, props, false);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const undoRewardPool = async ({ id }) => {
+    try {
+      const data = await putRequest(`${baseUrl}/rewardPool/undoRewardPool/${id}`, {}, true, props, false);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteRewardPool = async (id) => {
+    try {
+      const data = await deleteRequest(`${baseUrl}/rewardPool/deleteRewardPool/${id}`, {}, true, props);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const getNotifications = async (id, type, user, status, page, perPage) => {
     try {
-      const data = await getRequest(`${baseUrl}/notification/getNotifications?status=${status}&id=${id}}&perPage=${perPage}}&page=${page}}&user=${user}}&type=${type}`, false, props);
+      const data = await getRequest(`${baseUrl}/notification/getNotifications?status=${status}&id=${id}&perPage=${perPage}&page=${page}&user=${user}&type=${type}`, false, props);
       console.log(data);
       return data;
     } catch (error) {
@@ -1335,7 +1381,7 @@ const MainState = (props) => {
   };
 
   return (
-    <MainContext.Provider value={{ getBlogs, postBlog, updateBlog, deleteBlog, deleteAllBlogs, getContacts, deleteContact, signup, login, adminLogin, getUsers, createUser, updateUser, updateUserStatus, uploadImage, undoBlog, getFaqs, postFaq, updateFaq, deleteFaq, getTermss, postTerms, updateTerms, postReply, undoFaq, getPrivacys, postPrivacy, updatePrivacy, getSubscriptions, postSubscription, updateSubscription, undoSubscription, deleteSubscription, getCoupans, postCoupan, postCoupanBulk, assignCoupansToUser, updateCoupan, revealCoupan, undoCoupan, deleteCoupan, getPayments, getThemeControls, postThemeControls, updateThemeControls, deletePayment, getDashboardData, getCategorys, postCategory, updateCategory, deleteCategoryImage, deleteCategory, deleteAllCategorys, getContests, postContest, drawResults, updateContest, deleteContest, deleteAllContests, getCareers, postCareer, updateCareer, deleteCareer, deleteAllCareers, getPartners, postPartner, updatePartner, deletePartner, deleteAllPartners, getCharitys, postCharity, updateCharity, deleteCharity, deleteAllCharitys, getRuless, postRules, updateRules, undoGiftCard, getGiftCards, postGiftCard, updateGiftCard, deleteGiftCard, getNewsLetters, undoContest, undoCareer, undoPartner, undoCharity, undoCategory, undoMedia, getMedias, postMedia, deleteMedia, getTestimonials, postTestimonial, undoTestimonial, deleteTestimonial, updateTestimonial, deleteAllTestimonials, getStatisticss, postStatistics, updateStatistics, getVideos, postVideo, updateVideo, undoVideo, deleteVideo, getComment, postComment, updateComment, undoComment, deleteComment, getReplys, postReply1, updateReply, undoReply, deleteReply, getNotifications, postNotification, updateNotification, undoNotification, deleteNotification, deleteUser, getAbouts, postAbout, updateAbout, deleteAbout, undoAbout, deleteAllAbouts }}>
+    <MainContext.Provider value={{ getBlogs, postBlog, updateBlog, deleteBlog, deleteAllBlogs, getContacts, deleteContact, signup, login, adminLogin, getUsers, createUser, updateUser, updateUserStatus, uploadImage, undoBlog, getFaqs, postFaq, updateFaq, deleteFaq, getTermss, postTerms, updateTerms, postReply, undoFaq, getPrivacys, postPrivacy, updatePrivacy, getSubscriptions, postSubscription, updateSubscription, undoSubscription, deleteSubscription, getCoupans, postCoupan, postCoupanBulk, assignCoupansToUser, updateCoupan, revealCoupan, undoCoupan, deleteCoupan, getPayments, getThemeControls, postThemeControls, updateThemeControls, deletePayment, getDashboardData, getCategorys, postCategory, updateCategory, deleteCategoryImage, deleteCategory, deleteAllCategorys, getContests, postContest, drawResults, updateContest, deleteContest, deleteAllContests, getCareers, postCareer, updateCareer, deleteCareer, deleteAllCareers, getPartners, postPartner, updatePartner, deletePartner, deleteAllPartners, getCharitys, postCharity, updateCharity, deleteCharity, deleteAllCharitys, getRuless, postRules, updateRules, undoGiftCard, getGiftCards, postGiftCard, updateGiftCard, deleteGiftCard, getNewsLetters, undoContest, undoCareer, undoPartner, undoCharity, undoCategory, undoMedia, getMedias, postMedia, deleteMedia, getTestimonials, postTestimonial, undoTestimonial, deleteTestimonial, updateTestimonial, deleteAllTestimonials, getStatisticss, postStatistics, updateStatistics, getVideos, postVideo, updateVideo, undoVideo, deleteVideo, getComment, postComment, updateComment, undoComment, deleteComment, getReplys, postReply1, updateReply, undoReply, deleteReply, getNotifications, postNotification, updateNotification, undoNotification, deleteNotification, deleteUser, getAbouts, postAbout, updateAbout, deleteAbout, undoAbout, deleteAllAbouts, getRewardPools, postRewardPool, updateRewardPool, undoRewardPool, deleteRewardPool }}>
       {props.children}
     </MainContext.Provider>
   );

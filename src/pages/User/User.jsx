@@ -144,7 +144,7 @@ const User = ({ notify }) => {
               </svg>
             </div>
           </div>
-        )
+        );
       },
       grow: 0.2
     }
