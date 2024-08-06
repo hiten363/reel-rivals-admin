@@ -110,7 +110,7 @@ export function Dashboard({ notify }) {
         </div> */}
       </div>
 
-      <div className="w-full py-1 text-center bg-gray-900 text-white fixed bottom-0 text-xs" style={{zIndex: '999999'}}>Website Designed & Developed by <a href="https://binarymetrix.com/" target="_blank" className="hover:text-red-400">BinaryMetrix Technologies</a></div>
+      <div className="w-full py-1 text-center bg-gray-900 text-white fixed bottom-0 text-xs" style={{zIndex: '999999'}}>Powered by BinaryMetrix Technologies</div>
     </div>
   );
 }

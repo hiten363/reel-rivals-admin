@@ -6,17 +6,16 @@ import { useParams } from 'react-router-dom';
 import EditRewardpoolModal from './Modals/EditRewardpoolModal';
 
 const Rewardpool = ({ notify }) => {
-  const { getRewardpools } = useMain();
+  const { getRewardPools } = useMain();
 
-  const { event } = useParams();
+  const { contest } = useParams();
 
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
   const [refreshFlag, setRefreshFlag] = useState(false);
 
   useEffect(() => {
-    if(event)
-    {
+    if (contest) {
       getData();
     }
   }, [refreshFlag]);
@@ -34,27 +33,27 @@ const Rewardpool = ({ notify }) => {
     },
     {
       name: 'Reward',
-      selector: row => row.reward,
+      selector: row => row.reward!=="" && row.tokens!==0 ? `${row.reward} + ${row.tokens} Star Points` : row.reward!=="" ? row.reward : `${row.tokens} Star Points`,
       sortable: true
     },
   ];
 
   const getData = async () => {
-    const ans = await getRewardpools(event);
+    const ans = await getRewardPools(contest);
     // console.log(ans);
     setData(ans.data?.[0]);
   };
 
   return (
     <>
-      <EditRewardpoolModal data={data1} setRefreshFlag={setRefreshFlag} refreshFlag={refreshFlag} notify={notify} />
+      <EditRewardpoolModal data={data1} contest={contest} setRefreshFlag={setRefreshFlag} refreshFlag={refreshFlag} notify={notify} />
 
       <div className="mt-12 mb-8 flex flex-col gap-12">
         <Card>
           <CardHeader variant="gradient" color="gray" className="mb-8 p-6">
             <div className="flex items-center justify-between">
               <Typography variant="h6" color="white">
-                Manage Events
+                Manage Rewardpool
               </Typography>
 
               <Button color="amber" onClick={() => {
@@ -69,9 +68,43 @@ const Rewardpool = ({ notify }) => {
               columns={columns}
               data={data?.rewards}
               striped={true}
-              title="Rewards Distribution"
+              title="Global Rewards Distribution"
             />
           </CardBody>
+
+          {data?.countryRewards && data.countryRewards.length > 0 && <>
+            <h3 className='text-2xl mt-2 ml-3 text-black'>Countrywise Rewards Distribution</h3>
+
+            {data?.countryRewards?.map((e, index) => {
+              return (
+                <CardBody key={index} className="overflow-x-scroll px-0 pt-0 pb-2">
+                  <DataTable
+                    columns={columns}
+                    data={e?.rewards}
+                    striped={true}
+                    title={e.country.label}
+                  />
+                </CardBody>
+              );
+            })}
+          </>}
+
+          {data?.stateRewards && data.stateRewards.length > 0 && <>
+            <h3 className='text-2xl mt-2 ml-3 text-black'>Statewise Rewards Distribution</h3>
+            
+            {data?.stateRewards?.map((e, index) => {
+              return (
+                <CardBody key={index} className="overflow-x-scroll px-0 pt-0 pb-2">
+                  <DataTable
+                    columns={columns}
+                    data={e?.rewards}
+                    striped={true}
+                    title={e.state.label}
+                  />
+                </CardBody>
+              );
+            })}
+          </>}
         </Card>
       </div>
     </>

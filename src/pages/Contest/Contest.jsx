@@ -6,9 +6,10 @@ import DeleteModal from '../../Util/DeleteModal';
 import useMain from '../../hooks/useMain';
 import { Button, Card, CardBody, CardHeader, Typography } from '@material-tailwind/react';
 import { Select, Option, Input } from "@material-tailwind/react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ModalImage from "react-modal-image";
 import xlsx from "json-as-xlsx";
+import AddRewardpoolModal from './Modals/AddRewardpoolModal';
 
 const WinnerList = ({ data }) => {
   console.log(data);
@@ -97,6 +98,8 @@ const Contest = ({ notify }) => {
   const { getContests, deleteContest, undoContest, getCategorys } = useMain();
   // console.log('yes');
 
+  const navigate=useNavigate();
+
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
   const [id, setId] = useState(0);
@@ -112,6 +115,7 @@ const Contest = ({ notify }) => {
   const [categories, setCategories] = useState([]);
   const [loadFlag, setLoadFlag] = useState(true);
   const [totalRows, setTotalRows] = useState(0);
+  const [contest, setContest] = useState('');
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
 
@@ -165,6 +169,16 @@ const Contest = ({ notify }) => {
     //   selector: row => row.status === 'true' ? <span className='text-green-500 font-semibold'>Active</span> : <span className='text-red-500 font-semibold'>Finished</span>,
     //   sortable: true
     // },
+    {
+      name: 'Reward Pool',
+      selector: row => row.rewardPool ? <button onClick={()=>{
+        navigate(`/dashboard/rewardpool/${row?._id}`);
+      }} className='bg-green-700 text-white px-2 text-[13px] py-1 rounded-sm'>View</button> : <button onClick={()=>{
+        setContest(row?._id);
+        document.getElementById('addRewardpoolModal').classList.toggle('hidden');
+      }} className='bg-red-500 text-white px-2 text-[13px] py-1 rounded-sm'>Create</button>, 
+      sortable: true
+    },
     {
       name: 'Is Deleted?',
       selector: row => row.deleted === 'true' ? <span className='text-red-500 font-semibold'>Yes</span> : <span className='text-green-500 font-semibold'>No</span>,
@@ -297,6 +311,7 @@ const Contest = ({ notify }) => {
   return (
     <>
       <AddContestModal setRefreshFlag={setRefreshFlag} refreshFlag={refreshFlag} notify={notify} />
+      <AddRewardpoolModal setRefreshFlag={setRefreshFlag} refreshFlag={refreshFlag} notify={notify} contest={contest} />
       <EditContestModal data={data1} setRefreshFlag={setRefreshFlag} refreshFlag={refreshFlag} notify={notify} />
       <DeleteModal msg={msg} handleDelete={handleDelete} />
 

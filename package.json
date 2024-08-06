@@ -13,6 +13,7 @@
     "@material-tailwind/react": "2.1.9",
     "apexcharts": "3.49.1",
     "clone-deep": "^4.0.1",
+    "country-state-city": "^3.2.1",
     "html-to-text": "^9.0.5",
     "json-as-xlsx": "^2.5.6",
     "prop-types": "15.8.1",

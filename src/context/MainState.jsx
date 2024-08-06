@@ -1300,16 +1300,16 @@ const MainState = (props) => {
 
   const postRewardPool = async ({ contest, rewards, countryRewards, stateRewards }) => {
     try {
-      const data = await postRequest(`${baseUrl}/rewardPool/postRewardPool`, { contest, rewards, countryRewards, stateRewards }, true, props, true);
+      const data = await postRequest(`${baseUrl}/rewardPool/postRewardPool`, { contest, rewards, countryRewards, stateRewards }, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
     }
   };
 
-  const updateRewardPool = async ({ id, status }) => {
+  const updateRewardPool = async ({ id, rewards, countryRewards, stateRewards }) => {
     try {
-      const data = await putRequest(`${baseUrl}/rewardPool/updateRewardPool/${id}`, { status }, true, props, false);
+      const data = await putRequest(`${baseUrl}/rewardPool/updateRewardPool/${id}`, { rewards, countryRewards, stateRewards }, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -1346,7 +1346,7 @@ const MainState = (props) => {
 
   const postNotification = async ({ type, video, text, userReceiver }) => {
     try {
-      const data = await postRequest(`${baseUrl}/notification/postNotification`, { type, video, text, userReceiver }, true, props, true);
+      const data = await postRequest(`${baseUrl}/notification/postNotification`, { type, video, text, userReceiver }, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
