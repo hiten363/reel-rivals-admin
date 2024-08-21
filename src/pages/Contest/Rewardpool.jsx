@@ -33,7 +33,7 @@ const Rewardpool = ({ notify }) => {
     },
     {
       name: 'Reward',
-      selector: row => row.reward!=="" && row.tokens!==0 ? `${row.reward} + ${row.tokens} Star Points` : row.reward!=="" ? row.reward : `${row.tokens} Star Points`,
+      selector: row => row.reward && row.reward!=="" && row.tokens && row.tokens!==0 ? `${row.reward} + ${row.tokens} Star Points` : row.reward!=="" ? row.reward : `${row.tokens} Star Points`,
       sortable: true
     },
   ];

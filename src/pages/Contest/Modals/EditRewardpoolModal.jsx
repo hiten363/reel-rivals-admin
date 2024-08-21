@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import 'react-quill/dist/quill.snow.css';
 import { Button } from '@material-tailwind/react';
 import { Country, State } from 'country-state-city';
+import cloneDeep from 'clone-deep';
 
 const EditRewardpoolModal = ({ data, setRefreshFlag, refreshFlag, notify, contest }) => {
   const { updateRewardPool } = useMain();
@@ -20,7 +21,9 @@ const EditRewardpoolModal = ({ data, setRefreshFlag, refreshFlag, notify, contes
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
   const [countryRewards, setCountryRewards] = useState([]);
+  const [countryRewards1, setCountryRewards1] = useState([]);
   const [stateRewards, setStateRewards] = useState([]);
+  const [stateRewards1, setStateRewards1] = useState([]);
   const [loadFlag, setLoadFlag] = useState(false);
 
   useEffect(() => {
@@ -28,11 +31,11 @@ const EditRewardpoolModal = ({ data, setRefreshFlag, refreshFlag, notify, contes
       if (Object.keys(data).length > 0) {
         console.log(data);
         setValue(data?.rewards);
-        setCountryRewards(data?.countryRewards?.map((e)=>{
-          return {...e, country: e.country.value};
+        setCountryRewards(data?.countryRewards?.map((e) => {
+          return { ...e, country: e.country.value };
         }));
-        setStateRewards(data?.stateRewards?.map((e)=>{
-          return {...e, state: e.state.value};
+        setStateRewards(data?.stateRewards?.map((e) => {
+          return { ...e, state: e.state.value };
         }));
         setRewardId(data?._id);
       }
@@ -201,6 +204,37 @@ const EditRewardpoolModal = ({ data, setRefreshFlag, refreshFlag, notify, contes
     }
   };
 
+  const handleCountryGlobal = (flag) => {
+    // console.log(countryRewards);
+    // console.log(countries);
+
+    if (flag) {
+      if (countryRewards1.length === 0) {
+        let t = cloneDeep(countryRewards);
+        setCountryRewards1(t);
+      }
+      let newCountryRewards = [...countries.map((x) => { return { rewards: countryRewards[0].rewards, country: x.value } })];
+      setCountryRewards(newCountryRewards);
+    }
+    else {
+      setCountryRewards(countryRewards1);
+    }
+  };
+
+  const handleStateGlobal = (flag) => {
+    if (flag) {
+      if (stateRewards1.length === 0) {
+        let t = cloneDeep(stateRewards);
+        setStateRewards1(t);
+      }
+      let newStateRewards = [...states.map((x) => { return { rewards: stateRewards[0].rewards, state: x.value } })];
+      setStateRewards(newStateRewards);
+    }
+    else {
+      setStateRewards(stateRewards1);
+    }
+  };
+
   return (
     <>
       <div id="editRewardpoolModal" tabIndex="-1" className="fixed top-0 left-0 right-0 z-50 cus-modal hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
@@ -244,8 +278,8 @@ const EditRewardpoolModal = ({ data, setRefreshFlag, refreshFlag, notify, contes
                               <input type="text" name='reward' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Reward" onChange={(e) => {
                                 handleChange(e, index);
                               }} value={value[index]?.reward} />
-                            
-                            <input type="number" name='tokens' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Star Points" onChange={(e) => {
+
+                              <input type="number" name='tokens' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Star Points" onChange={(e) => {
                                 handleChange(e, index);
                               }} value={value[index]?.tokens} required />
                             </div>
@@ -264,6 +298,13 @@ const EditRewardpoolModal = ({ data, setRefreshFlag, refreshFlag, notify, contes
                   <div className="flex items-center mb-5 gap-3">
                     <h3 className='text-xl'>Country Wise Rewards</h3>
                     <Button color="amber" size='sm' type="button" children="Add rewards +" onClick={handleAddCountry}>Add rewards +</Button>
+
+                    {countryRewards?.length > 0 && <div className="flex items-center ml-5">
+                      <input id="global-country" type="checkbox" value="" onChange={(e) => {
+                        handleCountryGlobal(e.target.checked);
+                      }} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                      <label htmlFor="global-country" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Set As Globally</label>
+                    </div>}
                   </div>
 
                   {countryRewards?.map((e, index) => {
@@ -324,7 +365,15 @@ const EditRewardpoolModal = ({ data, setRefreshFlag, refreshFlag, notify, contes
                   {countryRewards?.find(x => x.country === 'US') && <>
                     <div className="flex items-center mb-5 gap-3">
                       <h3 className='text-xl'>State Wise Rewards</h3>
+
                       <Button color="amber" size='sm' type="button" children="Add rewards +" onClick={handleAddState}>Add rewards +</Button>
+
+                      {stateRewards?.length > 0 && <div className="flex items-center ml-5">
+                        <input id="global-country" type="checkbox" value="" onChange={(e) => {
+                          handleStateGlobal(e.target.checked);
+                        }} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <label htmlFor="global-country" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Set As Globally</label>
+                      </div>}
                     </div>
 
                     {stateRewards?.map((e, index) => {
