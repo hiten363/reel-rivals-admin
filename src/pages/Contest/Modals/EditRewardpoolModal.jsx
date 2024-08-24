@@ -7,6 +7,7 @@ import 'react-quill/dist/quill.snow.css';
 import { Button } from '@material-tailwind/react';
 import { Country, State } from 'country-state-city';
 import cloneDeep from 'clone-deep';
+import list from '../../../Util/sanctionList.json';
 
 const EditRewardpoolModal = ({ data, setRefreshFlag, refreshFlag, notify, contest }) => {
   const { updateRewardPool } = useMain();
@@ -49,7 +50,7 @@ const EditRewardpoolModal = ({ data, setRefreshFlag, refreshFlag, notify, contes
 
   const getCountries = () => {
     let countries = Country.getAllCountries();
-    setCountries(countries.map((e) => {
+    setCountries(countries.filter(x => !list.list.includes(x.name)).map((e) => {
       return { label: e.name, value: e.isoCode };
     }));
   };
@@ -213,7 +214,7 @@ const EditRewardpoolModal = ({ data, setRefreshFlag, refreshFlag, notify, contes
         let t = cloneDeep(countryRewards);
         setCountryRewards1(t);
       }
-      let newCountryRewards = [...countries.map((x) => { return { rewards: countryRewards[0].rewards, country: x.value } })];
+      let newCountryRewards = [...countries.map((x) => { return { rewards: value, country: x.value } })];
       setCountryRewards(newCountryRewards);
     }
     else {
@@ -227,7 +228,7 @@ const EditRewardpoolModal = ({ data, setRefreshFlag, refreshFlag, notify, contes
         let t = cloneDeep(stateRewards);
         setStateRewards1(t);
       }
-      let newStateRewards = [...states.map((x) => { return { rewards: stateRewards[0].rewards, state: x.value } })];
+      let newStateRewards = [...states.map((x) => { return { rewards: value, state: x.value } })];
       setStateRewards(newStateRewards);
     }
     else {
@@ -311,7 +312,7 @@ const EditRewardpoolModal = ({ data, setRefreshFlag, refreshFlag, notify, contes
                     return (
                       <div key={index} className="grid gap-6 px-0.5 py-0.5 mb-6">
                         <div>
-                          <div className="max-w-sm mx-auto">
+                          <div className="max-w-sm mx-auto flex gap-10">
                             <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={e.country} name="country" onChange={(g) => {
                               handleChange1(g, index, -1, 'COUNTRY');
                             }}>
@@ -322,6 +323,12 @@ const EditRewardpoolModal = ({ data, setRefreshFlag, refreshFlag, notify, contes
                                 );
                               })}
                             </select>
+
+                            <Button color="red" size='sm' style={{ padding: '7px 8px', width: '100px', height: 'fit-content' }} type="button" children="Remove" onClick={() => {
+                              setCountryRewards(countryRewards?.filter((_, indd) => {
+                                return indd !== index;
+                              }));
+                            }}>Remove</Button>
                           </div>
 
                           <label className="block mb-2 text-sm font-medium text-gray-900">Enter Rank Range & Rewards</label>
@@ -380,7 +387,7 @@ const EditRewardpoolModal = ({ data, setRefreshFlag, refreshFlag, notify, contes
                       return (
                         <div key={index} className="grid gap-6 px-0.5 py-0.5 mb-6">
                           <div>
-                            <div className="max-w-sm mx-auto">
+                            <div className="max-w-sm mx-auto flex gap-10">
                               <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={e.state} name="state" onChange={(g) => {
                                 handleChange1(g, index, -1, 'STATE');
                               }}>
@@ -391,6 +398,12 @@ const EditRewardpoolModal = ({ data, setRefreshFlag, refreshFlag, notify, contes
                                   );
                                 })}
                               </select>
+
+                              <Button color="red" size='sm' style={{ padding: '7px 8px', width: '100px', height: 'fit-content' }} type="button" children="Remove" onClick={() => {
+                                setStateRewards(stateRewards?.filter((_, indd) => {
+                                  return indd !== index;
+                                }));
+                              }}>Remove</Button>
                             </div>
 
                             <label className="block mb-2 text-sm font-medium text-gray-900">Enter Rank Range & Rewards</label>
