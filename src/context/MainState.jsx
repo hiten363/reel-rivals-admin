@@ -2,8 +2,8 @@ import React from 'react'
 import MainContext from './MainContext';
 import { getRequest, postRequest, putRequest, deleteRequest } from '@/Api/Api';
 
-export const baseUrl = 'http://localhost:5000';
-// export const baseUrl = 'https://seahorse-app-agn6w.ondigitalocean.app';
+// export const baseUrl = 'http://localhost:5000';
+export const baseUrl = 'https://seahorse-app-agn6w.ondigitalocean.app';
 
 const MainState = (props) => {
   const getBlogs = async (id, slug, status, query, page, perPage) => {
