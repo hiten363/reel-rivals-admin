@@ -31,7 +31,7 @@ export function Home() {
   const getData=async()=>{
     setLoadFlag(true);
     const ans = await getDashboardData();
-    console.log(ans);
+    // console.log(ans);
     setDashboardData(ans.data);
     setLoadFlag(false);
   };

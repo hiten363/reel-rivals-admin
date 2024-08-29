@@ -139,12 +139,12 @@ export const routes = [
         path: "/payment-plans",
         element:(notify)=>  <Subscription notify={notify} />
       },
-      // {
-      //   icon: <BanknotesIcon {...icon} />,
-      //   name: "payment logs",
-      //   path: "/payment-logs",
-      //   element:(notify)=>  <Payment notify={notify} />
-      // },
+      {
+        icon: <BanknotesIcon {...icon} />,
+        name: "payment logs",
+        path: "/payment-logs",
+        element:(notify)=>  <Payment notify={notify} />
+      },
       // {
       //   icon: <PaintBrushIcon {...icon} />,
       //   name: "theme control",

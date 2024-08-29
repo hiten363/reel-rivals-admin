@@ -2,8 +2,8 @@ import React from 'react'
 import MainContext from './MainContext';
 import { getRequest, postRequest, putRequest, deleteRequest } from '@/Api/Api';
 
-// export const baseUrl = 'http://localhost:5000';
-export const baseUrl = 'https://seahorse-app-agn6w.ondigitalocean.app';
+export const baseUrl = 'http://localhost:5000';
+// export const baseUrl = 'https://seahorse-app-agn6w.ondigitalocean.app';
 
 const MainState = (props) => {
   const getBlogs = async (id, slug, status, query, page, perPage) => {
@@ -710,9 +710,9 @@ const MainState = (props) => {
     }
   };
 
-  const getPayments = async (status, query, page, perPage, user, event, startDate, endDate) => {
+  const getPayments = async (status, query, page, perPage, user, startDate, endDate) => {
     try {
-      const data = await getRequest(`${baseUrl}/payment/getPayments?status=${status}&query=${query}&page=${page}&perPage=${perPage}&user=${user}&event=${event}&startDate=${startDate}&endDate=${endDate}`, true, props);
+      const data = await getRequest(`${baseUrl}/payment/getPayments?status=${status}&query=${query}&page=${page}&perPage=${perPage}&user=${user}&startDate=${startDate}&endDate=${endDate}`, true, props);
       return data;
     } catch (error) {
       console.log(error);
@@ -1102,7 +1102,7 @@ const MainState = (props) => {
   const getDashboardData = async () => {
     try {
       const data = await getRequest(`${baseUrl}/dashboard-data`, false, props);
-      console.log(data);
+      // console.log(data);
       return data;
     } catch (error) {
       console.log(error);

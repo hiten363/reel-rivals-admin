@@ -13,7 +13,7 @@ function toTitleCase(str) {
 }
 
 const Payment = ({ notify }) => {
-  const { getPayments, deletePayment, getDraws, getUsers } = useMain();
+  const { getPayments, deletePayment, getUsers} = useMain();
   // console.log('yes');
 
   const [data, setData] = useState([]);
@@ -24,7 +24,6 @@ const Payment = ({ notify }) => {
   const [value, setValue] = useState({
     status: '',
     query: '',
-    event: '',
     user: '',
     startDate: '',
     endDate: ''
@@ -34,6 +33,7 @@ const Payment = ({ notify }) => {
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
   const [events, setEvents] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [users, setUsers] = useState([]);
   const [total, setTotal] = useState(0);
 
@@ -54,28 +54,28 @@ const Payment = ({ notify }) => {
     },
     {
       name: 'Subscription',
-      selector: row => row?.subscription?.title,
+      selector: row => row?.subscription?.title!=="" ? row?.subscription?.title : `${row?.subscription?.type} (${row?.subscription?.subType})`,
       sortable: true,
       grow: 0.5
     },
-    {
-      name: 'Payment Mode',
-      selector: row => toTitleCase(row?.mode),
-      sortable: true,
-      grow: 0.4
-    },
+    // {
+    //   name: 'Payment Mode',
+    //   selector: row => toTitleCase(row?.mode),
+    //   sortable: true,
+    //   grow: 0.4
+    // },
     {
       name: 'Amount Paid',
-      selector: row => row?.amount,
+      selector: row => <p>${row?.amount}</p>,
       sortable: true,
       grow: 0.5
     },
-    {
-      name: 'Discount',
-      selector: row => row?.discount,
-      sortable: true,
-      grow: 0.5
-    },
+    // {
+    //   name: 'Discount',
+    //   selector: row => row?.discount,
+    //   sortable: true,
+    //   grow: 0.5
+    // },
     {
       name: 'Date & Time',
       selector: row => new Date(Number(row?.ts)).toLocaleString('en-GB'),
@@ -83,7 +83,7 @@ const Payment = ({ notify }) => {
     },
     {
       name: 'Status',
-      selector: row => row.status === 'true' ? <span className='text-green-500 font-semibold'>Payment Success</span> : <span className='text-red-500 font-semibold'>Payment Failed</span>,
+      selector: row => row.paymentStatus === 'SUCCESS' ? <span className='text-green-500 font-semibold'>Payment Success</span> : <span className='text-red-500 font-semibold'>Payment Failed</span>,
       sortable: true
     },
     // {
@@ -132,12 +132,10 @@ const Payment = ({ notify }) => {
   const getData = async () => {
     setLoadFlag(true);
     const ans = await getPayments(value.status, value.query, page, perPage);
-    const ans1 = await getDraws('', '', '', '', 'false');
-    const ans2 = await getUsers('', '', '', '', '', value.user);
-    console.log(ans);
-    console.log(ans1);
+    const ans2 = await getUsers('true');
+    // console.log(ans);
+    // console.log(ans1);
     setTotal(ans.totalAmount);
-    setEvents([{ title: 'Select Event', _id: '' }, ...ans1.data]);
     setUsers([{ name: 'Select User', _id: '' }, ...ans2.data]);
     setData(ans.data);
     setTotalRows(ans.count);
@@ -171,8 +169,8 @@ const Payment = ({ notify }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(value);
-    const ans = await getPayments(value.status, value.query, 1, perPage, value?.user, value?.event, value?.startDate ? new Date(value?.startDate).getTime() : '', value?.endDate ? new Date(value?.endDate).getTime() : '');
+    // console.log(value);
+    const ans = await getPayments(value.status, value.query, 1, perPage, value?.user, value?.startDate ? new Date(value?.startDate).getTime() : '', value?.endDate ? new Date(value?.endDate).getTime() : '');
     setTotal(ans.totalAmount);
     setTotalRows(ans.count);
     setPage(1);
@@ -197,12 +195,12 @@ const Payment = ({ notify }) => {
         columns: [
           { label: "User Name", value: row => row?.user?.name },
           { label: "User Email", value: row => row?.user?.email },
-          { label: "Subscription", value: row => row?.subscription?.title },
-          { label: "Payment Mode", value: row => toTitleCase(row?.mode) },
-          { label: "Amount Paid", value: "amount" },
-          { label: "Discount", value: "discount" },
+          { label: "Subscription", value: row => row?.subscription?.title!=="" ? row?.subscription?.title : `${row?.subscription?.type} (${row?.subscription?.subType})` },
+          // { label: "Payment Mode", value: row => toTitleCase(row?.mode) },
+          { label: "Amount Paid", value: row=> <div>${row.amount}</div> },
+          // { label: "Discount", value: "discount" },
           { label: "Date & Time", value: row => new Date(Number(row?.ts)).toLocaleString('en-GB') },
-          { label: "Payment Status", value: (e) => e.status === 'true' ? 'Success' : 'Failed' },
+          { label: "Payment Status", value: (e) => e.paymentStatus === 'SUCCESS' ? 'Success' : 'Failed' }
         ],
         content: ans.data
       }
@@ -258,26 +256,6 @@ const Payment = ({ notify }) => {
                   </select>
                 </div>
 
-                <div className="flex items-center mr-2 w-full">
-                  {/* <Select label="Event" children={<p>Event</p>} onChange={(e) => {
-                    handleChange(e, 'event');
-                  }}>
-                    {events?.map((x, index) => {
-                      return (
-                        <Option key={index} value={x?._id} children={<p>{x?.title}</p>}>{x?.title}</Option>
-                      );
-                    })}
-                  </Select> */}
-
-                  <select id="event" name='event' onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    {events?.map((x, index) => {
-                      return (
-                        <option key={index} value={x?._id}>{x?.title}</option>
-                      );
-                    })}
-                  </select>
-                </div>
-
                 {/* <div className="flex items-center w-full">
                   <Select label="Status" children={<p>Status</p>} onChange={(e) => {
                     handleChange(e, 'status');
@@ -304,7 +282,7 @@ const Payment = ({ notify }) => {
             </form>
 
             <div>
-              <p className='text-xl ml-4 mt-4 text-black'>Total Amount: {total}/-</p>
+              <p className='text-xl ml-4 mt-4 text-black'>Total Amount: ${total.toFixed(2)}</p>
             </div>
 
             <DataTable
