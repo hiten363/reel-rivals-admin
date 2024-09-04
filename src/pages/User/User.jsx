@@ -230,9 +230,11 @@ const User = ({ notify }) => {
         sheet: "Users",
         columns: [
           { label: "Name", value: "name" },
+          { label: "Username", value: "userName" },
           { label: "Email", value: 'email' },
           { label: "Phone", value: "phone" },
-          { label: "Address", value: "address" },
+          { label: "Country", value: (e)=>e.country && e.country !== "undefined" && e.country.label ? e.country.label : ' - ' },
+          { label: "State", value: (e)=>e.state && e.state !== "undefined" && e.state.label ? e.state.label : ' - ' },
           { label: "User Status", value: (e) => e.status === 'true' ? 'Active' : 'Inactive' },
         ],
         content: ans.data,

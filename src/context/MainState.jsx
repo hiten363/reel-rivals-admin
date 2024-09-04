@@ -701,9 +701,9 @@ const MainState = (props) => {
     }
   };
 
-  const getUsers = async (status, role, query, page, perPage, user, contest) => {
+  const getUsers = async (status, role, query, page, perPage, user, contest, subscription) => {
     try {
-      const data = await getRequest(`${baseUrl}/user/getUsers?status=${status}&role=${role}&query=${query}&page=${page}&perPage=${perPage}&user=${user}&contest=${contest}`, true, props);
+      const data = await getRequest(`${baseUrl}/user/getUsers?status=${status}&role=${role}&query=${query}&page=${page}&perPage=${perPage}&user=${user}&contest=${contest}&subscription=${subscription}`, true, props);
       return data;
     } catch (error) {
       console.log(error);
@@ -869,9 +869,9 @@ const MainState = (props) => {
     }
   };
 
-  const getSubscriptions = async (status, query, type, subType, page, perPage) => {
+  const getSubscriptions = async (status, query, type, subType, page, perPage, id) => {
     try {
-      const data = await getRequest(`${baseUrl}/subscription/getSubscriptions?status=${status}&query=${query}&type=${type}&subType=${subType}&page=${page}&perPage=${perPage}`, false, props);
+      const data = await getRequest(`${baseUrl}/subscription/getSubscriptions?status=${status}&query=${query}&type=${type}&subType=${subType}&page=${page}&perPage=${perPage}&id=${id}`, false, props);
       console.log(data);
       return data;
     } catch (error) {
@@ -879,18 +879,18 @@ const MainState = (props) => {
     }
   };
 
-  const postSubscription = async ({ title, subtitle, desc, desc1, desc2, desc3, starPointsOffered, amount, discount, type, subType }) => {
+  const postSubscription = async ({ title, subtitle, desc, desc1, desc2, desc3, starPointsOffered, amount, discount, type, subType, tier }) => {
     try {
-      const data = await postRequest(`${baseUrl}/subscription/postSubscription`, { title, subtitle, desc, desc1, desc2, desc3, starPointsOffered, amount, discount, type, subType }, true, props, false);
+      const data = await postRequest(`${baseUrl}/subscription/postSubscription`, { title, subtitle, desc, desc1, desc2, desc3, starPointsOffered, amount, discount, type, subType, tier }, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
     }
   };
 
-  const updateSubscription = async ({ id, title, subtitle, desc, desc1, desc2, desc3, starPointsOffered, amount, discount, type, subType }) => {
+  const updateSubscription = async ({ id, title, subtitle, desc, desc1, desc2, desc3, starPointsOffered, amount, discount, type, subType, tier }) => {
     try {
-      const data = await putRequest(`${baseUrl}/subscription/updateSubscription/${id}`, { title, subtitle, desc, desc1, desc2, desc3, starPointsOffered, amount, discount, type, subType }, true, props, false);
+      const data = await putRequest(`${baseUrl}/subscription/updateSubscription/${id}`, { title, subtitle, desc, desc1, desc2, desc3, starPointsOffered, amount, discount, type, subType, tier }, true, props, false);
       return data;
     } catch (error) {
       console.log(error);

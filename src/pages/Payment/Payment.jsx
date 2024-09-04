@@ -174,7 +174,22 @@ const Payment = ({ notify }) => {
     setTotal(ans.totalAmount);
     setTotalRows(ans.count);
     setPage(1);
-    console.log(ans);
+    setData(ans.data);
+  };
+
+  const handleReset = async () => {
+    // console.log(value);
+    const ans = await getPayments();
+    setValue({
+      status: '',
+      query: '',
+      user: '',
+      startDate: '',
+      endDate: ''
+    });
+    setTotal(ans.totalAmount);
+    setTotalRows(ans.count);
+    setPage(1);
     setData(ans.data);
   };
 
@@ -269,15 +284,18 @@ const Payment = ({ notify }) => {
 
               <div className='flex gap-2 items-center w-full justify-end px-10 pt-3'>
                 <div className="flex items-center mr-2">
-                  <label htmlFor="startDate" className="block w-28 mb-1.5 text-sm font-medium text-gray-900 dark:text-white">Start Date</label>
+                  <label htmlFor="startDate" className="block w-28 mb-0 text-sm font-medium text-gray-900 dark:text-white">Start Date</label>
                   <input type="date" id="startDate" name="startDate" value={value?.startDate} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                 </div>
 
                 <div className="flex items-center mr-2">
-                  <label htmlFor="endDate" className="block w-28 mb-1.5 text-sm font-medium text-gray-900 dark:text-white">End Date</label>
+                  <label htmlFor="endDate" className="block w-28 mb-0 text-sm font-medium text-gray-900 dark:text-white">End Date</label>
                   <input type="date" id="endDate" name="endDate" value={value?.endDate} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                 </div>
-                <Button type='submit' children="Filter" size='sm' className='ml-3'>Filter</Button>
+
+                <Button type='submit' children="Filter" size='sm' className='ml-3 !overflow-visible' style={{overflow: 'unset'}}>Filter</Button>
+
+                <Button type='button' onClick={handleReset} children="Filter" size='sm' className='ml-3 !overflow-visible' style={{overflow: 'unset'}}>Reset</Button>
               </div>
             </form>
 

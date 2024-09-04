@@ -40,6 +40,7 @@ import ContestUser1 from "@/pages/User/ContestUsers1";
 import CategoryContests from "@/pages/Category/CategoryContests";
 import About from "@/pages/About/About";
 import Rewardpool from "@/pages/Contest/Rewardpool";
+import SubscriptionUsers from "@/pages/User/SubscriptionUsers";
 
 export function Dashboard({ notify }) {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -92,6 +93,7 @@ export function Dashboard({ notify }) {
           <Route path={'/winners1'} element={<Winners1 notify={notify} />} />
           <Route path={'/winners/:type/:id'} element={<Winners notify={notify} />} />
           <Route path={'/payment-plans'} element={<Subscription notify={notify} />} />
+          <Route path={'/subscription/:subscriptionId/:subscriptionName'} element={<SubscriptionUsers notify={notify} />} />
           <Route path={'/payment-logs'} element={<Payment notify={notify} />} />
           <Route path={'/theme-control'} element={<ThemeControl notify={notify} />} />
           {/* <Route path={'/career'} element={<Career notify={notify} />} /> */}
@@ -110,7 +112,7 @@ export function Dashboard({ notify }) {
         </div> */}
       </div>
 
-      <div className="w-full py-1 text-center bg-gray-900 text-white fixed bottom-0 text-xs" style={{zIndex: '999999'}}>Powered by BinaryMetrix Technologies</div>
+      <div className="w-full py-1 text-center bg-gray-900 text-white fixed bottom-0 text-xs" style={{ zIndex: '999999' }}>Copyright © 2024 Reel Rivals. All content and images are protected under copyright law. Powered by BinaryMetrix Technologies</div>
     </div>
   );
 }

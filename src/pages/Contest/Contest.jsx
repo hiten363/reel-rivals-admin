@@ -236,6 +236,7 @@ const Contest = ({ notify }) => {
     setTotalRows(ans.count);
 
     const ans1 = await getCategorys('', true);
+    
     setCategories(ans1.data);
     setLoadFlag(false);
   };

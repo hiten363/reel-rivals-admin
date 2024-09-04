@@ -6,10 +6,13 @@ import DeleteModal from '../../Util/DeleteModal';
 import useMain from '../../hooks/useMain';
 import { Button, Card, CardBody, CardHeader, Typography } from '@material-tailwind/react';
 import { Select, Option, Input } from "@material-tailwind/react";
+import { useNavigate } from 'react-router-dom';
 
 const Subscription = ({ notify }) => {
   const { getSubscriptions, deleteSubscription, undoSubscription } = useMain();
   // console.log('yes');
+
+  const navigate = useNavigate();
 
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
@@ -30,26 +33,31 @@ const Subscription = ({ notify }) => {
   useEffect(() => {
     getData();
   }, [refreshFlag, page, perPage]);
-  
+
   const columns = [
     {
       name: 'Title',
-      selector: row => row.title && row?.title!=="" ? row?.title : " - ",
+      selector: row => row.title && row?.title !== "" ? row?.title : " - ",
       sortable: true
     },
     {
       name: 'Sub Title',
-      selector: row => row.subtitle && row.subtitle!=="" ? row.subtitle : " - ",
+      selector: row => row.subtitle && row.subtitle !== "" ? row.subtitle : " - ",
+      sortable: true
+    },
+    {
+      name: 'Subscription Tier',
+      selector: row => row.tier && row.tier !== "" ? row.tier : ' - ',
       sortable: true
     },
     {
       name: 'Type',
-      selector: row => row.type==='SUBSCRIPTIONS' ? 'Subscription' : 'Star Points',
+      selector: row => row.type === 'SUBSCRIPTIONS' ? 'Subscription' : 'Star Points',
       sortable: true
     },
     {
       name: 'Interval',
-      selector: row => row.subType==='MONTHLY' ? 'Monthly' : row.subType==='BIWEEKLY' ? 'Bi-Weekly' : 'Fixed',
+      selector: row => row.subType === 'MONTHLY' ? 'Monthly' : row.subType === 'BIWEEKLY' ? 'Bi-Weekly' : 'Fixed',
       sortable: true
     },
     {
@@ -66,6 +74,13 @@ const Subscription = ({ notify }) => {
       name: 'Discount',
       selector: row => row.discount,
       sortable: true
+    },
+    {
+      name: 'View Subscribers',
+      selector: row => <>{row.subType !== "FIXED" ? <Button color='blue-gray' onClick={() => {
+        navigate(`/dashboard/subscription/${row._id}/${row.title!=="" ? row.title.replaceAll('/', '^') : `${row.starPointsOffered} Star Points (${row.subType})`}`);
+      }} style={{ padding: '4px 10px', borderRadius: '4px' }} size='sm'>View</Button> : <p></p>}</>,
+      // sortable: true
     },
     {
       name: 'Status',
@@ -159,13 +174,13 @@ const Subscription = ({ notify }) => {
 
   const handlePageChange = (page) => {
     setPage(page);
-	};
+  };
 
-	const handlePerRowsChange = async (newPerPage, page) => {
+  const handlePerRowsChange = async (newPerPage, page) => {
     setPerPage(newPerPage);
     setPage(page);
-	};
-  
+  };
+
   return (
     <>
       <AddSubscriptionModal setRefreshFlag={setRefreshFlag} refreshFlag={refreshFlag} notify={notify} />
@@ -191,7 +206,7 @@ const Subscription = ({ notify }) => {
               <div className=''>
                 <Input label="Search .." name="query" onChange={handleChange} value={value.query} />
               </div>
-              
+
               <div className="flex items-center">
                 <Select label="Status" children={<p>Status</p>} onChange={(e) => {
                   handleChange(e, 'status');
@@ -222,7 +237,7 @@ const Subscription = ({ notify }) => {
                   <Option value="FIXED" children={<p>Fixed</p>}>Fixed</Option>
                 </Select>
               </div>
-              
+
               <Button type='submit' children="Filter" size='sm' className='ml-3'>Filter</Button>
             </form>
 
@@ -237,7 +252,7 @@ const Subscription = ({ notify }) => {
               paginationTotalRows={totalRows}
               onChangeRowsPerPage={handlePerRowsChange}
               onChangePage={handlePageChange}
-              paginationRowsPerPageOptions={[5,10,20,50,100]}
+              paginationRowsPerPageOptions={[5, 10, 20, 50, 100]}
             />
           </CardBody>
         </Card>
