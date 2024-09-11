@@ -47,7 +47,7 @@ const GiftCard = ({ notify }) => {
     },
     {
       name: 'Is Availed?',
-      selector: row => row.isAvailed==='true' ? 'Yes' : 'No',
+      selector: row => row.isAvailed === 'true' ? 'Yes' : 'No',
       sortable: true
     },
     {
@@ -103,7 +103,7 @@ const GiftCard = ({ notify }) => {
     const ans = await getGiftCards(value.status, value.query, page, perPage);
     console.log(ans);
     setData(ans.data);
-    setTotalRows(ans.count);                     
+    setTotalRows(ans.count);
     setLoadFlag(false);
   };
 
@@ -142,12 +142,12 @@ const GiftCard = ({ notify }) => {
 
   const handlePageChange = (page) => {
     setPage(page);
-	};
+  };
 
-	const handlePerRowsChange = async (newPerPage, page) => {
+  const handlePerRowsChange = async (newPerPage, page) => {
     setPerPage(newPerPage);
     setPage(page);
-	};
+  };
 
   return (
     <>
@@ -197,7 +197,7 @@ const GiftCard = ({ notify }) => {
               paginationTotalRows={totalRows}
               onChangeRowsPerPage={handlePerRowsChange}
               onChangePage={handlePageChange}
-              paginationRowsPerPageOptions={[5,10,20,50,100]}
+              paginationRowsPerPageOptions={[5, 10, 20, 50, 100]}
             />
           </CardBody>
         </Card>

@@ -34,10 +34,10 @@ const Testimonial = ({ notify }) => {
     {
       name: 'Photo',
       selector: row => <ModalImage
-      small={row?.img ? row?.img : '/img/user.png'}
-      large={row?.img ? row?.img : '/img/user.png'}
-      className='w-20 h-20 object-cover'
-    />,
+        small={row?.img ? row?.img : '/img/user.png'}
+        large={row?.img ? row?.img : '/img/user.png'}
+        className='w-20 h-20 object-cover'
+      />,
       sortable: true
     },
     {
@@ -138,7 +138,7 @@ const Testimonial = ({ notify }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(value);
-    const ans = await getTestimonials('', value.status, value.query ,1, perPage);
+    const ans = await getTestimonials('', value.status, value.query, 1, perPage);
     setTotalRows(ans.count);
     setPage(1);
     console.log(ans);
@@ -147,12 +147,12 @@ const Testimonial = ({ notify }) => {
 
   const handlePageChange = (page) => {
     setPage(page);
-	};
+  };
 
-	const handlePerRowsChange = async (newPerPage, page) => {
+  const handlePerRowsChange = async (newPerPage, page) => {
     setPerPage(newPerPage);
     setPage(page);
-	};
+  };
 
   return (
     <>
@@ -200,7 +200,7 @@ const Testimonial = ({ notify }) => {
               paginationTotalRows={totalRows}
               onChangeRowsPerPage={handlePerRowsChange}
               onChangePage={handlePageChange}
-              paginationRowsPerPageOptions={[5,10,20,50,100]}
+              paginationRowsPerPageOptions={[5, 10, 20, 50, 100]}
             />
           </CardBody>
         </Card>

@@ -30,9 +30,9 @@ const ContestUsers = ({ notify }) => {
     getData();
   }, [refreshFlag, page, perPage]);
 
-  useEffect(()=>{
+  useEffect(() => {
     getData1();
-  },[]);
+  }, []);
 
   const columns = [
     // {
@@ -76,7 +76,7 @@ const ContestUsers = ({ notify }) => {
     setLoadFlag(false);
   };
 
-  const getData1=async()=>{
+  const getData1 = async () => {
     const ans2 = await getCategorys('', true);
     setCategories(ans2.data);
   };

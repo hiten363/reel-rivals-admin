@@ -368,7 +368,7 @@ const EditAboutModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                       {value?.img && value?.img !== "" && <img style={{ width: '100px', height: '100px' }} className='mb-2' src={value?.img} />}
 
                       <label className="block mb-2 text-sm font-medium text-gray-900" htmlFor="img">Upload Image</label>
-                      <input className="block w-full text-sm text-gray-900 border p-2.5 border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" id="img" type="file" name='img' onChange={handleChange}  />
+                      <input className="block w-full text-sm text-gray-900 border p-2.5 border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" id="img" type="file" name='img' onChange={handleChange} />
                     </div>
 
                     <div>
@@ -383,7 +383,7 @@ const EditAboutModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                       {value?.subImg1 && value?.subImg1 !== "" && <img style={{ width: '100px', height: '100px' }} className='mb-2' src={value?.subImg1} />}
 
                       <label className="block mb-2 text-sm font-medium text-gray-900" htmlFor="subImg1">Upload Sub Image 1</label>
-                      <input className="block w-full text-sm text-gray-900 border p-2.5 border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none" id="subImg1" type="file" name='subImg1' onChange={handleChange}  />
+                      <input className="block w-full text-sm text-gray-900 border p-2.5 border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none" id="subImg1" type="file" name='subImg1' onChange={handleChange} />
                     </div>
 
                     <div>
@@ -398,7 +398,7 @@ const EditAboutModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                       {value?.subImg2 && value?.subImg2 !== "" && <img style={{ width: '100px', height: '100px' }} className='mb-2' src={value?.subImg2} />}
 
                       <label className="block mb-2 text-sm font-medium text-gray-900" htmlFor="subImg2">Upload Sub Image 2</label>
-                      <input className="block w-full text-sm text-gray-900 border p-2.5 border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none" id="subImg2" type="file" name='subImg2' onChange={handleChange}  />
+                      <input className="block w-full text-sm text-gray-900 border p-2.5 border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none" id="subImg2" type="file" name='subImg2' onChange={handleChange} />
                     </div>
 
                     <div>
@@ -413,7 +413,7 @@ const EditAboutModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                       {value?.subImg3 && value?.subImg3 !== "" && <img style={{ width: '100px', height: '100px' }} className='mb-2' src={value?.subImg3} />}
 
                       <label className="block mb-2 text-sm font-medium text-gray-900" htmlFor="subImg3">Upload Sub Image 3</label>
-                      <input className="block w-full text-sm text-gray-900 border p-2.5 border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none" id="subImg3" type="file" name='subImg3' onChange={handleChange}  />
+                      <input className="block w-full text-sm text-gray-900 border p-2.5 border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none" id="subImg3" type="file" name='subImg3' onChange={handleChange} />
                     </div>
 
                     <div>

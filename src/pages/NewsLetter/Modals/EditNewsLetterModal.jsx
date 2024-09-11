@@ -44,8 +44,7 @@ const EditNewsLetterModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
           textLength: data.desc.length
         });
 
-        if(data.img)
-        {
+        if (data.img) {
           setPrevImage({
             url: data.img.url,
             id: data.img.id
@@ -172,7 +171,7 @@ const EditNewsLetterModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
           <div className="relative bg-white rounded-lg shadow ">
             <div className="flex items-center justify-between p-5 border-b rounded-t ">
               <h3 className="text-xl font-medium text-gray-900 ">Update reply</h3>
-            
+
               <button type="button" onClick={() => {
                 document.getElementById('editNewsLetterModal').classList.toggle('hidden');
               }} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center ">

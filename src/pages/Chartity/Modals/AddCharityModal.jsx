@@ -145,8 +145,7 @@ const AddCharityModal = (props) => {
     e.preventDefault();
     console.log(value);
 
-    if(convert(value.desc.richText).trim()==="")
-    {
+    if (convert(value.desc.richText).trim() === "") {
       alert('Description is required');
       return;
     }
@@ -158,7 +157,7 @@ const AddCharityModal = (props) => {
     console.log(temp);
 
     try {
-      let validate=await schema.validate(value);
+      let validate = await schema.validate(value);
       const ans = await postCharity({ ...value, desc: `<div className="quill-component">${value.desc.richText}</div>`, tags: temp });
       console.log(ans);
       if (ans.status) {

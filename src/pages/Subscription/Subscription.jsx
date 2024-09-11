@@ -78,7 +78,7 @@ const Subscription = ({ notify }) => {
     {
       name: 'View Subscribers',
       selector: row => <>{row.subType !== "FIXED" ? <Button color='blue-gray' onClick={() => {
-        navigate(`/dashboard/subscription/${row._id}/${row.title!=="" ? row.title.replaceAll('/', '^') : `${row.starPointsOffered} Star Points (${row.subType})`}`);
+        navigate(`/dashboard/subscription/${row._id}/${row.title !== "" ? row.title.replaceAll('/', '^') : `${row.starPointsOffered} Star Points (${row.subType})`}`);
       }} style={{ padding: '4px 10px', borderRadius: '4px' }} size='sm'>View</Button> : <p></p>}</>,
       // sortable: true
     },

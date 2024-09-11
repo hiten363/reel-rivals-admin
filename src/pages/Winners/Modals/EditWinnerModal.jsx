@@ -115,7 +115,7 @@ const EditWinnerModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                                     console.log(uploadFlag);
                                     let ans = await uploadImage({ file: g.target.files[0] });
                                     // console.log(ans);
-                                    mainEvent.events[index].users[index1].winner={
+                                    mainEvent.events[index].users[index1].winner = {
                                       ...mainEvent.events[index].users[index1].winner,
                                       file: ans.data
                                     };

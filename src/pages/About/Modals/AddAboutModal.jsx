@@ -270,7 +270,7 @@ const AddAboutModal = (props) => {
                     </div>
 
                     <div>
-                    {value?.subImg1 && value?.subImg1 !== "" && <span className='mb-2'>Preview</span>}
+                      {value?.subImg1 && value?.subImg1 !== "" && <span className='mb-2'>Preview</span>}
                       {value?.subImg1 && value?.subImg1 !== "" && <img style={{ width: '100px', height: '100px' }} className='mb-2' src={value?.subImg1} />}
 
                       <label className="block mb-2 text-sm font-medium text-gray-900" htmlFor="subImg1">Upload Sub Image 1</label>

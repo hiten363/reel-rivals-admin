@@ -72,7 +72,7 @@ const Statistics = ({ notify }) => {
     const ans = await getStatisticss(value.status, value.query, page, perPage);
     console.log(ans);
     setData(ans.data);
-    setTotalRows(ans.count);                     
+    setTotalRows(ans.count);
     setLoadFlag(false);
   };
 
@@ -111,12 +111,12 @@ const Statistics = ({ notify }) => {
 
   const handlePageChange = (page) => {
     setPage(page);
-	};
+  };
 
-	const handlePerRowsChange = async (newPerPage, page) => {
+  const handlePerRowsChange = async (newPerPage, page) => {
     setPerPage(newPerPage);
     setPage(page);
-	};
+  };
 
   return (
     <>
@@ -130,7 +130,7 @@ const Statistics = ({ notify }) => {
             <div className="flex items-center justify-between">
               <Typography variant="h6" color="white">Manage Statistics</Typography>
 
-              {data.length===0 && <Button color="red" onClick={() => {
+              {data.length === 0 && <Button color="red" onClick={() => {
                 document.getElementById('addStatisticsModal').classList.toggle('hidden');
               }} children="Add Statistics +">Add Statistics +</Button>}
             </div>
@@ -164,7 +164,7 @@ const Statistics = ({ notify }) => {
               paginationTotalRows={totalRows}
               onChangeRowsPerPage={handlePerRowsChange}
               onChangePage={handlePageChange}
-              paginationRowsPerPageOptions={[5,10,20,50,100]}
+              paginationRowsPerPageOptions={[5, 10, 20, 50, 100]}
             />
           </CardBody>
         </Card>

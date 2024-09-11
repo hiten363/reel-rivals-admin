@@ -35,7 +35,7 @@ const EditUserModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
           name: data?.name,
           email: data?.email,
           userName: data?.userName,
-          phone: data?.phone && data?.phone!=="undefined" ? data?.phone : ''
+          phone: data?.phone && data?.phone !== "undefined" ? data?.phone : ''
         });
       }
     }
@@ -50,8 +50,8 @@ const EditUserModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
 
     try {
       console.log(value);
-      let validate=await schema.validate(value);
-  
+      let validate = await schema.validate(value);
+
       const ans = await updateUser({ ...value });
       console.log(ans);
       if (ans.status) {
@@ -90,7 +90,7 @@ const EditUserModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                 <span className="sr-only">Close modal</span>
               </button>
             </div>
-            
+
             <div className="p-6 space-y-6">
               <form onSubmit={handleSubmit}>
                 <div className="bus-form">

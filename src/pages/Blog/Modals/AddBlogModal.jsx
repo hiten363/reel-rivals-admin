@@ -147,8 +147,7 @@ const AddBlogModal = (props) => {
     e.preventDefault();
     console.log(value);
 
-    if(convert(value.desc.richText).trim()==="")
-    {
+    if (convert(value.desc.richText).trim() === "") {
       alert('Description is required');
       return;
     }
@@ -160,10 +159,10 @@ const AddBlogModal = (props) => {
     console.log(temp);
 
     try {
-      let validate=await schema.validate(value);
+      let validate = await schema.validate(value);
       const ans = await postBlog({ ...value, desc: `<div className="quill-component">${value.desc.richText}</div>`, tags: temp });
       console.log(ans);
-  
+
       if (ans.status) {
         setValue({
           title: '',
@@ -177,11 +176,11 @@ const AddBlogModal = (props) => {
           },
           slug: ''
         });
-  
+
         setData1([{
           tags: ''
         }]);
-  
+
         props.notify('success', ans.message);
         // props.setRefreshFlag(!props.refreshFlag);
         document.getElementById('addBlogModal').classList.toggle('hidden');

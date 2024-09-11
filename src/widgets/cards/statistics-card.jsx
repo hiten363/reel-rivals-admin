@@ -24,10 +24,10 @@ export function StatisticsCard({ color, icon, title, value, footer }) {
         <Typography variant="small" className="font-normal text-blue-gray-600" >
           {title}
         </Typography>
-        
+
         <Typography variant="h4" color="blue-gray">
           <span>
-          {value}
+            {value}
           </span>
         </Typography>
       </CardBody>

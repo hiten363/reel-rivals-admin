@@ -107,8 +107,7 @@ const AddRulesModal = (props) => {
     e.preventDefault();
     console.log(value);
 
-    if(convert(value.desc.richText).trim()==="")
-    {
+    if (convert(value.desc.richText).trim() === "") {
       alert('Description is required');
       return;
     }

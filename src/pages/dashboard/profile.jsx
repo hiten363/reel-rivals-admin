@@ -53,7 +53,7 @@ export function Profile() {
               </div>
             </div>
           </div>
-          
+
           <div className="gird-cols-1 mb-12 grid gap-12 px-4 lg:grid-cols-2 xl:grid-cols-2">
             <div>
               <Typography variant="h6" color="blue-gray" className="mb-3">

@@ -37,7 +37,7 @@ const Faq = ({ notify }) => {
     },
     {
       name: 'Answer',
-      selector: row => <span className='my-2 block'>{`${row.answer.slice(0,140)} ${row.answer?.length>140 && '...'}`}</span>,
+      selector: row => <span className='my-2 block'>{`${row.answer.slice(0, 140)} ${row.answer?.length > 140 && '...'}`}</span>,
       wrap: true,
       // sortable: true
     },
@@ -95,7 +95,7 @@ const Faq = ({ notify }) => {
     const ans = await getFaqs(value.status, value.query, page, perPage);
     console.log(ans);
     setData(ans.data);
-    setTotalRows(ans.count);                     
+    setTotalRows(ans.count);
     setLoadFlag(false);
   };
 
@@ -134,12 +134,12 @@ const Faq = ({ notify }) => {
 
   const handlePageChange = (page) => {
     setPage(page);
-	};
+  };
 
-	const handlePerRowsChange = async (newPerPage, page) => {
+  const handlePerRowsChange = async (newPerPage, page) => {
     setPerPage(newPerPage);
     setPage(page);
-	};
+  };
 
   return (
     <>
@@ -188,7 +188,7 @@ const Faq = ({ notify }) => {
               paginationTotalRows={totalRows}
               onChangeRowsPerPage={handlePerRowsChange}
               onChangePage={handlePageChange}
-              paginationRowsPerPageOptions={[5,10,20,50,100]}
+              paginationRowsPerPageOptions={[5, 10, 20, 50, 100]}
             />
           </CardBody>
         </Card>

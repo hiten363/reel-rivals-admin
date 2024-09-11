@@ -36,7 +36,7 @@ const PlayReelModal = (props) => {
             </div>
 
             <div className="p-6 space-y-6">
-              <video style={{height: '500px', width: '330px', objectFit: 'contain', margin: 'auto', borderRadius: '8px'}} src={props?.link} controls playsInline id="vid"></video>
+              <video style={{ height: '500px', width: '330px', objectFit: 'contain', margin: 'auto', borderRadius: '8px' }} src={props?.link} controls playsInline id="vid"></video>
             </div>
           </div>
         </div>

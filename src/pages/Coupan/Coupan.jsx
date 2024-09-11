@@ -31,9 +31,9 @@ const Coupon = ({ notify }) => {
   const [perPage, setPerPage] = useState(10);
   const [events, setEvents] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     getData1();
-  },[]);
+  }, []);
 
   useEffect(() => {
     getData();
@@ -54,7 +54,7 @@ const Coupon = ({ notify }) => {
     },
     {
       name: 'Prize Draw?',
-      selector: row => row.prizeWon!=="" ? 'Yes' : 'No',
+      selector: row => row.prizeWon !== "" ? 'Yes' : 'No',
       sortable: true
     },
     // {
@@ -106,9 +106,9 @@ const Coupon = ({ notify }) => {
     // }
   ];
 
-  const getData1=async()=>{
+  const getData1 = async () => {
     const ans1 = await getDraws('', '', '', '', 'false');
-    setEvents([{title: 'Select Event', _id: ''}, ...ans1.data]);
+    setEvents([{ title: 'Select Event', _id: '' }, ...ans1.data]);
   };
 
   const getData = async () => {
@@ -133,17 +133,15 @@ const Coupon = ({ notify }) => {
     }
   };
 
-  const handleChange = (e, name = '', checkFlag=false) => {
+  const handleChange = (e, name = '', checkFlag = false) => {
     if (name === '') {
       setValue({ ...value, [e.target.name]: e.target.value });
     }
     else {
-      if(checkFlag)
-      {
+      if (checkFlag) {
         setValue({ ...value, [name]: e.target.checked });
       }
-      else
-      {
+      else {
         setValue({ ...value, [name]: e });
       }
     }
@@ -162,12 +160,12 @@ const Coupon = ({ notify }) => {
 
   const handlePageChange = (page) => {
     setPage(page);
-	};
+  };
 
-	const handlePerRowsChange = async (newPerPage, page) => {
+  const handlePerRowsChange = async (newPerPage, page) => {
     setPerPage(newPerPage);
     setPage(page);
-	};
+  };
 
   return (
     <>
@@ -225,7 +223,7 @@ const Coupon = ({ notify }) => {
                   <Select label="Event" children={<p>Event</p>} onChange={(e) => {
                     handleChange(e, 'event');
                   }}>
-                    {events?.map((e,index)=>{
+                    {events?.map((e, index) => {
                       return (
                         <Option key={index} value={e?._id} children={<p>{e?.title}</p>}>{e?.title}</Option>
                       );
@@ -234,7 +232,7 @@ const Coupon = ({ notify }) => {
                 </div>
 
                 <div className='w-[23%] min-w-[250px] ml-2.5 mb-2'>
-                  <Switch label="Show Winning Vouchers Only" name='isRewardCoupan' onChange={(e)=>{handleChange(e, 'isRewardCoupan', true)}} />
+                  <Switch label="Show Winning Vouchers Only" name='isRewardCoupan' onChange={(e) => { handleChange(e, 'isRewardCoupan', true) }} />
                 </div>
               </div>
 
@@ -252,7 +250,7 @@ const Coupon = ({ notify }) => {
               paginationTotalRows={totalRows}
               onChangeRowsPerPage={handlePerRowsChange}
               onChangePage={handlePageChange}
-              paginationRowsPerPageOptions={[5,10,20,50,100]}
+              paginationRowsPerPageOptions={[5, 10, 20, 50, 100]}
             />
           </CardBody>
         </Card>

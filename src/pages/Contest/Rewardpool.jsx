@@ -33,7 +33,7 @@ const Rewardpool = ({ notify }) => {
     },
     {
       name: 'Reward',
-      selector: row => row.reward && row.reward!=="" && row.tokens && row.tokens!==0 ? `${row.reward} + ${row.tokens} Star Points` : row.reward!=="" ? row.reward : `${row.tokens} Star Points`,
+      selector: row => row.reward && row.reward !== "" && row.tokens && row.tokens !== 0 ? `${row.reward} + ${row.tokens} Star Points` : row.reward !== "" ? row.reward : `${row.tokens} Star Points`,
       sortable: true
     },
   ];
@@ -91,7 +91,7 @@ const Rewardpool = ({ notify }) => {
 
           {data?.stateRewards && data.stateRewards.length > 0 && <>
             <h3 className='text-2xl mt-2 ml-3 text-black'>Statewise Rewards Distribution</h3>
-            
+
             {data?.stateRewards?.map((e, index) => {
               return (
                 <CardBody key={index} className="overflow-x-scroll px-0 pt-0 pb-2">

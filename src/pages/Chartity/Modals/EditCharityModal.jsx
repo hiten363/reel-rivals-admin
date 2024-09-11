@@ -112,8 +112,7 @@ const EditCharityModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
           textLength: data.desc.length
         });
 
-        if(data.img)
-        {
+        if (data.img) {
           setPrevImage(data.img);
         }
 
@@ -202,8 +201,7 @@ const EditCharityModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(value);
-    if(convert(desc.richText).trim()==="")
-    {
+    if (convert(desc.richText).trim() === "") {
       alert('Description is required');
       return;
     }
@@ -215,7 +213,7 @@ const EditCharityModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
     // console.log(desc);
 
     try {
-      let validate=await schema.validate(value);
+      let validate = await schema.validate(value);
       const ans = await updateCharity({ ...value, desc: `<div className="quill-component">${desc.richText}</div>`, tags: temp });
       if (ans.status) {
         notify('success', ans.message);
@@ -259,11 +257,11 @@ const EditCharityModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                     </div>
                     <div>
                       <label htmlFor="subTitle" className="block mb-2 text-sm font-medium text-gray-900 ">Sub Title</label>
-                      <input type="text" id="subTitle" name='subTitle' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Sub-Title .." onChange={handleChange} value={value.subTitle}  />
+                      <input type="text" id="subTitle" name='subTitle' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Sub-Title .." onChange={handleChange} value={value.subTitle} />
                     </div>
                     <div>
                       <label htmlFor="writtenBy" className="block mb-2 text-sm font-medium text-gray-900 ">Author Name</label>
-                      <input type="text" id="writtenBy" name="writtenBy" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Written By .." onChange={handleChange} value={value.writtenBy}  />
+                      <input type="text" id="writtenBy" name="writtenBy" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Written By .." onChange={handleChange} value={value.writtenBy} />
                     </div>
                     <div>
                       <label htmlFor="slug" className="block mb-2 text-sm font-medium text-gray-900 ">Slug</label>

@@ -141,8 +141,7 @@ const AddPartnerModal = (props) => {
     e.preventDefault();
     console.log(value);
 
-    if(convert(value.desc.richText).trim()==="")
-    {
+    if (convert(value.desc.richText).trim() === "") {
       alert('Description is required');
       return;
     }
@@ -187,7 +186,7 @@ const AddPartnerModal = (props) => {
           <div className="relative bg-white rounded-lg shadow ">
             <div className="flex items-center justify-between p-5 border-b rounded-t ">
               <h3 className="text-xl font-medium text-gray-900 ">Add new partner</h3>
-              
+
               <button type="button" onClick={() => {
                 document.getElementById('addPartnerModal').classList.toggle('hidden');
               }} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center ">

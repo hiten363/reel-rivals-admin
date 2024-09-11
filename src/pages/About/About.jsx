@@ -38,7 +38,7 @@ const About = ({ notify }) => {
     },
     {
       name: 'Sub Title',
-      selector: row => <span dangerouslySetInnerHTML={{__html: row.desc}}></span>,
+      selector: row => <span dangerouslySetInnerHTML={{ __html: row.desc }}></span>,
       wrap: true,
       sortable: true
     },
@@ -108,7 +108,7 @@ const About = ({ notify }) => {
                 Manage About Us Page
               </Typography>
 
-              {data?.length===0 ? <Button color="red" onClick={() => {
+              {data?.length === 0 ? <Button color="red" onClick={() => {
                 document.getElementById('addAboutModal').classList.toggle('hidden');
               }} children="Add About Us Content +">Add About Content +</Button> : <Button color="red" onClick={() => {
                 setData1(data?.[0]);

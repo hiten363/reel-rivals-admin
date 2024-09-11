@@ -108,7 +108,7 @@ const Rules = ({ notify }) => {
               <Typography variant="h6" color="white">
                 Manage Contest Guidelines
               </Typography>
-              
+
               {data.length > 0 ? <Button color="red" onClick={() => {
                 setData1(data[0]);
                 document.getElementById('editRulesModal').classList.toggle('hidden');

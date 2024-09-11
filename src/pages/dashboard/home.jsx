@@ -24,11 +24,11 @@ import { TicketIcon, UsersIcon, ChartBarIcon, InboxStackIcon, ClockIcon } from "
 import useMain from "@/hooks/useMain";
 
 export function Home() {
-  const {getDashboardData} = useMain();
+  const { getDashboardData } = useMain();
   const [dashboardData, setDashboardData] = useState({});
   const [loadFlag, setLoadFlag] = useState(true);
 
-  const getData=async()=>{
+  const getData = async () => {
     setLoadFlag(true);
     const ans = await getDashboardData();
     // console.log(ans);
@@ -36,7 +36,7 @@ export function Home() {
     setLoadFlag(false);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     getData();
   }, []);
 
@@ -51,7 +51,7 @@ export function Home() {
             className: "w-6 h-6 text-white"
           })}
         />
-        
+
         <StatisticsCard
           color='gray'
           value={!loadFlag ? dashboardData?.categories ? dashboardData?.categories : 0 : 'Loading ..'}

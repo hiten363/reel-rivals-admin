@@ -23,7 +23,10 @@ import {
   BriefcaseIcon,
   ShieldExclamationIcon,
   CameraIcon,
-  InformationCircleIcon
+  InformationCircleIcon,
+  NoSymbolIcon,
+  BellAlertIcon,
+  ListBulletIcon
 } from "@heroicons/react/24/solid";
 import { Home, Profile, Tables, Notifications } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
@@ -52,6 +55,10 @@ import Statistics from "./pages/Statistics/Statistics";
 import Winners from "./pages/DrawResults/Winner";
 import Reels from "./pages/Reels/Reels";
 import About from "./pages/About/About";
+import RewardDistribution from "./pages/RewardDistribution/RewardDistribution";
+import SanctionList from "./pages/SanctionList/SanctionList";
+import Announcement from "./pages/Announcement/Announcement";
+import Log from "./pages/Log/Log";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -65,13 +72,13 @@ export const routes = [
         icon: <HomeIcon {...icon} />,
         name: "dashboard",
         path: "/home",
-        element:(notify)=> <Home notify={notify} />
+        element: (notify) => <Home notify={notify} />
       },
       {
         icon: <UserIcon {...icon} />,
         name: "users",
         path: "/users",
-        element:(notify)=>  <User notify={notify} />
+        element: (notify) => <User notify={notify} />
       },
       // {
       //   icon: <ChatBubbleLeftRightIcon {...icon} />,
@@ -95,19 +102,25 @@ export const routes = [
         icon: <VideoCameraIcon {...icon} />,
         name: "Reels",
         path: "/reels",
-        element:(notify)=>  <Reels notify={notify} />
+        element: (notify) => <Reels notify={notify} />
       },
       {
         icon: <QueueListIcon {...icon} />,
         name: "Categories",
         path: "/categories",
-        element:(notify)=>  <Category notify={notify} />
+        element: (notify) => <Category notify={notify} />
       },
       {
         icon: <CalendarDaysIcon {...icon} />,
         name: "Contests",
         path: "/contests",
-        element:(notify)=>  <EventAllocation notify={notify} />
+        element: (notify) => <EventAllocation notify={notify} />
+      },
+      {
+        icon: <GiftIcon {...icon} />,
+        name: "Reward Distribution",
+        path: "/reward-distribution",
+        element: (notify) => <RewardDistribution notify={notify} />
       },
       // {
       //   icon: <TicketIcon {...icon} />,
@@ -137,13 +150,13 @@ export const routes = [
         icon: <CurrencyRupeeIcon {...icon} />,
         name: "payment plans",
         path: "/payment-plans",
-        element:(notify)=>  <Subscription notify={notify} />
+        element: (notify) => <Subscription notify={notify} />
       },
       {
         icon: <BanknotesIcon {...icon} />,
         name: "payment logs",
         path: "/payment-logs",
-        element:(notify)=>  <Payment notify={notify} />
+        element: (notify) => <Payment notify={notify} />
       },
       // {
       //   icon: <PaintBrushIcon {...icon} />,
@@ -155,7 +168,7 @@ export const routes = [
         icon: <PaperClipIcon {...icon} />,
         name: "user enquiry",
         path: "/user-enquiry",
-        element:(notify)=>  <Contact notify={notify} />
+        element: (notify) => <Contact notify={notify} />
       },
       // {
       //   icon: <InboxArrowDownIcon {...icon} />,
@@ -167,7 +180,7 @@ export const routes = [
         icon: <QuestionMarkCircleIcon {...icon} />,
         name: "faq",
         path: "/faq",
-        element:(notify)=>  <Faq notify={notify} />
+        element: (notify) => <Faq notify={notify} />
       },
       // {
       //   icon: <CameraIcon {...icon} />,
@@ -185,19 +198,19 @@ export const routes = [
         icon: <ShieldExclamationIcon {...icon} />,
         name: "Contest Guidelines",
         path: "/contest-guidelines",
-        element:(notify)=>  <Rules notify={notify} />
+        element: (notify) => <Rules notify={notify} />
       },
       {
         icon: <ClipboardDocumentIcon {...icon} />,
         name: "Terms and Conditions",
         path: "/terms-and-conditions",
-        element:(notify)=>  <Terms notify={notify} />
+        element: (notify) => <Terms notify={notify} />
       },
       {
         icon: <NewspaperIcon {...icon} />,
         name: "Privacy Policy",
         path: "/privacy-policy",
-        element:(notify)=>  <Privacy notify={notify} />
+        element: (notify) => <Privacy notify={notify} />
       },
       // {
       //   icon: <EllipsisHorizontalCircleIcon {...icon} />,
@@ -205,12 +218,24 @@ export const routes = [
       //   path: "/testimonial",
       //   element:(notify)=>  <Testimonial notify={notify} />
       // },
-      // {
-      //   icon: <PresentationChartLineIcon {...icon} />,
-      //   name: "Statistics",
-      //   path: "/statistics",
-      //   element:(notify)=>  <Statistics notify={notify} />
-      // },
+      {
+        icon: <BellAlertIcon {...icon} />,
+        name: "Announcements",
+        path: "/announcements",
+        element:(notify)=>  <Announcement notify={notify} />
+      },
+      {
+        icon: <NoSymbolIcon {...icon} />,
+        name: "Sanctioned Countries",
+        path: "/sanction-countries",
+        element:(notify)=>  <SanctionList notify={notify} />
+      },
+      {
+        icon: <ListBulletIcon {...icon} />,
+        name: "Logs",
+        path: "/logs",
+        element:(notify)=>  <Log notify={notify} />
+      },
       {
         icon: <InformationCircleIcon {...icon} />,
         name: "About Us ",

@@ -15,8 +15,7 @@ const Leaderboard = ({ notify }) => {
   const [refreshFlag, setRefreshFlag] = useState(false);
 
   useEffect(() => {
-    if(event)
-    {
+    if (event) {
       getData();
     }
   }, [refreshFlag]);
@@ -40,7 +39,7 @@ const Leaderboard = ({ notify }) => {
   ];
 
   const getData = async () => {
-    const ans1=await getRewardpools(event);
+    const ans1 = await getRewardpools(event);
     const ans = await getParticipations(event);
     // console.log(ans);
     setRewardPool(ans1.data);

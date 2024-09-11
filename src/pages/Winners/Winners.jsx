@@ -10,7 +10,7 @@ import ModalImage from "react-modal-image";
 const Winners = ({ notify }) => {
   const { getDraws } = useMain();
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
@@ -32,10 +32,10 @@ const Winners = ({ notify }) => {
     {
       name: 'Event Image',
       selector: row => <ModalImage
-      small={row?.img ? row?.img : '/img/user.png'}
-      large={row?.img ? row?.img : '/img/user.png'}
-      className='w-20 h-20 object-cover'
-    />,
+        small={row?.img ? row?.img : '/img/user.png'}
+        large={row?.img ? row?.img : '/img/user.png'}
+        className='w-20 h-20 object-cover'
+      />,
       sortable: true
     },
     {
@@ -53,7 +53,7 @@ const Winners = ({ notify }) => {
     {
       name: "Actions",
       selector: row => <div className="flex justify-center">
-        <Button className='text-[11px] py-1.5 px-2 font-medium rounded-md' onClick={()=>{
+        <Button className='text-[11px] py-1.5 px-2 font-medium rounded-md' onClick={() => {
           setData1(row);
           document.getElementById('editWinnerModal').classList.toggle('hidden');
         }} children={<p>Update Winners</p>}>Update Winners</Button>
@@ -67,7 +67,7 @@ const Winners = ({ notify }) => {
     const ans = await getDraws('', 'false', page, perPage, 'false');
     console.log(ans);
     setData(ans.data);
-    setTotalRows(ans.count);                     
+    setTotalRows(ans.count);
     setLoadFlag(false);
   };
 
@@ -92,12 +92,12 @@ const Winners = ({ notify }) => {
 
   const handlePageChange = (page) => {
     setPage(page);
-	};
+  };
 
-	const handlePerRowsChange = async (newPerPage, page) => {
+  const handlePerRowsChange = async (newPerPage, page) => {
     setPerPage(newPerPage);
     setPage(page);
-	};
+  };
 
   return (
     <>
@@ -145,7 +145,7 @@ const Winners = ({ notify }) => {
               paginationTotalRows={totalRows}
               onChangeRowsPerPage={handlePerRowsChange}
               onChangePage={handlePageChange}
-              paginationRowsPerPageOptions={[5,10,20,50,100]}
+              paginationRowsPerPageOptions={[5, 10, 20, 50, 100]}
             />
           </CardBody>
         </Card>

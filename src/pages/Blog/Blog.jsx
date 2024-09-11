@@ -134,7 +134,7 @@ const Blog = ({ notify }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(value);
-    const ans = await getBlogs('', '', value.status, value.query ,1, perPage);
+    const ans = await getBlogs('', '', value.status, value.query, 1, perPage);
     setTotalRows(ans.count);
     setPage(1);
     console.log(ans);
@@ -143,12 +143,12 @@ const Blog = ({ notify }) => {
 
   const handlePageChange = (page) => {
     setPage(page);
-	};
+  };
 
-	const handlePerRowsChange = async (newPerPage, page) => {
+  const handlePerRowsChange = async (newPerPage, page) => {
     setPerPage(newPerPage);
     setPage(page);
-	};
+  };
 
   return (
     <>
@@ -197,7 +197,7 @@ const Blog = ({ notify }) => {
               paginationTotalRows={totalRows}
               onChangeRowsPerPage={handlePerRowsChange}
               onChangePage={handlePageChange}
-              paginationRowsPerPageOptions={[5,10,20,50,100]}
+              paginationRowsPerPageOptions={[5, 10, 20, 50, 100]}
             />
           </CardBody>
         </Card>

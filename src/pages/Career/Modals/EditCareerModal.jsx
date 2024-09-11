@@ -24,7 +24,7 @@ const imageHandler = async () => {
     console.log(file);
     let formdata = new FormData();
     formdata.append("file", file);
-    
+
     const url0 = `${baseUrl}/util/uploadImage`;
     const resp = await fetch(url0, {
       method: 'POST',
@@ -99,8 +99,7 @@ const EditCareerModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
           textLength: data.desc.length
         });
 
-        if(data.img)
-        {
+        if (data.img) {
           setPrevImage(data.img);
         }
       }
@@ -152,12 +151,11 @@ const EditCareerModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(value);
-    if(convert(desc.richText).trim()==="")
-    {
+    if (convert(desc.richText).trim() === "") {
       alert('Description is required');
       return;
     }
-   
+
     const ans = await updateCareer({ ...value, desc: `<div className="quill-component">${desc.richText}</div>` });
     if (ans.status) {
       notify('success', ans.message);
@@ -176,7 +174,7 @@ const EditCareerModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
           <div className="relative bg-white rounded-lg shadow ">
             <div className="flex items-center justify-between p-5 border-b rounded-t ">
               <h3 className="text-xl font-medium text-gray-900 ">Update career</h3>
-              
+
               <button type="button" onClick={() => {
                 document.getElementById('editCareerModal').classList.toggle('hidden');
               }} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center ">
@@ -202,7 +200,7 @@ const EditCareerModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                       <label htmlFor="subTitle" className="block mb-2 text-sm font-medium text-gray-900 ">Sub Title</label>
                       <input type="text" id="subTitle" name='subTitle' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Sub-Title .." onChange={handleChange} value={value.subTitle} required />
                     </div>
-               
+
                     {prevImage ? <div className='relative package-delete'>
                       <h5 className='mb-2 text-black'>Uploaded Image</h5>
                       <img width={200} className="rounded-md" src={prevImage} alt={prevImage} />

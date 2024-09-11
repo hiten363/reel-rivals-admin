@@ -36,7 +36,7 @@ export function Sidenav({ brandImg, brandName, routes }) {
             Reel Rivals
           </Typography>
         </Link>
-        
+
         <IconButton
           variant="text"
           color="white"

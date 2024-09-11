@@ -14,7 +14,7 @@ import xlsx from "json-as-xlsx";
 const ContestUser1 = ({ notify }) => {
   const { getUsers, deleteUser, updateUserStatus } = useMain();
 
-  const {contestName, contestId }=useParams();
+  const { contestName, contestId } = useParams();
 
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
@@ -201,7 +201,7 @@ const ContestUser1 = ({ notify }) => {
           { label: "Email", value: 'email' },
           { label: "Phone", value: "phone" },
           { label: "Address", value: "address" },
-          { label: "User Status", value: (e)=>e.status==='true' ? 'Active' : 'Inactive' },
+          { label: "User Status", value: (e) => e.status === 'true' ? 'Active' : 'Inactive' },
         ],
         content: ans.data,
       }

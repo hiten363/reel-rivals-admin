@@ -108,8 +108,7 @@ const EditBlogModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
           textLength: data.desc.length
         });
 
-        if(data.img)
-        {
+        if (data.img) {
           setPrevImage(data.img);
         }
 
@@ -200,8 +199,7 @@ const EditBlogModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
     e.preventDefault();
     // console.log(value);
 
-    if(convert(desc.richText).trim()==="")
-    {
+    if (convert(desc.richText).trim() === "") {
       alert('Description is required');
       return;
     }
@@ -213,7 +211,8 @@ const EditBlogModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
     // console.log(temp);
     // console.log(desc);
 
-    try {let validate=await schema.validate(value);
+    try {
+      let validate = await schema.validate(value);
       const ans = await updateBlog({ ...value, desc: `<div className="quill-component">${desc.richText}</div>`, tags: temp });
       if (ans.status) {
         notify('success', ans.message);
@@ -235,7 +234,7 @@ const EditBlogModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
           <div className="relative bg-white rounded-lg shadow ">
             <div className="flex items-center justify-between p-5 border-b rounded-t ">
               <h3 className="text-xl font-medium text-gray-900 ">Update blog</h3>
-          
+
               <button type="button" onClick={() => {
                 document.getElementById('editBlogModal').classList.toggle('hidden');
               }} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center ">
@@ -261,7 +260,7 @@ const EditBlogModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                     </div>
                     <div>
                       <label htmlFor="writtenBy" className="block mb-2 text-sm font-medium text-gray-900 ">Author Name</label>
-                      <input type="text" id="writtenBy" name="writtenBy" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Written By .." onChange={handleChange} value={value.writtenBy}  />
+                      <input type="text" id="writtenBy" name="writtenBy" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Written By .." onChange={handleChange} value={value.writtenBy} />
                     </div>
                     <div>
                       <label htmlFor="slug" className="block mb-2 text-sm font-medium text-gray-900 ">Slug</label>
@@ -278,7 +277,7 @@ const EditBlogModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                                 handleChange1(e, index);
                               }} value={data1[index]?.tags} required />
                             </div>
-                            
+
                             {index === 0 ? <div className="add-btn">
                               <button type="button" className="w-full focus:outline-none ml-2 text-lg text-white bg-green-600 rounded-md btn-hover focus:ring-4 focus:ring-purple-200 font-medium py-1.5 mb-0 " onClick={handleAddBtn}><span>+</span></button>
                             </div> : <div className="remove-btn">
@@ -294,7 +293,7 @@ const EditBlogModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                     {prevImage ? <div className='relative package-delete'>
                       <h5 className='mb-2 text-black'>Uploaded Image</h5>
                       <img width={200} className="rounded-md" src={prevImage} alt={prevImage} />
-                      
+
                       {!loadFlag ? <svg onClick={deleteImg} xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" className="cursor-pointer bi bi-trash hover:text-red-600" viewBox="0 0 16 16">
                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
                         <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />

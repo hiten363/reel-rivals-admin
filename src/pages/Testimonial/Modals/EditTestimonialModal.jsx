@@ -62,7 +62,7 @@ const EditTestimonialModal = ({ data, setRefreshFlag, refreshFlag, notify }) => 
       notify('success', ans.message);
       setRefreshFlag(!refreshFlag);
       document.getElementById('editTestimonialModal').classList.toggle('hidden');
-      if (value.file){
+      if (value.file) {
         window.location.reload();
       }
     }

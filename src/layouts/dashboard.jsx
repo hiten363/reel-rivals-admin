@@ -41,6 +41,11 @@ import CategoryContests from "@/pages/Category/CategoryContests";
 import About from "@/pages/About/About";
 import Rewardpool from "@/pages/Contest/Rewardpool";
 import SubscriptionUsers from "@/pages/User/SubscriptionUsers";
+import RewardDistribution from "@/pages/RewardDistribution/RewardDistribution";
+import DistributePrize from "@/pages/RewardDistribution/DistributePrize";
+import SanctionList from "@/pages/SanctionList/SanctionList";
+import Announcement from "@/pages/Announcement/Announcement";
+import Log from "@/pages/Log/Log";
 
 export function Dashboard({ notify }) {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -77,6 +82,8 @@ export function Dashboard({ notify }) {
           <Route path={'/about-us'} element={<About notify={notify} />} />
           <Route path={'/categories'} element={<Category notify={notify} />} />
           <Route path={'/contests'} element={<Contest notify={notify} />} />
+          <Route path={'/reward-distribution'} element={<RewardDistribution notify={notify} />} />
+          <Route path={'/distribute-prize/:contest'} element={<DistributePrize notify={notify} />} />
           <Route path={'/contests-categories/:categoryName/:categoryId'} element={<CategoryContests notify={notify} />} />
           <Route path={'/contests/:contestName/:contestId'} element={<ContestUser1 notify={notify} />} />
           <Route path={'/rewardpool/:contest'} element={<Rewardpool notify={notify} />} />
@@ -103,7 +110,9 @@ export function Dashboard({ notify }) {
           <Route path={'/charity'} element={<Charity notify={notify} />} />
           <Route path={'/draw-rules'} element={<Rules notify={notify} />} />
           <Route path={'/testimonial'} element={<Testimonial notify={notify} />} />
-          <Route path={'/statistics'} element={<Statistics notify={notify} />} />
+          <Route path={'/announcements'} element={<Announcement notify={notify} />} />
+          <Route path={'/sanction-countries'} element={<SanctionList notify={notify} />} />
+          <Route path={'/logs'} element={<Log notify={notify} />} />
           <Route path={'/event-users/:eventId/:name'} element={<EventUsers notify={notify} />} />
         </Routes>
 

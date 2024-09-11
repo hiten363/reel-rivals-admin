@@ -20,7 +20,7 @@ const EditSubscriptionModal = ({ data, setRefreshFlag, refreshFlag, notify }) =>
     starPointsOffered: '',
     amount: '',
     discount: 0,
-    type: '', 
+    type: '',
     subType: ''
   });
 
@@ -126,12 +126,12 @@ const EditSubscriptionModal = ({ data, setRefreshFlag, refreshFlag, notify }) =>
                       <label htmlFor="subType" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Interval</label>
                       <select id="subType" onChange={handleChange} value={value.subType} name="subType" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                         <option value="">Choose an interval</option>
-                        {value?.type!=="VOTES" && <option value="MONTHLY">Monthly</option>}
-                        {value?.type!=="SUBSCRIPTIONS" && <option value="BIWEEKLY">Bi-Weekly</option>}
-                        {value?.type!=="SUBSCRIPTIONS" && <option value="FIXED">Fixed</option>}
+                        {value?.type !== "VOTES" && <option value="MONTHLY">Monthly</option>}
+                        {value?.type !== "SUBSCRIPTIONS" && <option value="BIWEEKLY">Bi-Weekly</option>}
+                        {value?.type !== "SUBSCRIPTIONS" && <option value="FIXED">Fixed</option>}
                       </select>
                     </div>
-                    
+
                     <div>
                       <label htmlFor="starPointsOffered" className="block mb-2 text-sm font-medium text-gray-900 ">Star Points Offered</label>
                       <input type="number" id="starPointsOffered" name='starPointsOffered' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Voucher Count .." onChange={handleChange} value={value.starPointsOffered} required />

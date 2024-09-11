@@ -130,7 +130,7 @@ const Privacy = ({ notify }) => {
             /> */}
 
             <div className='terms-main'>
-              {data.length===0 ? <div className='text-center'>No data found</div> : <div style={{ padding: "0px 50px" }} dangerouslySetInnerHTML={{ __html: data[0]?.desc }}></div>}
+              {data.length === 0 ? <div className='text-center'>No data found</div> : <div style={{ padding: "0px 50px" }} dangerouslySetInnerHTML={{ __html: data[0]?.desc }}></div>}
             </div>
           </CardBody>}
         </Card>

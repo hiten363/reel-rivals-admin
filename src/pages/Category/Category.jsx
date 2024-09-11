@@ -35,10 +35,10 @@ const Category = ({ notify }) => {
     {
       name: 'Image',
       selector: row => <ModalImage
-      small={row?.img ? row?.img : '/img/user.png'}
-      large={row?.img ? row?.img : '/img/user.png'}
-      className='w-20 h-20 object-contain'
-    />,
+        small={row?.img ? row?.img : '/img/user.png'}
+        large={row?.img ? row?.img : '/img/user.png'}
+        className='w-20 h-20 object-contain'
+      />,
       // sortable: true
     },
     {
@@ -158,7 +158,7 @@ const Category = ({ notify }) => {
               <Typography variant="h6" color="white">
                 Manage Categories
               </Typography>
-              
+
               <Button color="red" onClick={() => {
                 document.getElementById('addCategoryModal').classList.toggle('hidden');
               }} children="Add Category +">Add Category +</Button>

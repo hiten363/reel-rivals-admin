@@ -45,7 +45,7 @@ const WinnerList = ({ data }) => {
           </thead>
 
           <tbody>
-            {data?.users?.length===0 ? 'No Winners' : data?.users?.map((e, index) => {
+            {data?.users?.length === 0 ? 'No Winners' : data?.users?.map((e, index) => {
               const isLast = index === data?.users.length - 1;
               const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
@@ -121,7 +121,7 @@ const Winners = ({ notify }) => {
     },
     {
       name: 'Prize Allocation',
-      selector: (row, index) => index===0 ? 'First Prize' : index===1 ? 'Second Prize' : index===2 ? 'Third Prize' : '',
+      selector: (row, index) => index === 0 ? 'First Prize' : index === 1 ? 'Second Prize' : index === 2 ? 'Third Prize' : '',
       sortable: true
     },
     {

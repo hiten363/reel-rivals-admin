@@ -84,7 +84,7 @@ const EditRulesModal = ({ flag, data, setRefreshFlag, refreshFlag, notify }) => 
     if (data) {
       // console.log(data);
       if (Object.keys(data).length > 0) {
-        setValue({id: data._id});
+        setValue({ id: data._id });
         // console.log(data.desc);
         setDesc({
           richText: data.desc,
@@ -115,8 +115,7 @@ const EditRulesModal = ({ flag, data, setRefreshFlag, refreshFlag, notify }) => 
     e.preventDefault();
     // console.log(value);
     // console.log(desc);
-    if(convert(desc.richText).trim()==="")
-    {
+    if (convert(desc.richText).trim() === "") {
       alert('Description is required');
       return;
     }
@@ -139,7 +138,7 @@ const EditRulesModal = ({ flag, data, setRefreshFlag, refreshFlag, notify }) => 
           <div className="relative bg-white rounded-lg shadow ">
             <div className="flex items-center justify-between p-5 border-b rounded-t ">
               <h3 className="text-xl font-medium text-gray-900 ">Update Contest Guidelines Rules</h3>
-              
+
               <button type="button" onClick={() => {
                 document.getElementById('editRulesModal').classList.toggle('hidden');
               }} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center ">
@@ -151,7 +150,7 @@ const EditRulesModal = ({ flag, data, setRefreshFlag, refreshFlag, notify }) => 
               <form onSubmit={handleSubmit}>
                 <div className="bus-form">
                   <h4 className="text-xl text-center mb-4 font-bold">Update details</h4>
-                  
+
                   <div id="loadFlagModal1" className='hidden flex justify-center'>
                     <Spinner />
                   </div>

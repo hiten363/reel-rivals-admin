@@ -33,10 +33,10 @@ const SubscriptionUsers = ({ notify }) => {
   const getData = async () => {
     setLoadFlag(true);
     let ans = await getUsers('', '', '', page, perPage, '', '', subscriptionId);
-    let ans1=await getSubscriptions('', '', '', '', '', '', subscriptionId);
+    let ans1 = await getSubscriptions('', '', '', '', '', '', subscriptionId);
     console.log(ans1.data);
 
-    setData(ans.data?.map(x=>{return {...x, subscriptionRenewDate: ans1.data.type==="VOTES" ? x.stripeSubscriptionId.find(x=>x.name==='VOTES').subscriptionRenewDate : ans1.data.tier==='3' ? x.subscriptionRenewDate : x.stripeSubscriptionId.find(x=>x.name==='SUBSCRIPTIONS').subscriptionRenewDate}}));
+    setData(ans.data?.map(x => { return { ...x, subscriptionRenewDate: ans1.data.type === "VOTES" ? x.stripeSubscriptionId.find(x => x.name === 'VOTES').subscriptionRenewDate : ans1.data.tier === '3' ? x.subscriptionRenewDate : x.stripeSubscriptionId.find(x => x.name === 'SUBSCRIPTIONS').subscriptionRenewDate } }));
 
     setTotalRows(ans.count);
     setLoadFlag(false);
@@ -127,10 +127,10 @@ const SubscriptionUsers = ({ notify }) => {
       {
         sheet: `${subscriptionName.replaceAll('^', '/')}`,
         columns: [
-          { label: "Name", value: "name" }, 
-          { label: "Username", value: "userName" }, 
-          { label: "Email", value: 'email' }, 
-          { label: "Phone", value: "phone" }, 
+          { label: "Name", value: "name" },
+          { label: "Username", value: "userName" },
+          { label: "Email", value: 'email' },
+          { label: "Phone", value: "phone" },
           { label: "Country", value: (e) => e.country && e.country !== "undefined" && e.country.label ? e.country.label : ' - ' },
           { label: "State", value: (e) => e.state && e.state !== "undefined" && e.state.label ? e.state.label : ' - ' }
         ],

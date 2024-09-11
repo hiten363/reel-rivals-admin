@@ -15,14 +15,12 @@ export const getRequest = async (url, isAuth, props) => {
 
 export const postRequest = async (url, body, isAuth, props, isFile) => {
     props.setProgress(20);
- 
+
     let headers = {};
-    if(!isFile)
-    {
+    if (!isFile) {
         headers["content-type"] = "application/json";
     }
-    if (isAuth)
-    {
+    if (isAuth) {
         headers['jwt'] = localStorage.getItem('reel_rivals_token');
     }
 
@@ -41,13 +39,11 @@ export const putRequest = async (url, body, isAuth, props, isFile) => {
     props.setProgress(20);
     let headers = {};
 
-    if(!isFile)
-    {
-        headers["content-type"]="application/json";
+    if (!isFile) {
+        headers["content-type"] = "application/json";
     }
 
-    if (isAuth)
-    {
+    if (isAuth) {
         headers['jwt'] = localStorage.getItem('reel_rivals_token');
     }
 

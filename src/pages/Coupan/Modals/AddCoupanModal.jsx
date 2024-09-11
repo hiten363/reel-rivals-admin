@@ -39,14 +39,12 @@ const AddCoupanModal = (props) => {
     e.preventDefault();
     console.log({ ...value, subscription: subscriptions.find(x => x._id === value.subscription) });
 
-    if(!value.prizeWon || value.prizeWon==="")
-    {
+    if (!value.prizeWon || value.prizeWon === "") {
       alert('Reward Vouchers is required');
       return;
     }
 
-    if(!value.subscription || value.subscription==="")
-    {
+    if (!value.subscription || value.subscription === "") {
       alert('Subscription is required');
       return;
     }
@@ -77,7 +75,7 @@ const AddCoupanModal = (props) => {
           <div className="relative bg-white rounded-lg shadow ">
             <div className="flex items-center justify-between p-5 border-b rounded-t ">
               <h3 className="text-xl font-medium text-gray-900 ">Add new voucher</h3>
-              
+
               <button type="button" onClick={() => {
                 document.getElementById('addCouponModal').classList.toggle('hidden');
               }} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center ">

@@ -33,31 +33,31 @@ const Media = ({ notify }) => {
     {
       name: 'Image',
       selector: row => <ModalImage
-      small={row?.img ? row?.img : '/img/user.png'}
-      large={row?.img ? row?.img : '/img/user.png'}
-      className='w-20 h-20 object-cover'
-    /> ,
+        small={row?.img ? row?.img : '/img/user.png'}
+        large={row?.img ? row?.img : '/img/user.png'}
+        className='w-20 h-20 object-cover'
+      />,
       sortable: true,
-      grow:0.1
+      grow: 0.1
     },
     {
       name: 'Source',
       selector: row => <img className='w-7 h-7 object-cover' src={row.favicon} />,
       sortable: true,
-      grow:0.1
+      grow: 0.1
     },
     {
       name: 'Title',
       selector: row => row.title,
       sortable: true,
-      grow:0.3
+      grow: 0.3
     },
     {
       name: 'Description',
-      selector: row => row.desc.slice(0,100)+' ...',
+      selector: row => row.desc.slice(0, 100) + ' ...',
       sortable: true,
       wrap: true,
-      grow:0.3
+      grow: 0.3
     },
     {
       name: 'Link',
@@ -110,7 +110,7 @@ const Media = ({ notify }) => {
     const ans = await getMedias(value.status, value.query, page, perPage);
     console.log(ans);
     setData(ans.data);
-    setTotalRows(ans.count);                     
+    setTotalRows(ans.count);
     setLoadFlag(false);
   };
 
@@ -149,12 +149,12 @@ const Media = ({ notify }) => {
 
   const handlePageChange = (page) => {
     setPage(page);
-	};
+  };
 
-	const handlePerRowsChange = async (newPerPage, page) => {
+  const handlePerRowsChange = async (newPerPage, page) => {
     setPerPage(newPerPage);
     setPage(page);
-	};
+  };
 
   return (
     <>
@@ -202,7 +202,7 @@ const Media = ({ notify }) => {
               paginationTotalRows={totalRows}
               onChangeRowsPerPage={handlePerRowsChange}
               onChangePage={handlePageChange}
-              paginationRowsPerPageOptions={[5,10,20,50,100]}
+              paginationRowsPerPageOptions={[5, 10, 20, 50, 100]}
             />
           </CardBody>
         </Card>

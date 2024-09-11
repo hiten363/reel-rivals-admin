@@ -13,7 +13,7 @@ function toTitleCase(str) {
 }
 
 const Payment = ({ notify }) => {
-  const { getPayments, deletePayment, getUsers} = useMain();
+  const { getPayments, deletePayment, getUsers } = useMain();
   // console.log('yes');
 
   const [data, setData] = useState([]);
@@ -54,7 +54,7 @@ const Payment = ({ notify }) => {
     },
     {
       name: 'Subscription',
-      selector: row => row?.subscription?.title!=="" ? row?.subscription?.title : `${row?.subscription?.type} (${row?.subscription?.subType})`,
+      selector: row => row?.subscription?.title !== "" ? row?.subscription?.title : `${row?.subscription?.type} (${row?.subscription?.subType})`,
       sortable: true,
       grow: 0.5
     },
@@ -210,9 +210,9 @@ const Payment = ({ notify }) => {
         columns: [
           { label: "User Name", value: row => row?.user?.name },
           { label: "User Email", value: row => row?.user?.email },
-          { label: "Subscription", value: row => row?.subscription?.title!=="" ? row?.subscription?.title : `${row?.subscription?.type} (${row?.subscription?.subType})` },
+          { label: "Subscription", value: row => row?.subscription?.title !== "" ? row?.subscription?.title : `${row?.subscription?.type} (${row?.subscription?.subType})` },
           // { label: "Payment Mode", value: row => toTitleCase(row?.mode) },
-          { label: "Amount Paid", value: row=> <div>${row.amount}</div> },
+          { label: "Amount Paid", value: row => <div>${row.amount}</div> },
           // { label: "Discount", value: "discount" },
           { label: "Date & Time", value: row => new Date(Number(row?.ts)).toLocaleString('en-GB') },
           { label: "Payment Status", value: (e) => e.paymentStatus === 'SUCCESS' ? 'Success' : 'Failed' }
@@ -293,9 +293,9 @@ const Payment = ({ notify }) => {
                   <input type="date" id="endDate" name="endDate" value={value?.endDate} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                 </div>
 
-                <Button type='submit' children="Filter" size='sm' className='ml-3 !overflow-visible' style={{overflow: 'unset'}}>Filter</Button>
+                <Button type='submit' children="Filter" size='sm' className='ml-3 !overflow-visible' style={{ overflow: 'unset' }}>Filter</Button>
 
-                <Button type='button' onClick={handleReset} children="Filter" size='sm' className='ml-3 !overflow-visible' style={{overflow: 'unset'}}>Reset</Button>
+                <Button type='button' onClick={handleReset} children="Filter" size='sm' className='ml-3 !overflow-visible' style={{ overflow: 'unset' }}>Reset</Button>
               </div>
             </form>
 

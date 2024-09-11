@@ -94,7 +94,7 @@ const WinnerList = ({ data }) => {
 const CategoryContests = ({ notify }) => {
   const { getContests, deleteContest, undoContest, getCategorys } = useMain();
 
-  const {categoryName, categoryId}=useParams();
+  const { categoryName, categoryId } = useParams();
 
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);

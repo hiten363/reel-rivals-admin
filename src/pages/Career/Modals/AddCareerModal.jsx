@@ -110,8 +110,7 @@ const AddCareerModal = (props) => {
     e.preventDefault();
     console.log(value);
 
-    if(convert(value.desc.richText).trim()==="")
-    {
+    if (convert(value.desc.richText).trim() === "") {
       alert('Description is required');
       return;
     }
@@ -172,12 +171,12 @@ const AddCareerModal = (props) => {
                       <label htmlFor="subTitle" className="block mb-2 text-sm font-medium text-gray-900 ">Sub Title</label>
                       <input type="text" id="subTitle" name='subTitle' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Sub-Title .." onChange={handleChange} value={value.subTitle} required />
                     </div>
-                   
+
                     <div>
                       <label className="block mb-2 text-sm font-medium text-gray-900" htmlFor="file">Upload Image</label>
                       <input className="block w-full text-sm text-gray-900 border p-2.5 border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none" id="file" type="file" name='file' onChange={handleChange} required />
                     </div>
-                    
+
                     <div>
                       <label className="block mb-2 text-sm font-medium text-gray-900" htmlFor="file">Description</label>
                       <ReactQuill ref={(el) => {

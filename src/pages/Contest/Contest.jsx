@@ -98,7 +98,7 @@ const Contest = ({ notify }) => {
   const { getContests, deleteContest, undoContest, getCategorys } = useMain();
   // console.log('yes');
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
@@ -171,12 +171,12 @@ const Contest = ({ notify }) => {
     // },
     {
       name: 'Reward Pool',
-      selector: row => row.rewardPool ? <button onClick={()=>{
+      selector: row => row.rewardPool ? <button onClick={() => {
         navigate(`/dashboard/rewardpool/${row?._id}`);
-      }} className='bg-green-700 text-white px-2 text-[13px] py-1 rounded-sm'>View</button> : <button onClick={()=>{
+      }} className='bg-green-700 text-white px-2 text-[13px] py-1 rounded-sm'>View</button> : <button onClick={() => {
         setContest(row?._id);
         document.getElementById('addRewardpoolModal').classList.toggle('hidden');
-      }} className='bg-red-500 text-white px-2 text-[13px] py-1 rounded-sm'>Create</button>, 
+      }} className='bg-red-500 text-white px-2 text-[13px] py-1 rounded-sm'>Create</button>,
       sortable: true
     },
     {
@@ -236,7 +236,7 @@ const Contest = ({ notify }) => {
     setTotalRows(ans.count);
 
     const ans1 = await getCategorys('', true);
-    
+
     setCategories(ans1.data);
     setLoadFlag(false);
   };
@@ -268,7 +268,7 @@ const Contest = ({ notify }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(value);
-    const ans = await getContests('', value.status, 1, perPage, value.deleted, value.category, value.startDate && value.startDate!=="" ? new Date(value.startDate).getTime() : '', value.endDate && value.endDate!=="" ? new Date(value.endDate).getTime() : "");
+    const ans = await getContests('', value.status, 1, perPage, value.deleted, value.category, value.startDate && value.startDate !== "" ? new Date(value.startDate).getTime() : '', value.endDate && value.endDate !== "" ? new Date(value.endDate).getTime() : "");
     setTotalRows(ans.count);
     setPage(1);
     console.log(ans);
@@ -341,17 +341,6 @@ const Contest = ({ notify }) => {
 
               <div className='flex items-center justify-end px-10 pt-3'>
                 <div className="flex items-center mr-2 max-w-sm">
-                  {/* <Select label="Category" children={<p>Category</p>} onChange={(e) => {
-                  handleChange(e, 'category');
-                }} value={value?.category}>
-                  <Option value="" children={<p>Select Category</p>}>Select Category</Option>
-                  {categories?.map((e, index) => {
-                    return (
-                      <Option key={index} value={e._id} children={<p>{e?.title}</p>}>{e?.title}</Option>
-                    );
-                  })}
-                </Select> */}
-
                   <select id="category" name="category" onChange={handleChange} value={value?.category} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-52 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option value=''>Select Category</option>
                     {categories?.map((e, index) => {

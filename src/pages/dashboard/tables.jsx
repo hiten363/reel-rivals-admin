@@ -21,7 +21,7 @@ export function Tables() {
           </Typography>
         </CardHeader>
         <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
-          
+
         </CardBody>
       </Card>
     </div>

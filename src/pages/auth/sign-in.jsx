@@ -9,8 +9,8 @@ import {
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export function SignIn({notify}) {
-  const navigate=useNavigate();
+export function SignIn({ notify }) {
+  const navigate = useNavigate();
   const { adminLogin } = useMain();
   const [value, setValue] = useState({
     email: '',
@@ -26,15 +26,13 @@ export function SignIn({notify}) {
     // console.log(value);
     let ans = await adminLogin(value);
     // console.log(ans);
-    if(ans.status)
-    {
+    if (ans.status) {
       localStorage.setItem('reel_rivals_token', ans.token);
       localStorage.setItem('reel_rivals_user', JSON.stringify(ans.user));
       navigate('/dashboard/home');
       notify('success', ans.message);
     }
-    else
-    {
+    else {
       notify('error', ans.message)
     }
   };

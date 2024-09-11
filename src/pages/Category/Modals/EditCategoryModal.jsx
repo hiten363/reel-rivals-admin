@@ -302,7 +302,7 @@ const EditCategoryModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                     <div>
                       <>
                         <p>Uploaded Image</p>
-                        <img style={{width: '120px', height: '120px', objectFit:'contain'}} src={prevImage} />
+                        <img style={{ width: '120px', height: '120px', objectFit: 'contain' }} src={prevImage} />
                       </>
 
                       <label className="block mb-2 text-sm font-medium text-gray-900" htmlFor="file">Upload Image</label>

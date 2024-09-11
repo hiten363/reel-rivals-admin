@@ -47,20 +47,18 @@ const AddUserModal = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(value);
-    
+
     if (!value.role || value.role === "") {
       alert('Role is required');
       return;
     }
 
-    if(value.password!==value.password1)
-    {
+    if (value.password !== value.password1) {
       alert('Password and Confirm Password must be same');
     }
-    else
-    {
+    else {
       try {
-        let validate=await schema.validate(value);
+        let validate = await schema.validate(value);
 
         const ans = await createUser({ ...value });
         console.log(ans);

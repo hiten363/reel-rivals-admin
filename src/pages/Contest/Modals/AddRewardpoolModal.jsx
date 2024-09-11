@@ -5,10 +5,10 @@ import Spinner from '../../../Util/Spinner';
 import { Button } from '@material-tailwind/react';
 import { Country, State } from 'country-state-city';
 import cloneDeep from 'clone-deep';
-import list from '../../../Util/sanctionList.json';
+// import list from '../../../Util/sanctionList.json';
 
 const AddRewardpoolModal = (props) => {
-  const { postRewardPool } = useMain();
+  const { postRewardPool, getSanctionLists } = useMain();
 
   const [value, setValue] = useState([{
     startRank: '',
@@ -28,9 +28,11 @@ const AddRewardpoolModal = (props) => {
     getStates('US');
   }, []);
 
-  const getCountries = () => {
+  const getCountries = async () => {
+    const list=await getSanctionLists();
     let countries = Country.getAllCountries();
-    setCountries(countries.filter(x => !list.list.includes(x.name)).map((e) => {
+    let list1=list.data[0].countries.map(x=>x.value);
+    setCountries(countries.filter(x => !list1.includes(x.isoCode)).map((e) => {
       return { label: e.name, value: e.isoCode };
     }));
   };

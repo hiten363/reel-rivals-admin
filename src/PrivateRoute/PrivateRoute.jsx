@@ -63,8 +63,7 @@ const PrivateRoute = () => {
             localStorage.removeItem('reel_rivals_token');
             window.location.href = "/auth/sign-in";
         }
-        else
-        {
+        else {
             setLoadFlag(false);
         }
     };

@@ -36,7 +36,7 @@ const AddTestimonialModal = (props) => {
         comment: '',
         file: ''
       });
-    
+
       props.notify('success', ans.message);
       props.setRefreshFlag(!props.refreshFlag);
       document.getElementById('addTestimonialModal').classList.toggle('hidden');

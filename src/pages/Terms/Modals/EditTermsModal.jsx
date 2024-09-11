@@ -85,7 +85,7 @@ const EditTermsModal = ({ flag, data, setRefreshFlag, refreshFlag, notify }) => 
     if (data) {
       // console.log(data);
       if (Object.keys(data).length > 0) {
-        setValue({id: data._id});
+        setValue({ id: data._id });
         // console.log(data.desc);
         setDesc({
           richText: data.desc,
@@ -117,8 +117,7 @@ const EditTermsModal = ({ flag, data, setRefreshFlag, refreshFlag, notify }) => 
     // console.log(value);
     // console.log(desc);
 
-    if(convert(desc.richText).trim()==="")
-    {
+    if (convert(desc.richText).trim() === "") {
       alert('Description is required');
       return;
     }
@@ -154,7 +153,7 @@ const EditTermsModal = ({ flag, data, setRefreshFlag, refreshFlag, notify }) => 
               <form onSubmit={handleSubmit}>
                 <div className="bus-form">
                   <h4 className="text-xl text-center mb-4 font-bold">Update details</h4>
-                  
+
                   <div id="loadFlagModal1" className='hidden flex justify-center'>
                     <Spinner />
                   </div>

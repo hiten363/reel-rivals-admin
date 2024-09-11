@@ -32,7 +32,7 @@ const AddContestModal = (props) => {
     setLoadFlag(true);
     let ans = await getCategorys('', 'true');
     setCategories(ans.data);
-  
+
     setLoadFlag(false);
   };
 
@@ -175,7 +175,7 @@ const AddContestModal = (props) => {
                   </div>
 
                   <div className='text-right'>
-                  <Button color="green" disabled={uploadFlag} type={uploadFlag ? "button" : "submit"} children="Submit">{uploadFlag ? "Uploading .." : "Submit"}</Button>
+                    <Button color="green" disabled={uploadFlag} type={uploadFlag ? "button" : "submit"} children="Submit">{uploadFlag ? "Uploading .." : "Submit"}</Button>
                   </div>
                 </div>
               </form>}

@@ -112,8 +112,7 @@ const EditPartnerModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
           textLength: data.desc.length
         });
 
-        if(data.img)
-        {
+        if (data.img) {
           setPrevImage({
             url: data.img.url,
             id: data.img.id
@@ -215,8 +214,7 @@ const EditPartnerModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(value);
-    if(convert(desc.richText).trim()==="")
-    {
+    if (convert(desc.richText).trim() === "") {
       alert('Description is required');
       return;
     }
@@ -254,7 +252,7 @@ const EditPartnerModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                 <span className="sr-only">Close modal</span>
               </button>
             </div>
-            
+
             <div className="p-6 space-y-6">
               <form onSubmit={handleSubmit}>
                 <div className="bus-form">

@@ -53,7 +53,7 @@ export function DashboardNavbar() {
             className={`bg-transparent p-0 transition-all ${fixedNavbar ? "mt-1" : ""
               }`}
           >
-            <Link to={`/${layout}`}>
+            <Link to={`/${layout}/Home`}>
               <Typography
                 variant="small"
                 color="blue-gray"
@@ -62,6 +62,7 @@ export function DashboardNavbar() {
                 {layout}
               </Typography>
             </Link>
+
             <Typography
               variant="small"
               color="blue-gray"
@@ -70,10 +71,8 @@ export function DashboardNavbar() {
               {page}
             </Typography>
           </Breadcrumbs>
-          {/* <Typography variant="h6" color="blue-gray">
-            {page}
-          </Typography> */}
         </div>
+
         <div className="flex items-center">
           {/* <div className="mr-auto md:mr-4 md:w-56">
             <Input label="Search" />

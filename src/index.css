@@ -68,7 +68,7 @@
     list-style: decimal;
 }
 
-.sidebar-main{
+.sidebar-main {
     border-top-right-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
 }
@@ -92,52 +92,59 @@
     background-color: #b2b2b2;
 }
 
-.quill-component h3{
+.quill-component h3 {
     font-size: 20px;
 }
 
-.quill-component ul li{
+.quill-component ul li {
     list-style: disc;
     list-style-position: inside;
 }
 
-.quill-component h1{
+.quill-component h1 {
     font-size: 26px;
 }
 
-.quill-component h2{
+.quill-component h2 {
     font-size: 24px;
 }
 
-.quill-component h3{
+.quill-component h3 {
     font-size: 22px;
 }
 
-.quill-component h4{
+.quill-component h4 {
     font-size: 20px;
 }
 
-.quill-component h5{
+.quill-component h5 {
     font-size: 18px;
 }
 
-.quill-component h6{
+.quill-component h6 {
     font-size: 16px;
 }
 
-.react-datetime-picker__inputGroup__input{
+.react-datetime-picker__inputGroup__input {
     background: white !important;
 }
-.react-datetime-picker{
+
+.react-datetime-picker {
     width: 100%;
     border: 1px solid #8f8f8f5e;
     border-radius: 7px;
     padding: 7px;
 }
-.react-datetime-picker__wrapper{
+
+.react-datetime-picker__wrapper {
     border: none !important;
 }
-.react-datetime-picker__inputGroup__input--hasLeadingZero{
+
+.react-datetime-picker__inputGroup__input--hasLeadingZero {
     margin-left: 0 !important;
     padding-left: 0 !important;
+}
+
+.none1 {
+    display: none !important;
 }

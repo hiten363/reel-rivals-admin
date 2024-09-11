@@ -133,7 +133,7 @@ const User = ({ notify }) => {
               </svg>}
             </div>
 
-            <div className='cursor-pointer' onClick={()=>{
+            <div className='cursor-pointer' onClick={() => {
               setDeleteFlag(true);
               setId(row._id);
               setMsg("Are you sure you want to deleted selected user?");
@@ -185,8 +185,7 @@ const User = ({ notify }) => {
     // console.log(deleteFlag);
 
     // Delete the user
-    if(deleteFlag)
-    {
+    if (deleteFlag) {
       const ans = await deleteUser(id);
 
       if (ans.status) {
@@ -199,8 +198,7 @@ const User = ({ notify }) => {
       }
     }
     // Block the user
-    else
-    {
+    else {
       const ans = await updateUserStatus({ _id: id, status: "false" });
 
       if (ans.status) {
@@ -233,8 +231,8 @@ const User = ({ notify }) => {
           { label: "Username", value: "userName" },
           { label: "Email", value: 'email' },
           { label: "Phone", value: "phone" },
-          { label: "Country", value: (e)=>e.country && e.country !== "undefined" && e.country.label ? e.country.label : ' - ' },
-          { label: "State", value: (e)=>e.state && e.state !== "undefined" && e.state.label ? e.state.label : ' - ' },
+          { label: "Country", value: (e) => e.country && e.country !== "undefined" && e.country.label ? e.country.label : ' - ' },
+          { label: "State", value: (e) => e.state && e.state !== "undefined" && e.state.label ? e.state.label : ' - ' },
           { label: "User Status", value: (e) => e.status === 'true' ? 'Active' : 'Inactive' },
         ],
         content: ans.data,

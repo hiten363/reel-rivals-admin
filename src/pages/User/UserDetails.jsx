@@ -31,9 +31,9 @@ const UserDetails = ({ notify }) => {
     getData();
   }, [refreshFlag, page, perPage]);
 
-  useEffect(()=>{
+  useEffect(() => {
     getData1();
-  },[]);
+  }, []);
 
   const columns = [
     {
@@ -44,36 +44,34 @@ const UserDetails = ({ notify }) => {
     },
     {
       name: 'Prize Draw?',
-      selector: row => row.prizeWon!=="" ? 'Yes' : 'No',
+      selector: row => row.prizeWon !== "" ? 'Yes' : 'No',
       sortable: true
     },
   ];
 
   const getData = async () => {
     setLoadFlag(true);
-    const ans = await getCoupans(value.status, value.query, page, perPage, id, 'undefined', eventId!=='0' ? eventId : '');
+    const ans = await getCoupans(value.status, value.query, page, perPage, id, 'undefined', eventId !== '0' ? eventId : '');
     console.log(ans);
     setTotalRows(ans.count);
     setData(ans.data);
     setLoadFlag(false);
   };
 
-  const getData1=async()=>{
+  const getData1 = async () => {
     const ans1 = await getDraws('', '', '', '', 'false');
-    setEvents([{title: 'Select Event', _id: ''}, ...ans1.data]);
+    setEvents([{ title: 'Select Event', _id: '' }, ...ans1.data]);
   };
 
-  const handleChange = (e, name = '', checkFlag=false) => {
+  const handleChange = (e, name = '', checkFlag = false) => {
     if (name === '') {
       setValue({ ...value, [e.target.name]: e.target.value });
     }
     else {
-      if(checkFlag)
-      {
+      if (checkFlag) {
         setValue({ ...value, [name]: e.target.checked });
       }
-      else
-      {
+      else {
         setValue({ ...value, [name]: e });
       }
     }
@@ -82,7 +80,7 @@ const UserDetails = ({ notify }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(value);
-    const ans = await getCoupans(value.status, value.query, 1, perPage, id, value.isRevealedCoupan ? 'false' : value.isRewardCoupan ? 'true' : 'undefined', eventId!=='0' ? eventId : '');
+    const ans = await getCoupans(value.status, value.query, 1, perPage, id, value.isRevealedCoupan ? 'false' : value.isRewardCoupan ? 'true' : 'undefined', eventId !== '0' ? eventId : '');
     setTotalRows(ans.count);
     setPage(1);
     // console.log(ans);
@@ -117,11 +115,11 @@ const UserDetails = ({ notify }) => {
                   <Input label="Search .." name="query" onChange={handleChange} value={value.query} />
                 </div>
 
-                {eventId==='0' && <div className="flex items-center w-[23%] min-w-[220px] mb-2">
+                {eventId === '0' && <div className="flex items-center w-[23%] min-w-[220px] mb-2">
                   <Select label="Event" children={<p>Event</p>} onChange={(e) => {
                     handleChange(e, 'event');
                   }}>
-                    {events?.map((e,index)=>{
+                    {events?.map((e, index) => {
                       return (
                         <Option key={index} value={e?._id} children={<p>{e?.title}</p>}>{e?.title}</Option>
                       );
@@ -141,7 +139,7 @@ const UserDetails = ({ notify }) => {
               columns={columns}
               data={data}
               striped={true}
-              title={eventName!=='0' ? `${name} (${eventName})` : name}
+              title={eventName !== '0' ? `${name} (${eventName})` : name}
               progressPending={loadFlag}
               pagination
               paginationServer
