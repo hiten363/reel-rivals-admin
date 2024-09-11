@@ -218,18 +218,18 @@ export const routes = [
       //   path: "/testimonial",
       //   element:(notify)=>  <Testimonial notify={notify} />
       // },
-      {
-        icon: <BellAlertIcon {...icon} />,
-        name: "Announcements",
-        path: "/announcements",
-        element:(notify)=>  <Announcement notify={notify} />
-      },
-      {
-        icon: <NoSymbolIcon {...icon} />,
-        name: "Sanctioned Countries",
-        path: "/sanction-countries",
-        element:(notify)=>  <SanctionList notify={notify} />
-      },
+      // {
+      //   icon: <BellAlertIcon {...icon} />,
+      //   name: "Announcements",
+      //   path: "/announcements",
+      //   element:(notify)=>  <Announcement notify={notify} />
+      // },
+      // {
+      //   icon: <NoSymbolIcon {...icon} />,
+      //   name: "Sanctioned Countries",
+      //   path: "/sanction-countries",
+      //   element:(notify)=>  <SanctionList notify={notify} />
+      // },
       {
         icon: <ListBulletIcon {...icon} />,
         name: "Logs",
