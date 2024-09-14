@@ -3,6 +3,34 @@ import DataTable from 'react-data-table-component';
 import useMain from '../../hooks/useMain';
 import { Button, Card, CardBody, CardHeader, Typography } from '@material-tailwind/react';
 import { Select, Option, Input } from "@material-tailwind/react";
+import UAParser from 'ua-parser-js';
+
+const LogDetail = ({ data }) => {
+  let parser = new UAParser(data.userAgent);
+  let parserResults = parser.getResult();
+  return (
+    <>
+      <Card className="h-full w-full overflow-scroll p-4">
+        <div className="flex gap-2 mb-0.5">
+          <b className='text-black font-semibold'>Browser:</b>
+          <p className='text-black'>{parserResults?.browser?.name} ({parserResults?.browser?.version})</p>
+        </div>
+        <div className="flex gap-2 mb-0.5">
+          <b className='text-black font-semibold'>CPU:</b>
+          <p className='text-black'>{parserResults?.cpu?.architecture}</p>
+        </div>
+        <div className="flex gap-2 mb-0.5">
+          <b className='text-black font-semibold'>Device:</b>
+          <p className='text-black'>{parserResults?.device?.model}</p>
+        </div>
+        <div className="flex gap-2 mb-0.5">
+          <b className='text-black font-semibold'>OS:</b>
+          <p className='text-black'>{parserResults?.os?.name}</p>
+        </div>
+      </Card>
+    </>
+  );
+};
 
 const Log = ({ notify }) => {
   const { getLogs } = useMain();
@@ -28,27 +56,30 @@ const Log = ({ notify }) => {
 
   const columns = [
     {
-      name: 'Question',
-      selector: row => row.question,
-      // sortable: true
+      name: 'Activity',
+      selector: row => row.activity,
+      wrap: true
     },
     {
-      name: 'Answer',
-      selector: row => <span className='my-2 block'>{`${row.answer.slice(0, 140)} ${row.answer?.length > 140 && '...'}`}</span>,
+      name: 'User IP',
+      selector: row => row.userIp,
       wrap: true,
-      // sortable: true
     },
     {
-      name: 'Status',
-      selector: row => row.status === 'true' ? <span className='text-green-500 font-semibold'>Active</span> : <span className='text-red-500 font-semibold'>Deleted</span>,
-      // sortable: true,
-      // grow: 0.1
+      name: 'Page Url',
+      selector: row => row.pageUrl,
+      wrap: true,
+    },
+    {
+      name: 'User',
+      selector: row => row.isAnonymous === "true" ? "Guest" : row.user.userName,
+      wrap: true,
     }
   ];
 
   const getData = async () => {
     setLoadFlag(true);
-    const ans = await getLogs(value.status, value.query, page, perPage);
+    const ans = await getLogs(value.startDate, value.endDate, page, perPage);
     console.log(ans);
     setData(ans.data);
     setTotalRows(ans.count);
@@ -66,11 +97,9 @@ const Log = ({ notify }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(value);
-    const ans = await getLogs(value.status, value.query, 1, perPage);
+    const ans = await getLogs(value.startDate, value.endDate, 1, perPage);
     setTotalRows(ans.count);
     setPage(1);
-    console.log(ans);
     setData(ans.data);
   };
 
@@ -85,15 +114,14 @@ const Log = ({ notify }) => {
 
   const handleReset = async () => {
     // console.log(value);
-    const ans = await getLogs();
+    const ans = await getLogs('', '', 1, perPage);
+    setData(ans.data);
     setValue({
       startDate: '',
       endDate: ''
     });
-    setTotal(ans.totalAmount);
     setTotalRows(ans.count);
     setPage(1);
-    setData(ans.data);
   };
 
   return (
@@ -139,6 +167,8 @@ const Log = ({ notify }) => {
               onChangeRowsPerPage={handlePerRowsChange}
               onChangePage={handlePageChange}
               paginationRowsPerPageOptions={[5, 10, 20, 50, 100]}
+              expandableRows
+              expandableRowsComponent={LogDetail}
             />
           </CardBody>
         </Card>

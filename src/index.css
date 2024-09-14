@@ -129,13 +129,6 @@
     background: white !important;
 }
 
-.react-datetime-picker {
-    width: 100%;
-    border: 1px solid #8f8f8f5e;
-    border-radius: 7px;
-    padding: 7px;
-}
-
 .react-datetime-picker__wrapper {
     border: none !important;
 }

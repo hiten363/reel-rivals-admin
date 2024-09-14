@@ -21,7 +21,6 @@
     "react-apexcharts": "1.4.1",
     "react-color": "^2.19.3",
     "react-data-table-component": "^7.6.2",
-    "react-datetime-picker": "^6.0.1",
     "react-dom": "18.3.1",
     "react-loader-spinner": "^6.1.6",
     "react-modal-image": "^2.6.0",
@@ -31,6 +30,7 @@
     "react-select": "^5.8.0",
     "react-toastify": "^10.0.5",
     "react-tooltip": "^5.28.0",
+    "ua-parser-js": "^0.7.39",
     "yup": "^1.4.0"
   },
   "devDependencies": {

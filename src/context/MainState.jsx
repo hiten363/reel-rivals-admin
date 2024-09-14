@@ -1407,9 +1407,9 @@ const MainState = (props) => {
     }
   };
 
-  const getLogs = async (page, perPage) => {
+  const getLogs = async (startDate, endDate, page, perPage) => {
     try {
-      const data = await getRequest(`${baseUrl}/logs/getLogs?perPage=${perPage}&page=${page}`, false, props);
+      const data = await getRequest(`${baseUrl}/logs/getLogs?startDate=${startDate}&endDate=${endDate}&perPage=${perPage}&page=${page}`, false, props);
       console.log(data);
       return data;
     } catch (error) {

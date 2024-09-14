@@ -3,12 +3,7 @@ import { useState } from 'react';
 import useMain from '../../../hooks/useMain';
 import Spinner from '../../../Util/Spinner';
 import { Button, Option, Select } from '@material-tailwind/react';
-import cloneDeep from 'clone-deep';
-import DateTimePicker from 'react-datetime-picker';
-import 'react-datetime-picker/dist/DateTimePicker.css';
-import 'react-calendar/dist/Calendar.css';
-import 'react-clock/dist/Clock.css';
-
+  
 const AddContestModal = (props) => {
   const { postContest, getCategorys } = useMain();
 
@@ -116,29 +111,6 @@ const AddContestModal = (props) => {
                     <div>
                       <label htmlFor="startDate" className="block mb-2 text-sm font-medium text-gray-900 ">Start Date </label>
                       <input type="date" id="startDate" name="startDate" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " onChange={handleChange} value={value.startDate} required />
-
-                      {/* <DateTimePicker locale="en-GB" format='dd-MM-y h:mm:ss a' onChange={(e) => {
-                        let ts1 = new Date().getTime();
-                        let ts2 = new Date(e).getTime();
-                        if (ts2 > ts1) {
-                          setValue({ ...value, startDate: e });
-
-                          if (value.endDate <= ts2) {
-                            setValue({ ...value, startDate: e, endDate: (new Date(ts2 + 60000)) });
-                          }
-                        }
-                        else
-                        {
-                          if(value.endDate==="")
-                          {
-                            setValue({ ...value, startDate: new Date(), endDate: (new Date(ts1 + 600000)) });
-                          }
-                          else
-                          {
-                            setValue({ ...value, startDate: new Date() });
-                          }
-                        }
-                      }} value={value.startDate} required /> */}
                     </div>
 
                     <div>

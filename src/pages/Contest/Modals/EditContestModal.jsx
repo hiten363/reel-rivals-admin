@@ -2,11 +2,6 @@ import React, { useState, useEffect } from 'react';
 import useMain from '../../../hooks/useMain';
 import Spinner from '../../../Util/Spinner';
 import { Button, Select, Option } from '@material-tailwind/react';
-// import cloneDeep from 'clone-deep';
-// import DateTimePicker from 'react-datetime-picker';
-// import 'react-datetime-picker/dist/DateTimePicker.css';
-// import 'react-calendar/dist/Calendar.css';
-// import 'react-clock/dist/Clock.css';
 
 const EditContestModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
   const { updateContest, getCategorys } = useMain();
