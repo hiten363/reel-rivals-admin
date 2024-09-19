@@ -218,12 +218,12 @@ export const routes = [
       //   path: "/testimonial",
       //   element:(notify)=>  <Testimonial notify={notify} />
       // },
-      // {
-      //   icon: <BellAlertIcon {...icon} />,
-      //   name: "Announcements",
-      //   path: "/announcements",
-      //   element:(notify)=>  <Announcement notify={notify} />
-      // },
+      {
+        icon: <BellAlertIcon {...icon} />,
+        name: "Announcements",
+        path: "/announcements",
+        element:(notify)=>  <Announcement notify={notify} />
+      },
       // {
       //   icon: <NoSymbolIcon {...icon} />,
       //   name: "Sanctioned Countries",
