@@ -92,7 +92,7 @@ const AddSubscriptionModal = (props) => {
                       <input type="text" id="subtitle" name='subtitle' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Sub Title .." onChange={handleChange} value={value.subtitle} />
                     </div>
 
-                    <div>
+                    {value?.type==='SUBSCRIPTIONS' && <div>
                       <label htmlFor="tier" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Subscription Tier</label>
                       <select id="tier" onChange={handleChange} value={value.tier} name="tier" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                         <option value="">Choose a tier</option>
@@ -101,7 +101,7 @@ const AddSubscriptionModal = (props) => {
                         <option value="3">3</option>
                       </select>
                       <p className='text-xs font-semibold pl-0.5 pt-1 text-blue-700'>Choosing to the highest tier means selecting the most advanced and costly plan.</p>
-                    </div>
+                    </div>}
 
                     <div>
                       <label htmlFor="type" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Plan Type</label>
