@@ -29,7 +29,6 @@ const EditUserModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
   useEffect(() => {
     if (data) {
       if (Object.keys(data).length > 0) {
-        console.log(data);
         setValue({
           _id: data._id,
           name: data?.name,

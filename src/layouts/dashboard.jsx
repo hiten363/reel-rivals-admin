@@ -46,6 +46,7 @@ import DistributePrize from "@/pages/RewardDistribution/DistributePrize";
 import SanctionList from "@/pages/SanctionList/SanctionList";
 import Announcement from "@/pages/Announcement/Announcement";
 import Log from "@/pages/Log/Log";
+import ContestDisclaimer from "@/pages/ContestDisclaimer/ContestDisclaimer";
 
 export function Dashboard({ notify }) {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -93,6 +94,7 @@ export function Dashboard({ notify }) {
           <Route path={'/faq'} element={<Faq notify={notify} />} />
           <Route path={'/news-media'} element={<Media notify={notify} />} />
           <Route path={'/terms-and-conditions'} element={<Terms notify={notify} />} />
+          <Route path={'/contest-disclaimer'} element={<ContestDisclaimer notify={notify} />} />
           <Route path={'/privacy-policy'} element={<Privacy notify={notify} />} />
           <Route path={'/contest-guidelines'} element={<Rules notify={notify} />} />
           <Route path={'/vouchers'} element={<Coupon notify={notify} />} />

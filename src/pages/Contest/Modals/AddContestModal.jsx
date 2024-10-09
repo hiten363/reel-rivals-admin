@@ -3,13 +3,14 @@ import { useState } from 'react';
 import useMain from '../../../hooks/useMain';
 import Spinner from '../../../Util/Spinner';
 import { Button, Option, Select } from '@material-tailwind/react';
+import FileInput from '@/Util/FileInput';
   
 const AddContestModal = (props) => {
   const { postContest, getCategorys } = useMain();
 
   const [value, setValue] = useState({
     title: '',
-    img: '',
+    file: '',
     startDate: '',
     endDate: '',
     winning: '',
@@ -50,12 +51,12 @@ const AddContestModal = (props) => {
     setUploadFlag(true);
     console.log(value);
 
-    const ans = await postContest({ title: value.title, img: value?.img, startDate: new Date(value?.startDate)?.getTime(), endDate: new Date(value?.endDate)?.getTime(), winning: value?.winning, category: value.category });
+    const ans = await postContest({ title: value.title, file: value?.file, startDate: new Date(value?.startDate)?.getTime(), endDate: new Date(value?.endDate)?.getTime(), winning: value?.winning, category: value.category });
     console.log(ans);
     if (ans.status) {
       setValue({
         title: '',
-        img: '',
+        file: '',
         startDate: '',
         endDate: '',
         winning: '',
@@ -103,10 +104,7 @@ const AddContestModal = (props) => {
                       <input type="text" id="title" name="title" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Contest Title .." onChange={handleChange} value={value.title} required />
                     </div>
 
-                    <div>
-                      <label htmlFor="img" className="block mb-2 text-sm font-medium text-gray-900 ">Contest Image </label>
-                      <input type="file" id="img" name="img" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Event Image .." onChange={handleChange} required />
-                    </div>
+                    <FileInput value={value} setValue={setValue} />
 
                     <div>
                       <label htmlFor="startDate" className="block mb-2 text-sm font-medium text-gray-900 ">Start Date </label>

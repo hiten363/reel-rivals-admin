@@ -17,16 +17,7 @@ const MainState = (props) => {
 
   const postBlog = async ({ title, subTitle, writtenBy, file, tags, desc, slug }) => {
     try {
-      let formdata = new FormData();
-      formdata.append('title', title);
-      formdata.append('file', file);
-      formdata.append('subTitle', subTitle);
-      formdata.append('writtenBy', writtenBy);
-      formdata.append('tags', tags);
-      formdata.append('desc', desc);
-      formdata.append('slug', slug);
-
-      const data = await postRequest(`${baseUrl}/blog/postBlog`, formdata, true, props, true);
+      const data = await postRequest(`${baseUrl}/blog/postBlog`, {title, file, subTitle, writtenBy, tags, desc, slug}, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -35,16 +26,7 @@ const MainState = (props) => {
 
   const updateBlog = async ({ id, title, subTitle, writtenBy, file, tags, desc, slug }) => {
     try {
-      let formdata = new FormData();
-      formdata.append('title', title);
-      formdata.append('file', file);
-      formdata.append('subTitle', subTitle);
-      formdata.append('writtenBy', writtenBy);
-      formdata.append('tags', tags);
-      formdata.append('desc', desc);
-      formdata.append('slug', slug);
-
-      const data = await putRequest(`${baseUrl}/blog/updateBlog/${id}`, formdata, true, props, true);
+      const data = await putRequest(`${baseUrl}/blog/updateBlog/${id}`, {title, file, subTitle, writtenBy, tags, desc, slug}, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -143,13 +125,7 @@ const MainState = (props) => {
 
   const postTestimonial = async ({ name, designation, comment, file }) => {
     try {
-      let formdata = new FormData();
-      formdata.append('name', name);
-      formdata.append('file', file);
-      formdata.append('designation', designation);
-      formdata.append('comment', comment);
-
-      const data = await postRequest(`${baseUrl}/testimonial/postTestimonial`, formdata, true, props, true);
+      const data = await postRequest(`${baseUrl}/testimonial/postTestimonial`, {name, file, designation, comment}, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -158,13 +134,7 @@ const MainState = (props) => {
 
   const updateTestimonial = async ({ id, name, designation, comment, file }) => {
     try {
-      let formdata = new FormData();
-      formdata.append('name', name);
-      formdata.append('file', file);
-      formdata.append('designation', designation);
-      formdata.append('comment', comment);
-
-      const data = await putRequest(`${baseUrl}/testimonial/updateTestimonial/${id}`, formdata, true, props, true);
+      const data = await putRequest(`${baseUrl}/testimonial/updateTestimonial/${id}`, {name, file, designation, comment}, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -209,13 +179,7 @@ const MainState = (props) => {
 
   const postCareer = async ({ title, subTitle, file, desc }) => {
     try {
-      let formdata = new FormData();
-      formdata.append('title', title);
-      formdata.append('file', file);
-      formdata.append('subTitle', subTitle);
-      formdata.append('desc', desc);
-
-      const data = await postRequest(`${baseUrl}/career/postCareer`, formdata, true, props, true);
+      const data = await postRequest(`${baseUrl}/career/postCareer`, { title, subTitle, file, desc }, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -224,13 +188,7 @@ const MainState = (props) => {
 
   const updateCareer = async ({ id, title, subTitle, file, desc, slug }) => {
     try {
-      let formdata = new FormData();
-      formdata.append('title', title);
-      formdata.append('file', file);
-      formdata.append('subTitle', subTitle);
-      formdata.append('desc', desc);
-
-      const data = await putRequest(`${baseUrl}/career/updateCareer/${id}`, formdata, true, props, true);
+      const data = await putRequest(`${baseUrl}/career/updateCareer/${id}`, { title, subTitle, file, desc }, true, props, true);
       return data;
     } catch (error) {
       console.log(error);
@@ -275,16 +233,7 @@ const MainState = (props) => {
 
   const postPartner = async ({ title, subTitle, writtenBy, file, tags, desc, slug }) => {
     try {
-      let formdata = new FormData();
-      formdata.append('title', title);
-      formdata.append('file', file);
-      formdata.append('subTitle', subTitle);
-      formdata.append('writtenBy', writtenBy);
-      formdata.append('tags', tags);
-      formdata.append('desc', desc);
-      formdata.append('slug', slug);
-
-      const data = await postRequest(`${baseUrl}/partner/postPartner`, formdata, true, props, true);
+      const data = await postRequest(`${baseUrl}/partner/postPartner`, { title, subTitle, writtenBy, file, tags, desc, slug }, true, props, true);
       return data;
     } catch (error) {
       console.log(error);
@@ -293,16 +242,7 @@ const MainState = (props) => {
 
   const updatePartner = async ({ id, title, subTitle, writtenBy, file, tags, desc, slug }) => {
     try {
-      let formdata = new FormData();
-      formdata.append('title', title);
-      formdata.append('file', file);
-      formdata.append('subTitle', subTitle);
-      formdata.append('writtenBy', writtenBy);
-      formdata.append('tags', tags);
-      formdata.append('desc', desc);
-      formdata.append('slug', slug);
-
-      const data = await putRequest(`${baseUrl}/partner/updatePartner/${id}`, formdata, true, props, true);
+      const data = await putRequest(`${baseUrl}/partner/updatePartner/${id}`, { title, subTitle, writtenBy, file, tags, desc, slug }, true, props, true);
       return data;
     } catch (error) {
       console.log(error);
@@ -347,16 +287,7 @@ const MainState = (props) => {
 
   const postCharity = async ({ title, subTitle, writtenBy, file, tags, desc, slug }) => {
     try {
-      let formdata = new FormData();
-      formdata.append('title', title);
-      formdata.append('file', file);
-      formdata.append('subTitle', subTitle);
-      formdata.append('writtenBy', writtenBy);
-      formdata.append('tags', tags);
-      formdata.append('desc', desc);
-      formdata.append('slug', slug);
-
-      const data = await postRequest(`${baseUrl}/charity/postCharity`, formdata, true, props, true);
+      const data = await postRequest(`${baseUrl}/charity/postCharity`, { title, subTitle, writtenBy, file, tags, desc, slug }, true, props, true);
       return data;
     } catch (error) {
       console.log(error);
@@ -365,16 +296,7 @@ const MainState = (props) => {
 
   const updateCharity = async ({ id, title, subTitle, writtenBy, file, tags, desc, slug }) => {
     try {
-      let formdata = new FormData();
-      formdata.append('title', title);
-      formdata.append('file', file);
-      formdata.append('subTitle', subTitle);
-      formdata.append('writtenBy', writtenBy);
-      formdata.append('tags', tags);
-      formdata.append('desc', desc);
-      formdata.append('slug', slug);
-
-      const data = await putRequest(`${baseUrl}/charity/updateCharity/${id}`, formdata, true, props, true);
+      const data = await putRequest(`${baseUrl}/charity/updateCharity/${id}`, { title, subTitle, writtenBy, file, tags, desc, slug }, true, props, true);
       return data;
     } catch (error) {
       console.log(error);
@@ -417,51 +339,18 @@ const MainState = (props) => {
     }
   };
 
-  const postCategory = async ({ title, file, subTitle, subTitle1, subTitle2, images, tags, imageDesc, desc, keyHighlights }) => {
+  const postCategory = async ({ title, file }) => {
     try {
-      let formdata = new FormData();
-      formdata.append('title', title);
-      formdata.append('file', file);
-
-      // for(let i of images)
-      // {
-      //   formdata.append('images', i);
-      // }
-      // formdata.append('subTitle', subTitle);
-      // formdata.append('subTitle1', subTitle1);
-      // formdata.append('subTitle2', subTitle2);
-      // formdata.append('tags', JSON.stringify(tags));
-      // formdata.append('imageDesc', JSON.stringify(imageDesc));
-      // formdata.append('desc', desc);
-      // formdata.append('keyHighlights', JSON.stringify(keyHighlights));
-
-      const data = await postRequest(`${baseUrl}/category/postCategory`, formdata, true, props, true);
+      const data = await postRequest(`${baseUrl}/category/postCategory`, {title, file}, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
     }
   };
 
-  const updateCategory = async ({ id, title, file, subTitle, subTitle1, subTitle2, prevImgArr, images, tags, imageDesc, desc, keyHighlights }) => {
+  const updateCategory = async ({ id, title, file }) => {
     try {
-      let formdata = new FormData();
-      formdata.append('title', title);
-      formdata.append('file', file);
-
-      // for(let i of images)
-      // {
-      //   formdata.append('images', i);
-      // }
-      // formdata.append('subTitle', subTitle);
-      // formdata.append('subTitle1', subTitle1);
-      // formdata.append('subTitle2', subTitle2);
-      // formdata.append('prevImgArr', JSON.stringify(prevImgArr));
-      // formdata.append('tags', JSON.stringify(tags));
-      // formdata.append('imageDesc', JSON.stringify(imageDesc));
-      // formdata.append('desc', desc);
-      // formdata.append('keyHighlights', JSON.stringify(keyHighlights));
-
-      const data = await putRequest(`${baseUrl}/category/updateCategory/${id}`, formdata, true, props, true);
+      const data = await putRequest(`${baseUrl}/category/updateCategory/${id}`, {title, file}, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -513,17 +402,9 @@ const MainState = (props) => {
     }
   };
 
-  const postContest = async ({ title, img, startDate, endDate, winning, category }) => {
+  const postContest = async ({ title, file, startDate, endDate, winning, category }) => {
     try {
-      let formdata = new FormData();
-      formdata.append('title', title);
-      formdata.append('startDate', startDate);
-      formdata.append('endDate', endDate);
-      formdata.append('winning', winning);
-      formdata.append('category', category);
-
-      formdata.append('file', img);
-      const data = await postRequest(`${baseUrl}/contest/postContest`, formdata, true, props, true);
+      const data = await postRequest(`${baseUrl}/contest/postContest`, {title, startDate, endDate, winning, category, file}, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -539,18 +420,9 @@ const MainState = (props) => {
     }
   };
 
-  const updateContest = async ({ id, title, img, startDate, endDate, winning, contestants, category }) => {
+  const updateContest = async ({ id, title, file, startDate, endDate, winning, contestants, category }) => {
     try {
-      let formdata = new FormData();
-      formdata.append('title', title);
-      formdata.append('startDate', startDate);
-      formdata.append('endDate', endDate);
-      formdata.append('winning', winning);
-      formdata.append('contestants', contestants);
-      formdata.append('category', category);
-
-      formdata.append('file', img);
-      const data = await putRequest(`${baseUrl}/contest/updateContest/${id}`, formdata, true, props, true);
+      const data = await putRequest(`${baseUrl}/contest/updateContest/${id}`, {title, startDate, endDate, winning, category, file, contestants}, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -595,15 +467,7 @@ const MainState = (props) => {
 
   const signup = async ({ firstName, lastName, email, phone, password, address, file }) => {
     try {
-      const formdata = new FormData();
-      formdata.append('firstName', firstName);
-      formdata.append('lastName', lastName);
-      formdata.append('email', email);
-      formdata.append('phone', phone);
-      formdata.append('password', password);
-      formdata.append('address', address);
-      formdata.append('file', file);
-      const data = await postRequest(`${baseUrl}/user/signin`, formdata, false, props, true);
+      const data = await postRequest(`${baseUrl}/user/signin`, {firstName, lastName, email, phone, password, address, file}, false, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -630,17 +494,7 @@ const MainState = (props) => {
 
   const createUser = async ({ name, email, userName, phone, password, role, userPermissions, address, file }) => {
     try {
-      const formdata = new FormData();
-      formdata.append('name', name);
-      formdata.append('email', email);
-      formdata.append('userName', userName);
-      formdata.append('phone', phone);
-      formdata.append('password', password);
-      formdata.append('role', role);
-      formdata.append('userPermissions', JSON.stringify(userPermissions));
-      formdata.append('address', address);
-      formdata.append('file', file);
-      const data = await postRequest(`${baseUrl}/user/createUser`, formdata, false, props, true);
+      const data = await postRequest(`${baseUrl}/user/createUser`, {name, email, userName, phone, password, role, userPermissions, address, file}, false, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -1024,6 +878,34 @@ const MainState = (props) => {
     }
   };
 
+  const getContestDisclaimers = async () => {
+    try {
+      const data = await getRequest(`${baseUrl}/contestDisclaimer/getContestDisclaimers`, false, props);
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const postContestDisclaimer = async ({ desc }) => {
+    try {
+      const data = await postRequest(`${baseUrl}/contestDisclaimer/postContestDisclaimer`, { desc }, true, props, false);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateContestDisclaimer = async ({ id, desc }) => {
+    try {
+      const data = await putRequest(`${baseUrl}/contestDisclaimer/updateContestDisclaimer/${id}`, { desc }, true, props, false);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const getRuless = async () => {
     try {
       const data = await getRequest(`${baseUrl}/rule/getRules`, false, props);
@@ -1155,33 +1037,9 @@ const MainState = (props) => {
     }
   };
 
-  const postVideo = async ({ caption, category, contest, regionCountry, regionState, file }) => {
+  const updateVideo = async ({ id,  }) => {
     try {
-      let formdata = new FormData();
-      formdata.append('caption', caption);
-      formdata.append('category', category);
-      formdata.append('contest', contest);
-      formdata.append('regionCountry', JSON.stringify(regionCountry));
-      formdata.append('regionState', JSON.stringify(regionState));
-      formdata.append('file', file);
-      const data = await postRequest(`${baseUrl}/video/postVideo`, formdata, true, props, true);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const updateVideo = async ({ id, caption, category, contest, regionCountry, regionState, isActive }) => {
-    try {
-      let formdata = new FormData();
-      formdata.append('caption', caption);
-      formdata.append('category', category);
-      formdata.append('contest', contest);
-      formdata.append('regionCountry', JSON.stringify(regionCountry));
-      formdata.append('regionState', JSON.stringify(regionState));
-      formdata.append('isActive', JSON.stringify(isActive));
-      formdata.append('file', file);
-      const data = await putRequest(`${baseUrl}/video/updateVideo/${id}`, formdata, true, props, false);
+      const data = await putRequest(`${baseUrl}/video/updateVideo/${id}`, {caption, category, contest, regionCountry, regionState, isActive}, true, props, false);
       return data;
     } catch (error) {
       console.log(error);
@@ -1354,7 +1212,6 @@ const MainState = (props) => {
   const getSanctionLists = async () => {
     try {
       const data = await getRequest(`${baseUrl}/sanctionList/getSanctionLists`, false, props);
-      console.log(data);
       return data;
     } catch (error) {
       console.log(error);
@@ -1418,7 +1275,7 @@ const MainState = (props) => {
   };
 
   return (
-    <MainContext.Provider value={{ getBlogs, postBlog, updateBlog, deleteBlog, deleteAllBlogs, getContacts, deleteContact, signup, login, adminLogin, getUsers, createUser, updateUser, updateUserStatus, uploadImage, undoBlog, getFaqs, postFaq, updateFaq, deleteFaq, getTermss, postTerms, updateTerms, postReply, undoFaq, getPrivacys, postPrivacy, updatePrivacy, getSubscriptions, postSubscription, updateSubscription, undoSubscription, deleteSubscription, getCoupans, postCoupan, postCoupanBulk, assignCoupansToUser, updateCoupan, revealCoupan, undoCoupan, deleteCoupan, getPayments, getThemeControls, postThemeControls, updateThemeControls, deletePayment, getDashboardData, getCategorys, postCategory, updateCategory, deleteCategoryImage, deleteCategory, deleteAllCategorys, getContests, postContest, drawResults, updateContest, deleteContest, deleteAllContests, getCareers, postCareer, updateCareer, deleteCareer, deleteAllCareers, getPartners, postPartner, updatePartner, deletePartner, deleteAllPartners, getCharitys, postCharity, updateCharity, deleteCharity, deleteAllCharitys, getRuless, postRules, updateRules, undoGiftCard, getGiftCards, postGiftCard, updateGiftCard, deleteGiftCard, getNewsLetters, undoContest, undoCareer, undoPartner, undoCharity, undoCategory, undoMedia, getMedias, postMedia, deleteMedia, getTestimonials, postTestimonial, undoTestimonial, deleteTestimonial, updateTestimonial, deleteAllTestimonials, getStatisticss, postStatistics, updateStatistics, getVideos, postVideo, updateVideo, undoVideo, deleteVideo, getComment, postComment, updateComment, undoComment, deleteComment, getReplys, postReply1, updateReply, undoReply, deleteReply, deleteUser, getAbouts, postAbout, updateAbout, deleteAbout, undoAbout, deleteAllAbouts, getRewardPools, postRewardPool, updateRewardPool, undoRewardPool, deleteRewardPool, updateDistributionStatus, getVideosWinners, getSanctionLists, postSanctionList, updateSanctionList, getAnnouncements, postAnnouncement, updateAnnouncement, getLogs }}>
+    <MainContext.Provider value={{ getBlogs, postBlog, updateBlog, deleteBlog, deleteAllBlogs, getContacts, deleteContact, signup, login, adminLogin, getUsers, createUser, updateUser, updateUserStatus, uploadImage, undoBlog, getFaqs, postFaq, updateFaq, deleteFaq, getTermss, postTerms, updateTerms, postReply, undoFaq, getPrivacys, postPrivacy, updatePrivacy, getSubscriptions, postSubscription, updateSubscription, undoSubscription, deleteSubscription, getCoupans, postCoupan, postCoupanBulk, assignCoupansToUser, updateCoupan, revealCoupan, undoCoupan, deleteCoupan, getPayments, getThemeControls, postThemeControls, updateThemeControls, deletePayment, getDashboardData, getCategorys, postCategory, updateCategory, deleteCategoryImage, deleteCategory, deleteAllCategorys, getContests, postContest, drawResults, updateContest, deleteContest, deleteAllContests, getCareers, postCareer, updateCareer, deleteCareer, deleteAllCareers, getPartners, postPartner, updatePartner, deletePartner, deleteAllPartners, getCharitys, postCharity, updateCharity, deleteCharity, deleteAllCharitys, getRuless, postRules, updateRules, undoGiftCard, getGiftCards, postGiftCard, updateGiftCard, deleteGiftCard, getNewsLetters, undoContest, undoCareer, undoPartner, undoCharity, undoCategory, undoMedia, getMedias, postMedia, deleteMedia, getTestimonials, postTestimonial, undoTestimonial, deleteTestimonial, updateTestimonial, deleteAllTestimonials, getStatisticss, postStatistics, updateStatistics, getVideos, updateVideo, undoVideo, deleteVideo, getComment, postComment, updateComment, undoComment, deleteComment, getReplys, postReply1, updateReply, undoReply, deleteReply, deleteUser, getAbouts, postAbout, updateAbout, deleteAbout, undoAbout, deleteAllAbouts, getRewardPools, postRewardPool, updateRewardPool, undoRewardPool, deleteRewardPool, updateDistributionStatus, getVideosWinners, getSanctionLists, postSanctionList, updateSanctionList, getAnnouncements, postAnnouncement, updateAnnouncement, getLogs, getContestDisclaimers, postContestDisclaimer, updateContestDisclaimer }}>
       {props.children}
     </MainContext.Provider>
   );

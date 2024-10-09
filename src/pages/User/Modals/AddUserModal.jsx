@@ -4,6 +4,7 @@ import useMain from '../../../hooks/useMain';
 import Spinner from '../../../Util/Spinner';
 import { Button, Option, Select } from '@material-tailwind/react';
 import * as Yup from 'yup';
+import FileInput from '@/Util/FileInput';
 
 const schema = Yup.object().shape({
   name: Yup.string().required().matches(/^\D*$/, 'Name should not contain integers').min(3).max(30),
@@ -158,10 +159,7 @@ const AddUserModal = (props) => {
                       </Select>
                     </div> */}
 
-                    <div>
-                      <label htmlFor="file" className="block mb-2 text-sm font-medium text-gray-900 ">Profile Image</label>
-                      <input type="file" id="file" name='file' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " onChange={handleChange} />
-                    </div>
+                    <FileInput value={value} setValue={setValue} />
                   </div>
 
                   <div className='text-right'>

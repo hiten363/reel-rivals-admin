@@ -97,14 +97,12 @@ const Category = ({ notify }) => {
   const getData = async () => {
     setLoadFlag(true);
     const ans = await getCategorys('', value.status, value.query, page, perPage);
-    console.log(ans);
     setData(ans.data);
     setTotalRows(ans.count);
     setLoadFlag(false);
   };
 
   const handleDelete = async () => {
-    console.log(id);
     const ans = await deleteCategory(id);
 
     if (ans.status) {
@@ -128,11 +126,10 @@ const Category = ({ notify }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(value);
+    // console.log(value);
     const ans = await getCategorys('', value.status, value.query, 1, perPage);
     setTotalRows(ans.count);
     setPage(1);
-    console.log(ans);
     setData(ans.data);
   };
 

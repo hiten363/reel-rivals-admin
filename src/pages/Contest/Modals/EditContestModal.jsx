@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useMain from '../../../hooks/useMain';
 import Spinner from '../../../Util/Spinner';
 import { Button, Select, Option } from '@material-tailwind/react';
+import FileInput from '@/Util/FileInput';
 
 const EditContestModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
   const { updateContest, getCategorys } = useMain();
@@ -9,7 +10,7 @@ const EditContestModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
   const [value, setValue] = useState({
     id: '',
     title: '',
-    img: '',
+    file: '',
     startDate: '',
     endDate: '',
     category: '',
@@ -40,7 +41,7 @@ const EditContestModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
     setValue({
       id: data._id,
       title: data?.title,
-      img: '',
+      file: '',
       startDate: new Date(Number(data?.startDate)).toISOString().split('T')[0],
       endDate: new Date(Number(data?.endDate)).toISOString().split('T')[0],
       category: data?.category?._id,
@@ -68,7 +69,7 @@ const EditContestModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
     e.preventDefault();
     // console.log(value);
 
-    const ans = await updateContest({ title: value.title, img: value?.img, startDate: new Date(value?.startDate)?.getTime(), endDate: new Date(value?.endDate)?.getTime(), winning: value?.winning, category: value?.category, id: data?._id });
+    const ans = await updateContest({ title: value.title, file: value?.file, startDate: new Date(value?.startDate)?.getTime(), endDate: new Date(value?.endDate)?.getTime(), winning: value?.winning, category: value?.category, id: data?._id });
     console.log(ans);
 
     if (ans.status) {
@@ -127,8 +128,7 @@ const EditContestModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                         <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
                       </svg> : <Spinner />}
                     </div> : <div>
-                      <label htmlFor="img" className="block mb-2 text-sm font-medium text-gray-900 ">Event Image </label>
-                      <input type="file" id="img" name="img" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Event Image .." onChange={handleChange} required />
+                      <FileInput value={value} setValue={setValue} />
                     </div>}
 
                     <div>

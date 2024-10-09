@@ -59,6 +59,7 @@ import RewardDistribution from "./pages/RewardDistribution/RewardDistribution";
 import SanctionList from "./pages/SanctionList/SanctionList";
 import Announcement from "./pages/Announcement/Announcement";
 import Log from "./pages/Log/Log";
+import ContestDisclaimer from "./pages/ContestDisclaimer/ContestDisclaimer";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -195,6 +196,12 @@ export const routes = [
       //   element:(notify)=>  <Career notify={notify} />
       // },
       {
+        icon: <PresentationChartLineIcon {...icon} />,
+        name: "Contest Disclaimer",
+        path: "/contest-disclaimer",
+        element: (notify) => <ContestDisclaimer notify={notify} />
+      },
+      {
         icon: <ShieldExclamationIcon {...icon} />,
         name: "Contest Guidelines",
         path: "/contest-guidelines",
@@ -224,12 +231,12 @@ export const routes = [
         path: "/announcements",
         element:(notify)=>  <Announcement notify={notify} />
       },
-      // {
-      //   icon: <NoSymbolIcon {...icon} />,
-      //   name: "Sanctioned Countries",
-      //   path: "/sanction-countries",
-      //   element:(notify)=>  <SanctionList notify={notify} />
-      // },
+      {
+        icon: <NoSymbolIcon {...icon} />,
+        name: "Sanctioned Countries",
+        path: "/sanction-countries",
+        element:(notify)=>  <SanctionList notify={notify} />
+      },
       {
         icon: <ListBulletIcon {...icon} />,
         name: "Logs",
