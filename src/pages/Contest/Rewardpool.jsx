@@ -8,7 +8,7 @@ import EditRewardpoolModal from './Modals/EditRewardpoolModal';
 const Rewardpool = ({ notify }) => {
   const { getRewardPools } = useMain();
 
-  const { contest } = useParams();
+  const { contest, contestName } = useParams();
 
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
@@ -53,7 +53,7 @@ const Rewardpool = ({ notify }) => {
           <CardHeader variant="gradient" color="gray" className="mb-8 p-6">
             <div className="flex items-center justify-between">
               <Typography variant="h6" color="white">
-                Manage Rewardpool
+                Manage Rewardpool ({contestName})
               </Typography>
 
               <Button color="amber" onClick={() => {

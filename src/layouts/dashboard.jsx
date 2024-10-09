@@ -87,7 +87,7 @@ export function Dashboard({ notify }) {
           <Route path={'/distribute-prize/:contest'} element={<DistributePrize notify={notify} />} />
           <Route path={'/contests-categories/:categoryName/:categoryId'} element={<CategoryContests notify={notify} />} />
           <Route path={'/contests/:contestName/:contestId'} element={<ContestUser1 notify={notify} />} />
-          <Route path={'/rewardpool/:contest'} element={<Rewardpool notify={notify} />} />
+          <Route path={'/rewardpool/:contest/:contestName'} element={<Rewardpool notify={notify} />} />
           <Route path={'/reels'} element={<Reels notify={notify} />} />
           <Route path={'/reels/:userName/:userId/:contestName/:contestId'} element={<ContestReels notify={notify} />} />
           <Route path={'/user-enquiry'} element={<Contact notify={notify} />} />

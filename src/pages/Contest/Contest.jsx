@@ -172,7 +172,7 @@ const Contest = ({ notify }) => {
     {
       name: 'Reward Pool',
       selector: row => row.rewardPool ? <button onClick={() => {
-        navigate(`/dashboard/rewardpool/${row?._id}`);
+        navigate(`/dashboard/rewardpool/${row?._id}/${row?.title}`);
       }} className='bg-green-700 text-white px-2 text-[13px] py-1 rounded-sm'>View</button> : <button onClick={() => {
         setContest(row?._id);
         document.getElementById('addRewardpoolModal').classList.toggle('hidden');
