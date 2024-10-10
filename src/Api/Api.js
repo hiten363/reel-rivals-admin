@@ -59,9 +59,7 @@ export const putRequest = async (url, body, isAuth, props, isFile) => {
 
 export const deleteRequest = async (url, body, isAuth, props) => {
     props.setProgress(20);
-    let headers = {
-        "content-type": "application/json"
-    };
+    let headers = {};
 
     if (isAuth)
         headers['jwt'] = localStorage.getItem('reel_rivals_token');

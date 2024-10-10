@@ -237,7 +237,7 @@ const EditCategoryModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                         <img style={{ width: '120px', height: '120px', objectFit: 'contain' }} src={prevImage} />
                       </>
 
-                      <FileInput value={value} setValue={setValue} />
+                      <FileInput value={value} setValue={setValue} isRequired={false} />
                     </div>
                   </div>
 

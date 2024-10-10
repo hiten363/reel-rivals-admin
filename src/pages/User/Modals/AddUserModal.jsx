@@ -159,7 +159,7 @@ const AddUserModal = (props) => {
                       </Select>
                     </div> */}
 
-                    <FileInput value={value} setValue={setValue} />
+                    <FileInput value={value} setValue={setValue} isRequired={true} />
                   </div>
 
                   <div className='text-right'>
