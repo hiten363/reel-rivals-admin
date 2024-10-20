@@ -5,7 +5,6 @@ import Spinner from '../../../Util/Spinner';
 import { Button } from '@material-tailwind/react';
 import { Country, State } from 'country-state-city';
 import cloneDeep from 'clone-deep';
-// import list from '../../../Util/sanctionList.json';
 
 const AddRewardpoolModal = (props) => {
   const { postRewardPool, getSanctionLists } = useMain();
@@ -29,9 +28,9 @@ const AddRewardpoolModal = (props) => {
   }, []);
 
   const getCountries = async () => {
-    const list=await getSanctionLists();
+    const list = await getSanctionLists();
     let countries = Country.getAllCountries();
-    let list1=list.data[0].countries.map(x=>x.value);
+    let list1 = list.data[0].countries.map(x => x.value);
     setCountries(countries.filter(x => !list1.includes(x.isoCode)).map((e) => {
       return { label: e.name, value: e.isoCode };
     }));
@@ -168,12 +167,12 @@ const AddRewardpoolModal = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(value);
-    console.log(countryRewards);
-    console.log(stateRewards);
+    // console.log(value);
+    // console.log(countryRewards);
+    // console.log(stateRewards);
 
     const ans = await postRewardPool({
-      rewards: value, contest: props.contest, countryRewards: countryRewards.map(x => {
+      rewards: [...value.map((x) => { return { ...x, tokens: (x.tokens && x.tokens !== "") ? x.tokens : 0, reward: x.reward.trim() } })], contest: props.contest, countryRewards: countryRewards.map(x => {
         let c = countries.find(y => y.value === x.country);
         return { ...x, country: { label: c.label, value: c.value } };
       }), stateRewards: stateRewards.map(x => {
@@ -182,7 +181,6 @@ const AddRewardpoolModal = (props) => {
       })
     });
 
-    // console.log(ans);
     if (ans.status) {
       setValue([{
         startRank: '',
@@ -256,17 +254,23 @@ const AddRewardpoolModal = (props) => {
 
                   <div className="grid gap-6 px-0.5 py-0.5 mb-6">
                     <div>
-                      <label className="block mb-2 text-sm font-medium text-gray-900">Enter Rank Range & Rewards</label>
+                      <label className="block mb-3 text-base font-medium text-gray-900">Enter Rank Range & Rewards</label>
+                      <div className="flex step2-box mb-1.5">
+                        <p className='w-full text-sm font-medium ml-1'>Start Rank</p>
+                        <p className='w-full text-sm font-medium ml-3'>End Rank</p>
+                        <p className='w-full text-sm font-medium ml-2'>Cash Reward</p>
+                        <p className='w-full text-sm font-medium ml-2'>Star Points</p>
+                      </div>
 
                       {value.map((e, index) => {
                         return (
                           <div key={index} className="flex pt-0.5 px-0.5 mb-2 items-center">
                             <div className="flex step2-box">
-                              <input type="number" name='startRank' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Start Rank" onChange={(e) => {
+                              <input type="number" name='startRank' min={1} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Start Rank" onChange={(e) => {
                                 handleChange(e, index);
                               }} value={value[index]?.startRank} required />
 
-                              <input type="number" name='endRank' className="bg-gray-50 mx-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="End Rank" onChange={(e) => {
+                              <input type="number" name='endRank' min={1} className="bg-gray-50 mx-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="End Rank" onChange={(e) => {
                                 handleChange(e, index);
                               }} value={value[index]?.endRank} required />
 
@@ -274,7 +278,7 @@ const AddRewardpoolModal = (props) => {
                                 handleChange(e, index);
                               }} value={value[index]?.reward} />
 
-                              <input type="number" name='tokens' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Star Points" onChange={(e) => {
+                              <input type="number" name='tokens' min={0} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Star Points" onChange={(e) => {
                                 handleChange(e, index);
                               }} value={value[index]?.tokens} required />
                             </div>
@@ -307,7 +311,7 @@ const AddRewardpoolModal = (props) => {
                     return (
                       <div key={index} className="grid gap-6 px-0.5 py-0.5 mb-6">
                         <div>
-                          <div className="max-w-sm mx-auto flex gap-10">
+                          <div className="max-w-sm mx-auto flex gap-2 items-center">
                             <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={e.country} name="country" onChange={(g) => {
                               handleChange1(g, index, -1, 'COUNTRY');
                             }}>
@@ -326,17 +330,23 @@ const AddRewardpoolModal = (props) => {
                             }}>Remove</Button>
                           </div>
 
-                          <label className="block mb-2 text-sm font-medium text-gray-900">Enter Rank Range & Rewards</label>
+                          <label className="block mb-3 text-base font-medium text-gray-900">Enter Rank Range & Rewards</label>
+                          <div className="flex step2-box mb-1.5">
+                            <p className='w-full text-sm font-medium ml-1'>Start Rank</p>
+                            <p className='w-full text-sm font-medium ml-3'>End Rank</p>
+                            <p className='w-full text-sm font-medium ml-2'>Cash Reward</p>
+                            <p className='w-full text-sm font-medium ml-2'>Star Points</p>
+                          </div>
 
                           {e.rewards.map((f, index1) => {
                             return (
                               <div key={index1} className="flex pt-0.5 px-0.5 mb-2 items-center">
                                 <div className="flex step2-box">
-                                  <input type="number" name='startRank' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Start Rank" onChange={(g) => {
+                                  <input type="number" name='startRank' min={1} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Start Rank" onChange={(g) => {
                                     handleChange1(g, index, index1, 'COUNTRY');
                                   }} value={countryRewards[index]?.rewards?.[index1]?.startRank} required />
 
-                                  <input type="number" name='endRank' className="bg-gray-50 mx-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="End Rank" onChange={(f) => {
+                                  <input type="number" name='endRank' min={1} className="bg-gray-50 mx-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="End Rank" onChange={(f) => {
                                     handleChange1(f, index, index1, 'COUNTRY');
                                   }} value={countryRewards[index]?.rewards?.[index1]?.endRank} required />
 
@@ -344,7 +354,7 @@ const AddRewardpoolModal = (props) => {
                                     handleChange1(f, index, index1, 'COUNTRY');
                                   }} value={countryRewards[index]?.rewards?.[index1]?.reward} />
 
-                                  <input type="number" name='tokens' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Star Points" onChange={(f) => {
+                                  <input type="number" name='tokens' min={0} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Star Points" onChange={(f) => {
                                     handleChange1(f, index, index1, 'COUNTRY');
                                   }} value={countryRewards[index]?.rewards?.[index1]?.tokens} required />
                                 </div>
@@ -382,7 +392,7 @@ const AddRewardpoolModal = (props) => {
                       return (
                         <div key={index} className="grid gap-6 px-0.5 py-0.5 mb-6">
                           <div>
-                            <div className="max-w-sm mx-auto flex gap-10">
+                            <div className="max-w-sm mx-auto flex gap-2 items-center">
                               <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={e.state} name="state" onChange={(g) => {
                                 handleChange1(g, index, -1, 'STATE');
                               }}>
@@ -401,17 +411,23 @@ const AddRewardpoolModal = (props) => {
                               }}>Remove</Button>
                             </div>
 
-                            <label className="block mb-2 text-sm font-medium text-gray-900">Enter Rank Range & Rewards</label>
+                            <label className="block mb-3 text-base font-medium text-gray-900">Enter Rank Range & Rewards</label>
+                            <div className="flex step2-box mb-1.5">
+                              <p className='w-full text-sm font-medium ml-1'>Start Rank</p>
+                              <p className='w-full text-sm font-medium ml-3'>End Rank</p>
+                              <p className='w-full text-sm font-medium ml-2'>Cash Reward</p>
+                              <p className='w-full text-sm font-medium ml-2'>Star Points</p>
+                            </div>
 
                             {e.rewards.map((f, index1) => {
                               return (
                                 <div key={index1} className="flex pt-0.5 px-0.5 mb-2 items-center">
                                   <div className="flex step2-box">
-                                    <input type="number" name='startRank' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Start Rank" onChange={(g) => {
+                                    <input type="number" name='startRank' min={1} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Start Rank" onChange={(g) => {
                                       handleChange1(g, index, index1, 'STATE');
                                     }} value={stateRewards[index]?.rewards?.[index1]?.startRank} required />
 
-                                    <input type="number" name='endRank' className="bg-gray-50 mx-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="End Rank" onChange={(f) => {
+                                    <input type="number" name='endRank' min={1} className="bg-gray-50 mx-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="End Rank" onChange={(f) => {
                                       handleChange1(f, index, index1, 'STATE');
                                     }} value={stateRewards[index]?.rewards?.[index1]?.endRank} required />
 
@@ -419,7 +435,7 @@ const AddRewardpoolModal = (props) => {
                                       handleChange1(f, index, index1, 'STATE');
                                     }} value={stateRewards[index]?.rewards?.[index1]?.reward} />
 
-                                    <input type="number" name='tokens' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Star Points" onChange={(f) => {
+                                    <input type="number" name='tokens' min={0} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Star Points" onChange={(f) => {
                                       handleChange1(f, index, index1, 'STATE');
                                     }} value={stateRewards[index]?.rewards?.[index1]?.tokens} required />
                                   </div>

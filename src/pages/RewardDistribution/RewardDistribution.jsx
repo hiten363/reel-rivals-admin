@@ -48,8 +48,8 @@ const RewardDistribution = ({ notify }) => {
       wrap: true
     },
     {
-      name: 'Total Winnings',
-      selector: row => row.winning,
+      name: 'Total Participants',
+      selector: row => row.contestants,
       // sortable: true,
       wrap: true
     },
@@ -67,14 +67,19 @@ const RewardDistribution = ({ notify }) => {
     },
     {
       name: 'Is Distributed?',
-      selector: row => <select onChange={async (e) => {
-        console.log(e.target.value);
-        let ans = await updateDistributionStatus({ isDistributed: e.target.value, id: row._id });
-      }} defaultValue={row?.isDistributed} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-fit p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-        <option value=''>Select Status</option>
-        <option value={'true'}>Yes</option>
-        <option value={'false'}>No</option>
-      </select>,
+      selector: row => <>
+        {row?.isDistributed==="false" ? <select onChange={async (e) => {
+          if (e.target.value !== "" && e.target.value !== "false") {
+            let ans = await updateDistributionStatus({ isDistributed: e.target.value, id: row._id });
+            setRefreshFlag(!refreshFlag);
+          }
+        }} defaultValue={row?.isDistributed} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-fit p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option value=''>Select Status</option>
+          <option value={'true'}>Yes</option>
+          <option value={'false'}>No</option>
+        </select> : <button className='bg-green-700 cursor-default text-white px-2 text-[13px] py-1 rounded-sm'>Distributed</button>}
+      </>
+      ,
       sortable: true,
       grow: 2
     },
@@ -90,6 +95,7 @@ const RewardDistribution = ({ notify }) => {
   const getData = async () => {
     setLoadFlag(true);
     const ans = await getContests('', '', page, perPage, 'false', value.category, '', '', 'false', '', value.isDistributed);
+    // const ans = await getContests('', '', page, perPage, 'false', value.category, '', '', 'true', '', value.isDistributed);
     setData(ans.data);
     setTotalRows(ans.count);
 

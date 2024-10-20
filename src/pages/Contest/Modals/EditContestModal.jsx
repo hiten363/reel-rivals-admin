@@ -69,7 +69,7 @@ const EditContestModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
     e.preventDefault();
     // console.log(value);
 
-    const ans = await updateContest({ title: value.title, file: value?.file, startDate: new Date(value?.startDate)?.getTime(), endDate: new Date(value?.endDate)?.getTime(), winning: value?.winning, category: value?.category, id: data?._id });
+    const ans = await updateContest({ title: value.title, file: value?.file, startDate: new Date(value?.startDate)?.getTime(), endDate: new Date(value?.endDate)?.getTime(), winning: value?.winning.trim() !== "" ? value?.winning.trim() : '0', category: value?.category, id: data?._id });
     console.log(ans);
 
     if (ans.status) {
@@ -187,7 +187,7 @@ const EditContestModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
 
                     <div>
                       <label htmlFor="winning" className="block mb-2 text-sm font-medium text-gray-900 ">Total Winnings </label>
-                      <input type="text" id="winning" name="winning" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Contest Winnings .." onChange={handleChange} value={value.winning} required />
+                      <input type="number" min={0} id="winning" name="winning" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Contest Winnings .." onChange={handleChange} value={value.winning} required />
                     </div>
                   </div>
 

@@ -38,11 +38,13 @@ const User = ({ notify }) => {
     {
       name: 'Image',
       // selector: row => <img src={row?.img ? row?.img : '/img/user.png'} style={{width: '50px', padding:'5px 0px'}} />,
-      selector: row => <ModalImage
-        small={row?.img ? row?.img : '/img/user.png'}
-        large={row?.img ? row?.img : '/img/user.png'}
-        className='w-12 h-12 object-cover'
-      />,
+      selector: row => <div className='py-1'>
+        <ModalImage
+          small={row?.img ? row?.img : '/img/user.png'}
+          large={row?.img ? row?.img : '/img/user.png'}
+          className='w-12 h-12 object-cover'
+        />
+      </div>,
       sortable: true,
       grow: 0.4
     },
@@ -50,33 +52,44 @@ const User = ({ notify }) => {
       name: 'Name',
       selector: row => <NavLink to={`/dashboard/user/${row._id}/${row.name}`}>{row.name}</NavLink>,
       // selector: row => row.name,
-      sortable: true
+      sortable: true,
+      wrap: true
     },
     {
       name: 'Username',
-      // selector: row => <NavLink to={`/dashboard/user/${row._id}/${row.name}/0/0`}>{row.name}</NavLink>,
       selector: row => row.userName,
-      sortable: true
+      sortable: true,
+      wrap: true
+    },
+    {
+      name: 'Verification Status',
+      selector: row => row.isVerified === 'NOT' ? 'Not Verified' : row.isVerified === 'PARTIAL' ? 'Partially Verified' : row.isVerified === 'FULL' ? 'Fully Verified' : '',
+      sortable: true,
+      wrap: true
     },
     {
       name: 'Email',
       selector: row => row.email,
-      sortable: true
+      sortable: true,
+      wrap: true
     },
     {
       name: 'Phone',
       selector: row => row.phone && row.phone !== "undefined" ? row.phone : ' - ',
-      sortable: true
+      sortable: true,
+      wrap: true
     },
     {
       name: 'Country',
       selector: row => row.country && row.country !== "undefined" && row.country.label ? row.country.label : ' - ',
-      sortable: true
+      sortable: true,
+      wrap: true
     },
     {
       name: 'State',
       selector: row => row.state && row.state !== "undefined" && row.state.label ? row.state.label : ' - ',
-      sortable: true
+      sortable: true,
+      wrap: true
     },
     // {
     //   name: 'Role',

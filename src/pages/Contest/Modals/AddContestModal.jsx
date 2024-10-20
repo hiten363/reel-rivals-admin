@@ -51,7 +51,7 @@ const AddContestModal = (props) => {
     setUploadFlag(true);
     console.log(value);
 
-    const ans = await postContest({ title: value.title, file: value?.file, startDate: new Date(value?.startDate)?.getTime(), endDate: new Date(value?.endDate)?.getTime(), winning: value?.winning, category: value.category });
+    const ans = await postContest({ title: value.title, file: value?.file, startDate: new Date(value?.startDate)?.getTime(), endDate: new Date(value?.endDate)?.getTime(), winning: value?.winning.trim() !== "" ? value?.winning.trim() : '0', category: value.category });
     console.log(ans);
     if (ans.status) {
       setValue({
@@ -140,7 +140,7 @@ const AddContestModal = (props) => {
 
                     <div>
                       <label htmlFor="winning" className="block mb-2 text-sm font-medium text-gray-900 ">Total Winnings </label>
-                      <input type="number" id="winning" name="winning" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Contest Winnings .." onChange={handleChange} value={value.winning} required />
+                      <input type="number" min={0} id="winning" name="winning" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Contest Winnings .." onChange={handleChange} value={value.winning} required />
                     </div>
                   </div>
 

@@ -145,9 +145,7 @@ const DistributePrize = ({ notify }) => {
           }
         }
       }
-
-      // setData(ans.data?.[0]);
-      console.log(t);
+      
       setData(t);
     }
 
@@ -210,23 +208,18 @@ const DistributePrize = ({ notify }) => {
                     </div>
 
                     <div className="formgroup my-3 basis-1/4">
-                      <label className='font-semibold'>Bank Name</label>
-                      <p>{userDetails?.bankName ? userDetails?.bankName : " - "}</p>
+                      <label className='font-semibold'>Verification Status</label>
+                      <p>{userDetails?.isVerified ? userDetails?.isVerified==="NOT" ? "Not Verified" : userDetails.isVerified==="PARTIAL" ? "Partially Verified" : "Fully Verified" : " - "}</p>
                     </div>
 
                     <div className="formgroup my-3 basis-1/4">
-                      <label className='font-semibold'>Bank Account Number</label>
-                      <p>{userDetails?.bankAccountNumber ? userDetails?.bankAccountNumber : " - "}</p>
+                      <label className='font-semibold'>Country</label>
+                      <p>{userDetails?.country ? userDetails?.country?.label : " - "}</p>
                     </div>
 
                     <div className="formgroup my-3 basis-1/4">
-                      <label className='font-semibold'>Beneficiary Name</label>
-                      <p>{userDetails?.bankUserName ? userDetails?.bankUserName : " - "}</p>
-                    </div>
-
-                    <div className="formgroup my-3 basis-1/4">
-                      <label className='font-semibold'>Swift Code</label>
-                      <p>{userDetails?.swiftCode ? userDetails?.swiftCode : " - "}</p>
+                      <label className='font-semibold'>State</label>
+                      <p>{userDetails?.state ? userDetails?.state?.label : " - "}</p>
                     </div>
                   </div>
                 </div>
