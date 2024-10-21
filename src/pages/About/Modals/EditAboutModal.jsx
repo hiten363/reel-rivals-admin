@@ -285,35 +285,8 @@ const EditAboutModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
     });
   };
 
-  const handleChange1 = (e, index) => {
-    let obj = data1[index];
-    obj = { ...obj, [e.target.name]: e.target.value };
-    let t = [];
-    for (let i = 0; i < data1.length; i++) {
-      if (i === index) {
-        t.push(obj);
-      }
-      else {
-        t.push(data1[i]);
-      }
-    }
-    setData1(t);
-  };
-
-  const deleteImg = async () => {
-    setLoadFlag(true);
-    setPrevImage('');
-    setLoadFlag(false);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(value);
-
-    // if (convert(desc.richText).trim() === "") {
-    //   alert('Description is required');
-    //   return;
-    // }
 
     try {
       const ans = await updateAbout({ ...value, desc: `<div className="quill-component">${desc.richText}</div>`, subDesc1: `<div className="quill-component">${desc1.richText}</div>`, subDesc2: `<div className="quill-component">${desc2.richText}</div>`, subDesc3: `<div className="quill-component">${desc3.richText}</div>` });
@@ -330,8 +303,6 @@ const EditAboutModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
       notify('error', error?.message?.replace('writtenBy', 'Author Name'));
     }
   };
-
-  console.log('render');
 
   return (
     <>
@@ -365,7 +336,14 @@ const EditAboutModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
 
                     <div>
                       {value?.img && value?.img !== "" && <span className='mb-2'>Preview</span>}
-                      {value?.img && value?.img !== "" && <img style={{ width: '100px', height: '100px' }} className='mb-2' src={value?.img} />}
+                      {value?.img && value?.img !== "" && <div className='relative w-fit'>
+                        <img style={{ width: '100px', height: '100px' }} className='mb-2' src={value?.img} />
+                        <svg xmlns="http://www.w3.org/2000/svg" onClick={() => {
+                          setValue({ ...value, img: "" });
+                        }} width="20" height="20" fill="currentColor" className="bi bi-trash3-fill absolute top-2 right-2 bg-[#ffffff69] rounded-md cursor-pointer p-0.5 text-red-400" viewBox="0 0 16 16">
+                          <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
+                        </svg>
+                      </div>}
 
                       <label className="block mb-2 text-sm font-medium text-gray-900" htmlFor="img">Upload Image</label>
                       <input className="block w-full text-sm text-gray-900 border p-2.5 border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" id="img" type="file" name='img' onChange={handleChange} />

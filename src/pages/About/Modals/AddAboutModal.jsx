@@ -259,7 +259,7 @@ const AddAboutModal = (props) => {
                       {value?.img && value?.img !== "" && <img style={{ width: '100px', height: '100px' }} className='mb-2' src={value?.img} />}
 
                       <label className="block mb-2 text-sm font-medium text-gray-900" htmlFor="img">Upload Image</label>
-                      <input className="block w-full text-sm text-gray-900 border p-2.5 border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" id="img" type="file" name='img' onChange={handleChange} required />
+                      <input className="block w-full text-sm text-gray-900 border p-2.5 border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" id="img" type="file" name='img' onChange={handleChange} />
                     </div>
 
                     <div>
