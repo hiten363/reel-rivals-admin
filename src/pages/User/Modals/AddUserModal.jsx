@@ -5,6 +5,7 @@ import Spinner from '../../../Util/Spinner';
 import { Button, Option, Select } from '@material-tailwind/react';
 import * as Yup from 'yup';
 import FileInput from '@/Util/FileInput';
+import { getAge } from '@/Util/utils';
 
 const schema = Yup.object().shape({
   name: Yup.string().required().matches(/^\D*$/, 'Name should not contain integers').min(3).max(30),
@@ -25,6 +26,7 @@ const AddUserModal = (props) => {
     phone: '',
     userName: '',
     password: '',
+    dob: '',
     password1: '',
     role: 'USER',
     userPermissions: [],
@@ -56,36 +58,41 @@ const AddUserModal = (props) => {
 
     if (value.password !== value.password1) {
       alert('Password and Confirm Password must be same');
+      return;
     }
-    else {
-      try {
-        let validate = await schema.validate(value);
 
-        const ans = await createUser({ ...value });
-        console.log(ans);
-        if (ans.status) {
-          setValue({
-            name: '',
-            email: '',
-            phone: '',
-            userName: '',
-            password: '',
-            password1: '',
-            role: 'SUBADMIN',
-            userPermissions: [],
-            file: ''
-          });
-          props.notify('success', ans.message);
-          props.setRefreshFlag(!props.refreshFlag);
-          document.getElementById('addUserModal').classList.toggle('hidden');
-          window.location.reload();
-        }
-        else {
-          props.notify('error', ans.message);
-        }
-      } catch (error) {
-        props.notify('error', error?.message?.replace('name', 'Name'));
+    if (getAge(value.dob) < 18) {
+      notify('error', 'User must be at least 18 years old');
+      return;
+    }
+    try {
+      let validate = await schema.validate(value);
+
+      const ans = await createUser({ ...value });
+      console.log(ans);
+      if (ans.status) {
+        setValue({
+          name: '',
+          email: '',
+          phone: '',
+          userName: '',
+          password: '',
+          dob: '',
+          password1: '',
+          role: 'SUBADMIN',
+          userPermissions: [],
+          file: ''
+        });
+        props.notify('success', ans.message);
+        props.setRefreshFlag(!props.refreshFlag);
+        document.getElementById('addUserModal').classList.toggle('hidden');
+        window.location.reload();
       }
+      else {
+        props.notify('error', ans.message);
+      }
+    } catch (error) {
+      props.notify('error', error?.message?.replace('name', 'Name'));
     }
   };
 
@@ -114,12 +121,12 @@ const AddUserModal = (props) => {
                     <Spinner />
                   </div>
                   <div className="grid gap-6 px-0.5 py-0.5 mb-6 md:grid-cols-2">
-                    <div className=''>
+                    <div>
                       <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Name</label>
                       <input type="text" id="name" name="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter Name .." onChange={handleChange} value={value.name} required />
                     </div>
 
-                    <div className=''>
+                    <div>
                       <label htmlFor="userName" className="block mb-2 text-sm font-medium text-gray-900 ">Username</label>
                       <input type="text" id="userName" name="userName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter User Name .." onChange={handleChange} value={value.userName} required />
                     </div>
@@ -131,6 +138,10 @@ const AddUserModal = (props) => {
                     <div>
                       <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 ">Phone</label>
                       <input type="number" id="phone" name='phone' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter User Phone .." onChange={handleChange} value={value.phone} required />
+                    </div>
+                    <div>
+                      <label htmlFor="dob" className="block mb-2 text-sm font-medium text-gray-900 ">D.O.B</label>
+                      <input type="date" id="dob" name='dob' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter dob .." onChange={handleChange} value={value.dob} required />
                     </div>
                     <div>
                       <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 ">Password</label>

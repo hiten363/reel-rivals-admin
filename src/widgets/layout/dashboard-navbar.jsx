@@ -1,4 +1,4 @@
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import {
   Navbar,
   Typography,
@@ -36,6 +36,7 @@ export function DashboardNavbar() {
   const { fixedNavbar, openSidenav } = controller;
   const { pathname } = useLocation();
   const [layout, page] = pathname.split("/").filter((el) => el !== "");
+  const navigate=useNavigate();
 
   return (
     <Navbar
@@ -99,9 +100,23 @@ export function DashboardNavbar() {
                   <Typography
                     variant="small"
                     color="blue-gray"
-                    className="mb-1 font-normal"
+                    className="font-normal"
                   >
                     <strong>Welcome</strong> {user?.name}
+                  </Typography>
+                </div>
+              </MenuItem>
+
+              <MenuItem className="flex items-center gap-3 border-b-2" onClick={() => {
+                navigate('/dashboard/reset-password');
+              }}>
+                <div>
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"
+                  >
+                    <p>Reset Password</p>
                   </Typography>
                 </div>
               </MenuItem>
@@ -115,7 +130,7 @@ export function DashboardNavbar() {
                   <Typography
                     variant="small"
                     color="blue-gray"
-                    className="mb-1 font-normal text-red-600"
+                    className="font-medium text-red-600"
                   >
                     <p>Logout</p>
                   </Typography>

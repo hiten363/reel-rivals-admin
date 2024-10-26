@@ -47,6 +47,7 @@ import SanctionList from "@/pages/SanctionList/SanctionList";
 import Announcement from "@/pages/Announcement/Announcement";
 import Log from "@/pages/Log/Log";
 import ContestDisclaimer from "@/pages/ContestDisclaimer/ContestDisclaimer";
+import ResetPassword from "@/pages/ResetPassword/ResetPassword";
 
 export function Dashboard({ notify }) {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -76,6 +77,7 @@ export function Dashboard({ notify }) {
 
         <Routes>
           <Route path={'/home'} element={<Home notify={notify} />} />
+          <Route path={'/reset-password'} element={<ResetPassword notify={notify} />} />
           <Route path={'/users'} element={<User notify={notify} />} />
           <Route path={'/user/:userId/:name'} element={<ContestUsers notify={notify} />} />
           <Route path={'/user/:id/:name/:eventId/:eventName/:flag'} element={<UserDetails1 notify={notify} />} />

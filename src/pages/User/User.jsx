@@ -62,6 +62,12 @@ const User = ({ notify }) => {
       wrap: true
     },
     {
+      name: 'D.O.B',
+      selector: row => new Date(row.dob).toLocaleDateString(),
+      sortable: true,
+      wrap: true
+    },
+    {
       name: 'Verification Status',
       selector: row => row.isVerified === 'NOT' ? 'Not Verified' : row.isVerified === 'PARTIAL' ? 'Partially Verified' : row.isVerified === 'FULL' ? 'Fully Verified' : '',
       sortable: true,
