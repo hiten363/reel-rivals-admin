@@ -40,11 +40,11 @@ const Contact = ({ notify }) => {
       selector: row => row.email,
       sortable: true
     },
-    {
-      name: 'Phone',
-      selector: row => row.phone === '' ? ' - ' : row.phone,
-      sortable: true
-    },
+    // {
+    //   name: 'Phone',
+    //   selector: row => row.phone === '' ? ' - ' : row.phone,
+    //   sortable: true
+    // },
     {
       name: 'Message',
       selector: row => row.message,
