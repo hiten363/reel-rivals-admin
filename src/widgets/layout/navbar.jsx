@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import {
   Navbar as MTNavbar,
@@ -81,13 +80,5 @@ export function Navbar({ brandName="", routes=[], action=null }) {
     </MTNavbar>
   );
 }
-
-Navbar.propTypes = {
-  brandName: PropTypes.string,
-  routes: PropTypes.arrayOf(PropTypes.object).isRequired,
-  action: PropTypes.node,
-};
-
-Navbar.displayName = "/src/widgets/layout/navbar.jsx";
 
 export default Navbar;

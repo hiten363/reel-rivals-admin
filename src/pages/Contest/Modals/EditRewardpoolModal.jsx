@@ -3,7 +3,7 @@ import useMain from '../../../hooks/useMain';
 import Spinner from '../../../Util/Spinner';
 import React from 'react'
 import { useEffect } from 'react';
-import 'react-quill/dist/quill.snow.css';
+import 'react-quill-new/dist/quill.snow.css';
 import { Button } from '@material-tailwind/react';
 import { Country, State } from 'country-state-city';
 import cloneDeep from 'clone-deep';

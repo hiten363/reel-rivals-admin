@@ -1,12 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
 import useMain from '../../../hooks/useMain';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import ReactQuill from 'react-quill-new';
+import 'react-quill-new/dist/quill.snow.css';
 import Spinner from '../../../Util/Spinner';
 import { Button } from '@material-tailwind/react';
 import { baseUrl } from '@/context/MainState';
-import { convert } from 'html-to-text';
 
 var quillObj1;
 var quillObj2;
@@ -184,14 +183,7 @@ const AddAboutModal = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(value);
-
-    // if(convert(value.desc.richText).trim()==="")
-    // {
-    //   alert('Description is required');
-    //   return;
-    // }
-
+    
     try {
       const ans = await postAbout({ ...value, desc: `<div className="quill-component">${value.desc.richText}</div>`, subDesc1: `<div className="quill-component">${value.subDesc1.richText}</div>`, subDesc2: `<div className="quill-component">${value.subDesc2.richText}</div>`, subDesc3: `<div className="quill-component">${value.subDesc3.richText}</div>` });
       console.log(ans);

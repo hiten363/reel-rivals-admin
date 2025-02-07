@@ -3,8 +3,8 @@ import useMain from '../../../hooks/useMain';
 import Spinner from '../../../Util/Spinner';
 import React from 'react'
 import { useEffect } from 'react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import ReactQuill from 'react-quill-new';
+import 'react-quill-new/dist/quill.snow.css';
 import { convert } from 'html-to-text';
 
 const EditContactModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {

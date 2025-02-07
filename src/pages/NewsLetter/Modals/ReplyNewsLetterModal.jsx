@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import useMain from '../../../hooks/useMain';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import ReactQuill from 'react-quill-new';
+import 'react-quill-new/dist/quill.snow.css';
 import Spinner from '../../../Util/Spinner';
 import { Button } from '@material-tailwind/react';
 

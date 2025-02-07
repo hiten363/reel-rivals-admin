@@ -3,7 +3,7 @@ import useMain from '../../../hooks/useMain';
 import Spinner from '../../../Util/Spinner';
 import React from 'react'
 import { useEffect } from 'react';
-import 'react-quill/dist/quill.snow.css';
+import 'react-quill-new/dist/quill.snow.css';
 import { Button, Option, Select } from '@material-tailwind/react';
 
 const EditCoupanModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {

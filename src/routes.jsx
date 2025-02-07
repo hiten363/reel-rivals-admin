@@ -28,8 +28,7 @@ import {
   BellAlertIcon,
   ListBulletIcon
 } from "@heroicons/react/24/solid";
-import { Home, Profile, Tables, Notifications } from "@/pages/dashboard";
-import { SignIn, SignUp } from "@/pages/auth";
+import { Home } from "@/pages/dashboard";
 import User from "./pages/User/User";
 import Blog from "./pages/Blog/Blog";
 import Contact from "./pages/Contact/Contact";
@@ -250,25 +249,7 @@ export const routes = [
         element: <About />
       },
     ],
-  },
-  // {
-  //   title: "auth pages",
-  //   layout: "auth",
-  //   pages: [
-  //     {
-  //       icon: <ServerStackIcon {...icon} />,
-  //       name: "sign in",
-  //       path: "/sign-in",
-  //       element: <SignIn />,
-  //     },
-  //     {
-  //       icon: <RectangleStackIcon {...icon} />,
-  //       name: "sign up",
-  //       path: "/sign-up",
-  //       element: <SignUp />,
-  //     },
-  //   ],
-  // },
+  }
 ];
 
 export default routes;

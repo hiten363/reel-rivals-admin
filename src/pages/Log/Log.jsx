@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
 import useMain from '../../hooks/useMain';
 import { Button, Card, CardBody, CardHeader, Typography } from '@material-tailwind/react';
-import { Select, Option, Input } from "@material-tailwind/react";
-import UAParser from 'ua-parser-js';
+import { UAParser } from 'ua-parser-js';
 
 const LogDetail = ({ data }) => {
   let parser = new UAParser(data.userAgent);
   let parserResults = parser.getResult();
+
   return (
     <>
       <Card className="h-full w-full overflow-scroll p-4">
@@ -32,14 +32,9 @@ const LogDetail = ({ data }) => {
   );
 };
 
-const Log = ({ notify }) => {
+const Log = () => {
   const { getLogs } = useMain();
-  // console.log('yes');
-
   const [data, setData] = useState([]);
-  const [data1, setData1] = useState([]);
-  const [id, setId] = useState(0);
-  const [msg, setMsg] = useState('');
   const [refreshFlag, setRefreshFlag] = useState(false);
   const [value, setValue] = useState({
     startDate: '',
@@ -49,10 +44,6 @@ const Log = ({ notify }) => {
   const [totalRows, setTotalRows] = useState(0);
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
-
-  useEffect(() => {
-    getData();
-  }, [refreshFlag, page, perPage]);
 
   const columns = [
     {
@@ -80,12 +71,10 @@ const Log = ({ notify }) => {
   const getData = async () => {
     setLoadFlag(true);
     const ans = await getLogs(value.startDate, value.endDate, page, perPage);
-    console.log(ans);
     setData(ans.data);
     setTotalRows(ans.count);
     setLoadFlag(false);
   };
-
   const handleChange = (e, name = '') => {
     if (name === '') {
       setValue({ ...value, [e.target.name]: e.target.value });
@@ -94,7 +83,6 @@ const Log = ({ notify }) => {
       setValue({ ...value, [name]: e });
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const ans = await getLogs(value.startDate, value.endDate, 1, perPage);
@@ -102,16 +90,13 @@ const Log = ({ notify }) => {
     setPage(1);
     setData(ans.data);
   };
-
   const handlePageChange = (page) => {
     setPage(page);
   };
-
   const handlePerRowsChange = async (newPerPage, page) => {
     setPerPage(newPerPage);
     setPage(page);
   };
-
   const handleReset = async () => {
     // console.log(value);
     const ans = await getLogs('', '', 1, perPage);
@@ -123,6 +108,10 @@ const Log = ({ notify }) => {
     setTotalRows(ans.count);
     setPage(1);
   };
+
+  useEffect(() => {
+    getData();
+  }, [refreshFlag, page, perPage]);
 
   return (
     <>
