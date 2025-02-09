@@ -4,16 +4,14 @@ import useMain from '../../hooks/useMain';
 import { Button, Card, CardBody, CardHeader, Option, Select, Typography } from '@material-tailwind/react';
 import { useParams } from 'react-router-dom';
 import { Country, State } from 'country-state-city';
-// import list from '../../Util/sanctionList.json';
 import OutsideClickHandler from 'react-outside-click-handler';
 
-const DistributePrize = ({ notify }) => {
+const DistributePrize = () => {
   const { getRewardPools, getVideosWinners, getSanctionLists } = useMain();
 
   const { contest } = useParams();
 
   const [data, setData] = useState([]);
-  const [data1, setData1] = useState([]);
   const [refreshFlag, setRefreshFlag] = useState(false);
   const [value, setValue] = useState({
     type: 'GLOBAL',
@@ -37,32 +35,6 @@ const DistributePrize = ({ notify }) => {
     }
   }, [refreshFlag]);
 
-  // const columns = [
-  //   {
-  //     name: 'Start Rank',
-  //     selector: row => row.startRank,
-  //     sortable: true
-  //   },
-  //   {
-  //     name: 'End Rank',
-  //     selector: row => row.endRank,
-  //     sortable: true
-  //   },
-  //   {
-  //     name: 'Reward',
-  //     selector: row => row.reward && row.reward !== "" && row.tokens && row.tokens !== 0 ? `${row.reward} + ${row.tokens} Star Points` : row.reward !== "" ? row.reward : `${row.tokens} Star Points`,
-  //     sortable: true
-  //   },
-  //   {
-  //     name: 'User Details',
-  //     selector: (row, index) => <button onClick={() => {
-  //       console.log(index);
-  //       setUserDetails(users[index]?.user);
-  //     }} className='bg-green-700 text-white px-2 text-[13px] py-1 rounded-sm'>Show</button>,
-  //     sortable: true
-  //   }
-  // ];
-
   const columns = [
     {
       name: 'Rank',
@@ -77,7 +49,6 @@ const DistributePrize = ({ notify }) => {
     {
       name: 'User Details',
       selector: (row) => <button onClick={() => {
-        console.log(users[row.userIndex]?.user);
         setUserDetails(users[row.userIndex]?.user);
         document.getElementById('winningcash-modal').classList.toggle('hidden');
         document.querySelector('.shadow1').classList.toggle('none1');
@@ -110,7 +81,7 @@ const DistributePrize = ({ notify }) => {
 
       if (value.type === 'GLOBAL') {
         for (let j of ans.data?.[0].rewards) {
-          for (let i = j.startRank; i <= j.endRank; j++) {
+          for (let i = j.startRank; i <= j.endRank; i++) {
             t.push({
               rank: i,
               reward: j.reward && j.reward !== "" && j.tokens && j.tokens !== 0 ? `${j.reward} + ${j.tokens} Star Points` : j.reward !== "" ? j.reward : `${j.tokens} Star Points`,
@@ -122,7 +93,7 @@ const DistributePrize = ({ notify }) => {
       else if (value.type === 'COUNTRY') {
         if (ans.data?.[0].countryRewards?.length > 0) {
           for (let j of ans.data?.[0].countryRewards?.[0]?.rewards) {
-            for (let i = j.startRank; i <= j.endRank; j++) {
+            for (let i = j.startRank; i <= j.endRank; i++) {
               t.push({
                 rank: i,
                 reward: j.reward && j.reward !== "" && j.tokens && j.tokens !== 0 ? `${j.reward} + ${j.tokens} Star Points` : j.reward !== "" ? j.reward : `${j.tokens} Star Points`,
@@ -135,7 +106,7 @@ const DistributePrize = ({ notify }) => {
       else if (value.type === 'STATE') {
         if (ans.data?.[0].stateRewards?.length > 0) {
           for (let j of ans.data?.[0].stateRewards?.[0]?.rewards) {
-            for (let i = j.startRank; i <= j.endRank; j++) {
+            for (let i = j.startRank; i <= j.endRank; i++) {
               t.push({
                 rank: i,
                 reward: j.reward && j.reward !== "" && j.tokens && j.tokens !== 0 ? `${j.reward} + ${j.tokens} Star Points` : j.reward !== "" ? j.reward : `${j.tokens} Star Points`,
