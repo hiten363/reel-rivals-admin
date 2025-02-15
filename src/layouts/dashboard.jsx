@@ -12,18 +12,14 @@ import Terms from "@/pages/Terms/Terms";
 import Faq from "@/pages/Faq/Faq";
 import Contact from "@/pages/Contact/Contact";
 import Privacy from "@/pages/Privacy/Privacy";
-import Coupon from "@/pages/Coupan/Coupan";
 import Subscription from "@/pages/Subscription/Subscription";
 import Payment from "@/pages/Payment/Payment";
 import ThemeControl from "@/pages/ThemeControl/ThemeControl";
 import UserDetails from "@/pages/User/UserDetails";
 import Career from "@/pages/Career/Career";
 import NewsLetter from "@/pages/NewsLetter/NewsLetter";
-import Charity from "@/pages/Chartity/Charity";
 import Rules from "@/pages/Rules/Rules";
-import GiftCard from "@/pages/GiftCard/GiftCard";
 import Partner from "@/pages/Partner/Partner";
-import DrawResults from "@/pages/DrawResults/DrawResults";
 import Winners from "@/pages/DrawResults/Winner";
 import Winners1 from "@/pages/Winners/Winners";
 import Media from "@/pages/Media/Media";
@@ -87,8 +83,6 @@ export function Dashboard({ notify }) {
           <Route path={'/contest-disclaimer'} element={<ContestDisclaimer notify={notify} />} />
           <Route path={'/privacy-policy'} element={<Privacy notify={notify} />} />
           <Route path={'/contest-guidelines'} element={<Rules notify={notify} />} />
-          <Route path={'/vouchers'} element={<Coupon notify={notify} />} />
-          <Route path={'/draw-results'} element={<DrawResults notify={notify} />} />
           <Route path={'/winners1'} element={<Winners1 notify={notify} />} />
           <Route path={'/winners/:type/:id'} element={<Winners notify={notify} />} />
           <Route path={'/payment-plans'} element={<Subscription notify={notify} />} />
@@ -97,9 +91,7 @@ export function Dashboard({ notify }) {
           <Route path={'/theme-control'} element={<ThemeControl notify={notify} />} />
           {/* <Route path={'/career'} element={<Career notify={notify} />} /> */}
           <Route path={'/news-letter'} element={<NewsLetter notify={notify} />} />
-          {/* <Route path={'/gift-card'} element={<GiftCard notify={notify} />} /> */}
           {/* <Route path={'/partners'} element={<Partner notify={notify} />} /> */}
-          <Route path={'/charity'} element={<Charity notify={notify} />} />
           <Route path={'/draw-rules'} element={<Rules notify={notify} />} />
           <Route path={'/testimonial'} element={<Testimonial notify={notify} />} />
           <Route path={'/announcements'} element={<Announcement notify={notify} />} />
