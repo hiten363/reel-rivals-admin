@@ -168,168 +168,6 @@ const MainState = (props) => {
     }
   };
 
-  const getCareers = async (id, status, query, page, perPage) => {
-    try {
-      const data = await getRequest(`${baseUrl}/career/getCareers?id=${id}&status=${status}&query=${query}&page=${page}&perPage=${perPage}`, false, props);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const postCareer = async ({ title, subTitle, file, desc }) => {
-    try {
-      const data = await postRequest(`${baseUrl}/career/postCareer`, { title, subTitle, file, desc }, true, props, false);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const updateCareer = async ({ id, title, subTitle, file, desc, slug }) => {
-    try {
-      const data = await putRequest(`${baseUrl}/career/updateCareer/${id}`, { title, subTitle, file, desc }, true, props, true);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const deleteCareer = async (id) => {
-    try {
-      const data = await deleteRequest(`${baseUrl}/career/deleteCareer/${id}`, {}, true, props);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const undoCareer = async ({ id }) => {
-    try {
-      const data = await putRequest(`${baseUrl}/career/undoCareer/${id}`, {}, true, props, false);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const deleteAllCareers = async () => {
-    try {
-      const data = await deleteRequest(`${baseUrl}/career/deleteAllCareers`, true, props);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const getPartners = async (id, slug, status, query, page, perPage) => {
-    try {
-      const data = await getRequest(`${baseUrl}/partner/getPartners?id=${id}&slug=${slug}&status=${status}&query=${query}&page=${page}&perPage=${perPage}`, false, props);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const postPartner = async ({ title, subTitle, writtenBy, file, tags, desc, slug }) => {
-    try {
-      const data = await postRequest(`${baseUrl}/partner/postPartner`, { title, subTitle, writtenBy, file, tags, desc, slug }, true, props, true);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const updatePartner = async ({ id, title, subTitle, writtenBy, file, tags, desc, slug }) => {
-    try {
-      const data = await putRequest(`${baseUrl}/partner/updatePartner/${id}`, { title, subTitle, writtenBy, file, tags, desc, slug }, true, props, true);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const deletePartner = async (id) => {
-    try {
-      const data = await deleteRequest(`${baseUrl}/partner/deletePartner/${id}`, {}, true, props);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const undoPartner = async ({ id }) => {
-    try {
-      const data = await putRequest(`${baseUrl}/partner/undoPartner/${id}`, {}, true, props, false);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const deleteAllPartners = async () => {
-    try {
-      const data = await deleteRequest(`${baseUrl}/partner/deleteAllPartners`, true, props);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const getCharitys = async (id, slug, status, query, page, perPage) => {
-    try {
-      const data = await getRequest(`${baseUrl}/charity/getCharitys?id=${id}&slug=${slug}&status=${status}&query=${query}&page=${page}&perPage=${perPage}`, false, props);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const postCharity = async ({ title, subTitle, writtenBy, file, tags, desc, slug }) => {
-    try {
-      const data = await postRequest(`${baseUrl}/charity/postCharity`, { title, subTitle, writtenBy, file, tags, desc, slug }, true, props, true);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const updateCharity = async ({ id, title, subTitle, writtenBy, file, tags, desc, slug }) => {
-    try {
-      const data = await putRequest(`${baseUrl}/charity/updateCharity/${id}`, { title, subTitle, writtenBy, file, tags, desc, slug }, true, props, true);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const deleteCharity = async (id) => {
-    try {
-      const data = await deleteRequest(`${baseUrl}/charity/deleteCharity/${id}`, {}, true, props);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const undoCharity = async ({ id }) => {
-    try {
-      const data = await putRequest(`${baseUrl}/charity/undoCharity/${id}`, {}, true, props, false);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const deleteAllCharitys = async () => {
-    try {
-      const data = await deleteRequest(`${baseUrl}/charity/deleteAllCharitys`, true, props);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const getCategorys = async (id, status, query, page, perPage) => {
     try {
       const data = await getRequest(`${baseUrl}/category/getCategorys?id=${id}&status=${status}&query=${query}&page=${page}&perPage=${perPage}`, false, props);
@@ -537,9 +375,9 @@ const MainState = (props) => {
     }
   };
 
-  const getContacts = async (status, query, page, perPage) => {
+  const getContacts = async (status, query, ticketType, page, perPage) => {
     try {
-      const data = await getRequest(`${baseUrl}/contact/getContacts?status=${status}&query=${query}&page=${page}&perPage=${perPage}`, true, props);
+      const data = await getRequest(`${baseUrl}/contact/getContacts?status=${status}&query=${query}&ticketType=${ticketType}&page=${page}&perPage=${perPage}`, true, props);
       return data;
     } catch (error) {
       console.log(error);
@@ -1284,8 +1122,35 @@ const MainState = (props) => {
     }
   };
 
+  const getIssueReports = async (status, page, perPage) => {
+    try {
+      const data = await getRequest(`${baseUrl}/contact/support/getIssueReports?status=${status}&page=${page}&perPage=${perPage}`, false, props);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateIssueReport = async ({ _id, status }) => {
+    try {
+      const data = await putRequest(`${baseUrl}/contact/support/updateIssueReport/${_id}`, { status }, true, props, false);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteIssueReport = async (id) => {
+    try {
+      const data = await deleteRequest(`${baseUrl}/contact/support/deleteIssueReport/${id}`, {}, true, props);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <MainContext.Provider value={{ getBlogs, postBlog, updateBlog, deleteBlog, deleteAllBlogs, getContacts, deleteContact, signup, login, adminLogin, getUsers, createUser, updateUser, updateUserStatus, uploadImage, undoBlog, getFaqs, postFaq, updateFaq, deleteFaq, getTermss, postTerms, updateTerms, postReply, undoFaq, getPrivacys, postPrivacy, updatePrivacy, getSubscriptions, postSubscription, updateSubscription, undoSubscription, deleteSubscription, getCoupans, postCoupan, postCoupanBulk, assignCoupansToUser, updateCoupan, revealCoupan, undoCoupan, deleteCoupan, getPayments, getThemeControls, postThemeControls, updateThemeControls, deletePayment, getDashboardData, getCategorys, postCategory, updateCategory, deleteCategoryImage, deleteCategory, deleteAllCategorys, getContests, postContest, drawResults, updateContest, deleteContest, deleteAllContests, getCareers, postCareer, updateCareer, deleteCareer, deleteAllCareers, getPartners, postPartner, updatePartner, deletePartner, deleteAllPartners, getCharitys, postCharity, updateCharity, deleteCharity, deleteAllCharitys, getRuless, postRules, updateRules, undoGiftCard, getGiftCards, postGiftCard, updateGiftCard, deleteGiftCard, getNewsLetters, undoContest, undoCareer, undoPartner, undoCharity, undoCategory, undoMedia, getMedias, postMedia, deleteMedia, getTestimonials, postTestimonial, undoTestimonial, deleteTestimonial, updateTestimonial, deleteAllTestimonials, getStatisticss, postStatistics, updateStatistics, getVideos, updateVideo, undoVideo, deleteVideo, getComment, postComment, updateComment, undoComment, deleteComment, getReplys, postReply1, updateReply, undoReply, deleteReply, deleteUser, getAbouts, postAbout, updateAbout, deleteAbout, undoAbout, deleteAllAbouts, getRewardPools, postRewardPool, updateRewardPool, undoRewardPool, deleteRewardPool, updateDistributionStatus, getVideosWinners, getSanctionLists, postSanctionList, updateSanctionList, getAnnouncements, postAnnouncement, updateAnnouncement, getLogs, getContestDisclaimers, postContestDisclaimer, updateContestDisclaimer, adminResetPassword }}>
+    <MainContext.Provider value={{ getBlogs, postBlog, updateBlog, deleteBlog, deleteAllBlogs, getContacts, deleteContact, signup, login, adminLogin, getUsers, createUser, updateUser, updateUserStatus, uploadImage, undoBlog, getFaqs, postFaq, updateFaq, deleteFaq, getTermss, postTerms, updateTerms, postReply, undoFaq, getPrivacys, postPrivacy, updatePrivacy, getSubscriptions, postSubscription, updateSubscription, undoSubscription, deleteSubscription, getCoupans, postCoupan, postCoupanBulk, assignCoupansToUser, updateCoupan, revealCoupan, undoCoupan, deleteCoupan, getPayments, getThemeControls, postThemeControls, updateThemeControls, deletePayment, getDashboardData, getCategorys, postCategory, updateCategory, deleteCategoryImage, deleteCategory, deleteAllCategorys, getContests, postContest, drawResults, updateContest, deleteContest, deleteAllContests, getRuless, postRules, updateRules, undoGiftCard, getGiftCards, postGiftCard, updateGiftCard, deleteGiftCard, getNewsLetters, undoContest, undoCategory, undoMedia, getMedias, postMedia, deleteMedia, getTestimonials, postTestimonial, undoTestimonial, deleteTestimonial, updateTestimonial, deleteAllTestimonials, getStatisticss, postStatistics, updateStatistics, getVideos, updateVideo, undoVideo, deleteVideo, getComment, postComment, updateComment, undoComment, deleteComment, getReplys, postReply1, updateReply, undoReply, deleteReply, deleteUser, getAbouts, postAbout, updateAbout, deleteAbout, undoAbout, deleteAllAbouts, getRewardPools, postRewardPool, updateRewardPool, undoRewardPool, deleteRewardPool, updateDistributionStatus, getVideosWinners, getSanctionLists, postSanctionList, updateSanctionList, getAnnouncements, postAnnouncement, updateAnnouncement, getLogs, getContestDisclaimers, postContestDisclaimer, updateContestDisclaimer, adminResetPassword, getIssueReports, updateIssueReport, deleteIssueReport }}>
       {props.children}
     </MainContext.Provider>
   );

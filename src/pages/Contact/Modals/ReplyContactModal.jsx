@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import useMain from '../../../hooks/useMain';
-import ReactQuill from 'react-quill-new';
-import 'react-quill-new/dist/quill.snow.css';
 import Spinner from '../../../Util/Spinner';
 import { Button } from '@material-tailwind/react';
 
@@ -16,21 +14,14 @@ const AddReplyModal = (props) => {
     name: ''
   });
 
-  useEffect(() => {
-    setValue({ ...props.data1, reply: '' });
-  }, [props.data1]);
-
-  const handleChange = (e, type = '') => {
+  const handleChange = (e) => {
     setValue({ ...value, [e.target.name]: e.target.value });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(value);
 
     const ans = await postReply({ ...value });
-    console.log(ans);
-    if (ans.status) {
+    if (ans?.status) {
       setValue({
         reply: '',
         email: '',
@@ -44,6 +35,10 @@ const AddReplyModal = (props) => {
       props.notify('error', ans.message);
     }
   };
+
+  useEffect(() => {
+    setValue({ ...props.data1, reply: '' });
+  }, [props.data1]);
 
   return (
     <>
@@ -73,7 +68,7 @@ const AddReplyModal = (props) => {
                   <div className="grid gap-6 px-0.5 py-0.5 mb-6 md:grid-cols-2">
                     <div>
                       <label htmlFor="reply" className="block mb-2 text-sm font-medium text-gray-900 ">Reply</label>
-                      <input type="text" id="reply" name="reply" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter reply .." onChange={handleChange} value={value.reply} required />
+                      <textarea id="reply" name="reply" onChange={handleChange} value={value.reply} rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter reply..."></textarea>
                     </div>
                   </div>
 

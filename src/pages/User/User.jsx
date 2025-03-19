@@ -30,10 +30,6 @@ const User = ({ notify }) => {
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
 
-  useEffect(() => {
-    getData();
-  }, [refreshFlag, page, perPage]);
-
   const columns = [
     {
       name: 'Image',
@@ -97,12 +93,6 @@ const User = ({ notify }) => {
       sortable: true,
       wrap: true
     },
-    // {
-    //   name: 'Role',
-    //   selector: row => row.role,
-    //   sortable: true,
-    //   grow: 0.2
-    // },
     {
       name: 'Status',
       selector: row => row.status === 'true' ? <span className='text-green-500 font-semibold'>Active</span> : <span className='text-red-500 font-semibold'>Deleted</span>,
@@ -172,14 +162,12 @@ const User = ({ notify }) => {
   const getData = async () => {
     setLoadFlag(true);
     const ans = await getUsers(value.status, value.role, value.query, page, perPage);
-    // console.log(ans);
-    setTotalRows(ans.count);
-    setData([...ans.data.sort((a, b) => {
+    setTotalRows(ans?.count);
+    setData([...ans?.data?.sort((a, b) => {
       return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
     })]);
     setLoadFlag(false);
   };
-
   const handleChange = (e, name = '') => {
     if (name === '') {
       setValue({ ...value, [e.target.name]: e.target.value });
@@ -188,7 +176,6 @@ const User = ({ notify }) => {
       setValue({ ...value, [name]: e });
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(value);
@@ -198,7 +185,6 @@ const User = ({ notify }) => {
     // console.log(ans);
     setData(ans.data);
   };
-
   const handleDelete = async () => {
     // console.log(id);
     // console.log(deleteFlag);
@@ -230,16 +216,13 @@ const User = ({ notify }) => {
       }
     }
   };
-
   const handlePageChange = (page) => {
     setPage(page);
   };
-
   const handlePerRowsChange = async (newPerPage, page) => {
     setPerPage(newPerPage);
     setPage(page);
   };
-
   const handleExport = async () => {
     const ans = await getUsers();
     let data = [
@@ -264,6 +247,10 @@ const User = ({ notify }) => {
 
     xlsx(data, settings);
   };
+
+  useEffect(() => {
+    getData();
+  }, [refreshFlag, page, perPage]);
 
   return (
     <>

@@ -15,16 +15,9 @@ import Privacy from "@/pages/Privacy/Privacy";
 import Subscription from "@/pages/Subscription/Subscription";
 import Payment from "@/pages/Payment/Payment";
 import ThemeControl from "@/pages/ThemeControl/ThemeControl";
-import UserDetails from "@/pages/User/UserDetails";
-import Career from "@/pages/Career/Career";
 import NewsLetter from "@/pages/NewsLetter/NewsLetter";
 import Rules from "@/pages/Rules/Rules";
-import Partner from "@/pages/Partner/Partner";
-import Winners from "@/pages/DrawResults/Winner";
-import Winners1 from "@/pages/Winners/Winners";
-import Media from "@/pages/Media/Media";
 import Testimonial from "@/pages/Testimonial/Testimonial";
-import Statistics from "@/pages/Statistics/Statistics";
 import EventUsers from "@/pages/User/ContestUsers";
 import UserDetails1 from "@/pages/User/UserDetails1";
 import Category from "@/pages/Category/Category";
@@ -44,6 +37,7 @@ import Announcement from "@/pages/Announcement/Announcement";
 import Log from "@/pages/Log/Log";
 import ContestDisclaimer from "@/pages/ContestDisclaimer/ContestDisclaimer";
 import ResetPassword from "@/pages/ResetPassword/ResetPassword";
+import ReportedIssues from "@/pages/ReportedIssues";
 
 export function Dashboard({ notify }) {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -77,21 +71,17 @@ export function Dashboard({ notify }) {
           <Route path={'/reels'} element={<Reels notify={notify} />} />
           <Route path={'/reels/:userName/:userId/:contestName/:contestId'} element={<ContestReels notify={notify} />} />
           <Route path={'/user-enquiry'} element={<Contact notify={notify} />} />
+          <Route path={'/reported-issues'} element={<ReportedIssues notify={notify} />} />
           <Route path={'/faq'} element={<Faq notify={notify} />} />
-          <Route path={'/news-media'} element={<Media notify={notify} />} />
           <Route path={'/terms-and-conditions'} element={<Terms notify={notify} />} />
           <Route path={'/contest-disclaimer'} element={<ContestDisclaimer notify={notify} />} />
           <Route path={'/privacy-policy'} element={<Privacy notify={notify} />} />
           <Route path={'/contest-guidelines'} element={<Rules notify={notify} />} />
-          <Route path={'/winners1'} element={<Winners1 notify={notify} />} />
-          <Route path={'/winners/:type/:id'} element={<Winners notify={notify} />} />
           <Route path={'/payment-plans'} element={<Subscription notify={notify} />} />
           <Route path={'/subscription/:subscriptionId/:subscriptionName'} element={<SubscriptionUsers notify={notify} />} />
           <Route path={'/payment-logs'} element={<Payment notify={notify} />} />
           <Route path={'/theme-control'} element={<ThemeControl notify={notify} />} />
-          {/* <Route path={'/career'} element={<Career notify={notify} />} /> */}
           <Route path={'/news-letter'} element={<NewsLetter notify={notify} />} />
-          {/* <Route path={'/partners'} element={<Partner notify={notify} />} /> */}
           <Route path={'/draw-rules'} element={<Rules notify={notify} />} />
           <Route path={'/testimonial'} element={<Testimonial notify={notify} />} />
           <Route path={'/announcements'} element={<Announcement notify={notify} />} />
