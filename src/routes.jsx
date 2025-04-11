@@ -26,7 +26,8 @@ import {
   InformationCircleIcon,
   NoSymbolIcon,
   BellAlertIcon,
-  ListBulletIcon
+  ListBulletIcon,
+  Cog6ToothIcon
 } from "@heroicons/react/24/solid";
 import { Home } from "@/pages/dashboard";
 import User from "./pages/User/User";
@@ -48,6 +49,7 @@ import SanctionList from "./pages/SanctionList/SanctionList";
 import Announcement from "./pages/Announcement/Announcement";
 import Log from "./pages/Log/Log";
 import ContestDisclaimer from "./pages/ContestDisclaimer/ContestDisclaimer";
+import Config from "./pages/Config/Config";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -169,6 +171,12 @@ export const routes = [
         name: "About Us ",
         path: "/about-us",
         element: <About />
+      },
+      {
+        icon: <Cog6ToothIcon {...icon} />,
+        name: "Configuration",
+        path: "/config",
+        element: (notify) => <Config notify={notify} />
       },
     ],
   }

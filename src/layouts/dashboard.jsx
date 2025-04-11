@@ -38,6 +38,7 @@ import Log from "@/pages/Log/Log";
 import ContestDisclaimer from "@/pages/ContestDisclaimer/ContestDisclaimer";
 import ResetPassword from "@/pages/ResetPassword/ResetPassword";
 import ReportedIssues from "@/pages/ReportedIssues";
+import Config from "@/pages/Config/Config";
 
 export function Dashboard({ notify }) {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -88,6 +89,7 @@ export function Dashboard({ notify }) {
           <Route path={'/sanction-countries'} element={<SanctionList notify={notify} />} />
           <Route path={'/logs'} element={<Log notify={notify} />} />
           <Route path={'/event-users/:eventId/:name'} element={<EventUsers notify={notify} />} />
+          <Route path={'/config'} element={<Config notify={notify} />} />
         </Routes>
 
         {/* <div className="text-blue-gray-600">
