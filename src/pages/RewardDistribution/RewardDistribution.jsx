@@ -57,7 +57,7 @@ const RewardDistribution = () => {
     {
       name: 'Is Distributed?',
       selector: row => <>
-        {row?.isDistributed==="false" ? <select onChange={async (e) => {
+        {row?.isDistributed === "false" ? <select onChange={async (e) => {
           if (e.target.value !== "" && e.target.value !== "false") {
             await updateDistributionStatus({ isDistributed: e.target.value, id: row._id });
             setRefreshFlag(!refreshFlag);

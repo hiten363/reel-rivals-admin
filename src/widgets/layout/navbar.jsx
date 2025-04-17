@@ -9,7 +9,7 @@ import {
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
-export function Navbar({ brandName="", routes=[], action=null }) {
+export function Navbar({ brandName = "", routes = [], action = null }) {
   const [openNav, setOpenNav] = React.useState(false);
 
   React.useEffect(() => {

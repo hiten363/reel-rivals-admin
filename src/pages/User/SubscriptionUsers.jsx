@@ -102,16 +102,6 @@ const SubscriptionUsers = ({ notify }) => {
     }
   };
 
-  // const fetchUsers = async page => {
-  // 	setLoading(true);
-
-  // 	const response = await axios.get(`https://reqres.in/api/users?page=${page}&per_page=${perPage}&delay=1`);
-
-  // 	setData(response.data.data);
-  // 	setTotalRows(response.data.total);
-  // 	setLoading(false);
-  // };
-
   const handlePageChange = (page) => {
     setPage(page);
   };

@@ -183,7 +183,7 @@ const AddAboutModal = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
       const ans = await postAbout({ ...value, desc: `<div className="quill-component">${value.desc.richText}</div>`, subDesc1: `<div className="quill-component">${value.subDesc1.richText}</div>`, subDesc2: `<div className="quill-component">${value.subDesc2.richText}</div>`, subDesc3: `<div className="quill-component">${value.subDesc3.richText}</div>` });
       console.log(ans);

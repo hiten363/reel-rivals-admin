@@ -4,7 +4,7 @@ import useMain from '../../../hooks/useMain';
 import Spinner from '../../../Util/Spinner';
 import { Button, Option, Select } from '@material-tailwind/react';
 import FileInput from '@/Util/FileInput';
-  
+
 const AddContestModal = (props) => {
   const { postContest, getCategorys } = useMain();
 

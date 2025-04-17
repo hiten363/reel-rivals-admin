@@ -40,8 +40,7 @@ const SanctionList = ({ notify }) => {
   const getData = async () => {
     setLoadFlag(true);
     const ans = await getSanctionLists();
-    if(ans && ans?.data?.length>0)
-    {
+    if (ans && ans?.data?.length > 0) {
       setData1(ans.data[0]);
       setData(ans.data[0].countries);
     }
@@ -62,7 +61,7 @@ const SanctionList = ({ notify }) => {
                 Manage Sanctioned Countries
               </Typography>
 
-              {data?.length===0 ? <Button color="red" onClick={() => {
+              {data?.length === 0 ? <Button color="red" onClick={() => {
                 document.getElementById('addSanctionListModal').classList.toggle('hidden');
               }} children="Add List +">Add List +</Button> : <Button color="red" onClick={() => {
                 document.getElementById('editSanctionListModal').classList.toggle('hidden');

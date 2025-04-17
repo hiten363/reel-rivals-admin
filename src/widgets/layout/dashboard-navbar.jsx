@@ -36,7 +36,7 @@ export function DashboardNavbar() {
   const { fixedNavbar, openSidenav } = controller;
   const { pathname } = useLocation();
   const [layout, page] = pathname.split("/").filter((el) => el !== "");
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   return (
     <Navbar

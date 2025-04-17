@@ -27,7 +27,8 @@ import {
   NoSymbolIcon,
   BellAlertIcon,
   ListBulletIcon,
-  Cog6ToothIcon
+  Cog6ToothIcon,
+  TrophyIcon
 } from "@heroicons/react/24/solid";
 import { Home } from "@/pages/dashboard";
 import User from "./pages/User/User";
@@ -50,6 +51,7 @@ import Announcement from "./pages/Announcement/Announcement";
 import Log from "./pages/Log/Log";
 import ContestDisclaimer from "./pages/ContestDisclaimer/ContestDisclaimer";
 import Config from "./pages/Config/Config";
+import Challenges from "./pages/Challenges/Challenges";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -70,6 +72,12 @@ export const routes = [
         name: "users",
         path: "/users",
         element: (notify) => <User notify={notify} />
+      },
+      {
+        icon: <TrophyIcon {...icon} />,
+        name: "Challenges",
+        path: "/challenges",
+        element: (notify) => <Challenges notify={notify} />
       },
       {
         icon: <VideoCameraIcon {...icon} />,
@@ -178,6 +186,7 @@ export const routes = [
         path: "/config",
         element: (notify) => <Config notify={notify} />
       },
+
     ],
   }
 ];

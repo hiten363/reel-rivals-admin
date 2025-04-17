@@ -22,8 +22,7 @@ export function ResetPassword({ notify }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(value?.password!==value?.password1)
-    {
+    if (value?.password !== value?.password1) {
       notify('error', "Password and Confirm Password must be same! ");
       return;
     }
@@ -33,7 +32,7 @@ export function ResetPassword({ notify }) {
     if (ans.status) {
       localStorage.clear();
       alert(ans.message);
-      window.location.href= '/dashboard/sign-in';
+      window.location.href = '/dashboard/sign-in';
     }
     else {
       notify('error', ans.message);

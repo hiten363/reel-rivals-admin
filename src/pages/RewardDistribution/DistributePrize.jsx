@@ -58,9 +58,9 @@ const DistributePrize = () => {
   ];
 
   const getCountries = async () => {
-    const list=await getSanctionLists();
+    const list = await getSanctionLists();
     let countries = Country.getAllCountries();
-    let list1=list.data[0].countries.map(x=>x.value);
+    let list1 = list.data[0].countries.map(x => x.value);
     setCountries(countries.filter(x => !list1.includes(x.isoCode)).map((e) => {
       return { label: e.name, value: e.isoCode };
     }));
@@ -116,7 +116,7 @@ const DistributePrize = () => {
           }
         }
       }
-      
+
       setData(t);
     }
 
@@ -180,7 +180,7 @@ const DistributePrize = () => {
 
                     <div className="formgroup my-3 basis-1/4">
                       <label className='font-semibold'>Verification Status</label>
-                      <p>{userDetails?.isVerified ? userDetails?.isVerified==="NOT" ? "Not Verified" : userDetails.isVerified==="PARTIAL" ? "Partially Verified" : "Fully Verified" : " - "}</p>
+                      <p>{userDetails?.isVerified ? userDetails?.isVerified === "NOT" ? "Not Verified" : userDetails.isVerified === "PARTIAL" ? "Partially Verified" : "Fully Verified" : " - "}</p>
                     </div>
 
                     <div className="formgroup my-3 basis-1/4">

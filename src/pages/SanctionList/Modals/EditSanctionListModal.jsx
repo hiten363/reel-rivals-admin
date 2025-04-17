@@ -26,7 +26,7 @@ const EditSanctionListModal = ({ data, setRefreshFlag, refreshFlag, notify }) =>
   useEffect(() => {
     if (data) {
       console.log(data);
-      
+
       if (Object.keys(data).length > 0) {
         setValue({
           id: data._id,

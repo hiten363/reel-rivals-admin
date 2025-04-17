@@ -74,8 +74,8 @@ const AddSanctionListModal = (props) => {
                       <Select
                         isMulti
                         options={countries}
-                        onChange={(e)=>{
-                          setValue({countries: e});
+                        onChange={(e) => {
+                          setValue({ countries: e });
                         }}
                         className="basic-multi-select"
                         classNamePrefix="select"
