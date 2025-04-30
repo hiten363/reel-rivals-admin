@@ -154,7 +154,7 @@ const Config = ({ notify }) => {
                     label="Star Points for Referrer"
                     value={referralSettings.referrerTokens}
                     onChange={(e) => handleReferralSettingsChange('referrerTokens', Number(e.target.value))}
-                    placeholder="Enter tokens for referrer"
+                    placeholder="Enter Star Points for referrer"
                     min="0"
                   />
                   <Typography variant="caption" color="gray">
@@ -171,7 +171,7 @@ const Config = ({ notify }) => {
                     label="Star Points for New User"
                     value={referralSettings.referredTokens}
                     onChange={(e) => handleReferralSettingsChange('referredTokens', Number(e.target.value))}
-                    placeholder="Enter tokens for new users"
+                    placeholder="Enter Star Points for new users"
                     min="0"
                   />
                   <Typography variant="caption" color="gray">
@@ -222,7 +222,7 @@ const Config = ({ notify }) => {
                   Referral Milestones
                 </Typography>
                 <Typography variant="caption" color="gray">
-                  Set bonus tokens for users who reach specific referral milestones.
+                  Set bonus Star Points for users who reach specific referral milestones.
                 </Typography>
 
                 {referralSettings.milestones.map((milestone, index) => (
