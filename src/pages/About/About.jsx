@@ -10,7 +10,6 @@ import { Select, Option, Input } from "@material-tailwind/react";
 
 const About = ({ notify }) => {
   const { getAbouts, deleteAbout, undoAbout } = useMain();
-  // console.log('yes');
 
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);

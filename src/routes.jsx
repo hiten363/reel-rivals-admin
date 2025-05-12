@@ -28,7 +28,8 @@ import {
   BellAlertIcon,
   ListBulletIcon,
   Cog6ToothIcon,
-  TrophyIcon
+  TrophyIcon,
+  HeartIcon
 } from "@heroicons/react/24/solid";
 import { Home } from "@/pages/dashboard";
 import User from "./pages/User/User";
@@ -52,6 +53,7 @@ import Log from "./pages/Log/Log";
 import ContestDisclaimer from "./pages/ContestDisclaimer/ContestDisclaimer";
 import Config from "./pages/Config/Config";
 import Challenges from "./pages/Challenges/Challenges";
+import Charity from "./pages/Charity/Charity";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -90,6 +92,12 @@ export const routes = [
         name: "Categories",
         path: "/categories",
         element: (notify) => <Category notify={notify} />
+      },
+      {
+        icon: <HeartIcon {...icon} />,
+        name: "Charities",
+        path: "/charities",
+        element: (notify) => <Charity notify={notify} />
       },
       {
         icon: <CalendarDaysIcon {...icon} />,

@@ -11,7 +11,6 @@ import { Link } from 'react-router-dom';
 
 const Category = ({ notify }) => {
   const { getCategorys, deleteCategory, undoCategory } = useMain();
-  // console.log('yes');
 
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);

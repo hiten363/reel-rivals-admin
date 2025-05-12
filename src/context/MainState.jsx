@@ -2,8 +2,8 @@ import React from 'react'
 import MainContext from './MainContext';
 import { getRequest, postRequest, putRequest, deleteRequest } from '@/Api/Api';
 
-// export const baseUrl = 'http://localhost:5000';
-export const baseUrl = 'https://oyster-app-k2fd9.ondigitalocean.app';
+export const baseUrl = 'http://localhost:5000';
+// export const baseUrl = 'https://oyster-app-k2fd9.ondigitalocean.app';
 
 const MainState = (props) => {
   const getBlogs = async (id, slug, status, query, page, perPage) => {
@@ -1205,8 +1205,26 @@ const MainState = (props) => {
     }
   };
 
+  const getCharities = async (id = '', verified = '', page = 1, perPage = 10) => {
+    try {
+      const data = await getRequest(`${baseUrl}/charity?id=${id}&verified=${verified}&page=${page}&perPage=${perPage}`, false, props);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const verifyCharity = async ({ id, verified }) => {
+    try {
+      const data = await putRequest(`${baseUrl}/charity/${id}/verify`, { verified }, true, props, false);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <MainContext.Provider value={{ getChallenges, updateChallenge, getConfig, updateConfig, getBlogs, postBlog, updateBlog, deleteBlog, deleteAllBlogs, getContacts, deleteContact, signup, login, adminLogin, getUsers, createUser, updateUser, updateUserStatus, uploadImage, undoBlog, getFaqs, postFaq, updateFaq, deleteFaq, getTermss, postTerms, updateTerms, postReply, undoFaq, getPrivacys, postPrivacy, updatePrivacy, getSubscriptions, postSubscription, updateSubscription, undoSubscription, deleteSubscription, getCoupans, postCoupan, postCoupanBulk, assignCoupansToUser, updateCoupan, revealCoupan, undoCoupan, deleteCoupan, getPayments, getThemeControls, postThemeControls, updateThemeControls, deletePayment, getDashboardData, getCategorys, postCategory, updateCategory, deleteCategoryImage, deleteCategory, deleteAllCategorys, getContests, postContest, drawResults, updateContest, deleteContest, deleteAllContests, getRuless, postRules, updateRules, undoGiftCard, getGiftCards, postGiftCard, updateGiftCard, deleteGiftCard, getNewsLetters, undoContest, undoCategory, undoMedia, getMedias, postMedia, deleteMedia, getTestimonials, postTestimonial, undoTestimonial, deleteTestimonial, updateTestimonial, deleteAllTestimonials, getStatisticss, postStatistics, updateStatistics, getVideos, updateVideo, undoVideo, deleteVideo, getComment, postComment, updateComment, undoComment, deleteComment, getReplys, postReply1, updateReply, undoReply, deleteReply, deleteUser, getAbouts, postAbout, updateAbout, deleteAbout, undoAbout, deleteAllAbouts, getRewardPools, postRewardPool, updateRewardPool, undoRewardPool, deleteRewardPool, updateDistributionStatus, getVideosWinners, getSanctionLists, postSanctionList, updateSanctionList, getAnnouncements, postAnnouncement, updateAnnouncement, getLogs, getContestDisclaimers, postContestDisclaimer, updateContestDisclaimer, adminResetPassword, getIssueReports, updateIssueReport, deleteIssueReport, getReferralSettings, updateReferralSettings }}>
+    <MainContext.Provider value={{ getChallenges, updateChallenge, getConfig, updateConfig, getBlogs, postBlog, updateBlog, deleteBlog, deleteAllBlogs, getContacts, deleteContact, signup, login, adminLogin, getUsers, createUser, updateUser, updateUserStatus, uploadImage, undoBlog, getFaqs, postFaq, updateFaq, deleteFaq, getTermss, postTerms, updateTerms, postReply, undoFaq, getPrivacys, postPrivacy, updatePrivacy, getSubscriptions, postSubscription, updateSubscription, undoSubscription, deleteSubscription, getCoupans, postCoupan, postCoupanBulk, assignCoupansToUser, updateCoupan, revealCoupan, undoCoupan, deleteCoupan, getPayments, getThemeControls, postThemeControls, updateThemeControls, deletePayment, getDashboardData, getCategorys, postCategory, updateCategory, deleteCategoryImage, deleteCategory, deleteAllCategorys, getContests, postContest, drawResults, updateContest, deleteContest, deleteAllContests, getRuless, postRules, updateRules, undoGiftCard, getGiftCards, postGiftCard, updateGiftCard, deleteGiftCard, getNewsLetters, undoContest, undoCategory, undoMedia, getMedias, postMedia, deleteMedia, getTestimonials, postTestimonial, undoTestimonial, deleteTestimonial, updateTestimonial, deleteAllTestimonials, getStatisticss, postStatistics, updateStatistics, getVideos, updateVideo, undoVideo, deleteVideo, getComment, postComment, updateComment, undoComment, deleteComment, getReplys, postReply1, updateReply, undoReply, deleteReply, deleteUser, getAbouts, postAbout, updateAbout, deleteAbout, undoAbout, deleteAllAbouts, getRewardPools, postRewardPool, updateRewardPool, undoRewardPool, deleteRewardPool, updateDistributionStatus, getVideosWinners, getSanctionLists, postSanctionList, updateSanctionList, getAnnouncements, postAnnouncement, updateAnnouncement, getLogs, getContestDisclaimers, postContestDisclaimer, updateContestDisclaimer, adminResetPassword, getIssueReports, updateIssueReport, deleteIssueReport, getReferralSettings, updateReferralSettings, getCharities, verifyCharity }}>
       {props.children}
     </MainContext.Provider>
   );

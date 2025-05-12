@@ -40,6 +40,7 @@ import ResetPassword from "@/pages/ResetPassword/ResetPassword";
 import ReportedIssues from "@/pages/ReportedIssues";
 import Config from "@/pages/Config/Config";
 import Challenges from "@/pages/Challenges/Challenges";
+import Charity from "@/pages/Charity/Charity";
 
 export function Dashboard({ notify }) {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -92,6 +93,7 @@ export function Dashboard({ notify }) {
           <Route path={'/event-users/:eventId/:name'} element={<EventUsers notify={notify} />} />
           <Route path={'/config'} element={<Config notify={notify} />} />
           <Route path={'/challenges'} element={<Challenges notify={notify} />} />
+          <Route path={'/charities'} element={<Charity notify={notify} />} />
         </Routes>
 
         {/* <div className="text-blue-gray-600">
