@@ -1,12 +1,26 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import DataTable from 'react-data-table-component';
-import { Button, Card, CardBody, CardHeader, Typography } from '@material-tailwind/react';
-import { Select, Option } from "@material-tailwind/react";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Typography
+} from '@material-tailwind/react';
+import { Select, Option } from '@material-tailwind/react';
+import {
+  PlusIcon,
+  PencilIcon,
+  TrashIcon,
+  BookOpenIcon
+} from '@heroicons/react/24/outline';
 import useMain from '../../hooks/useMain';
 import VerifyCharityModal from './Modals/VerifyCharityModal';
+import CharityModal from './Modals/CharityModal';
+import ImpactStoryModal from './Modals/ImpactStoryModal';
 
 const Charity = ({ notify }) => {
-  const { getCharities } = useMain();
+  const { getCharities, deleteCharity } = useMain();
 
   const [data, setData] = useState([]);
   const [selectedCharity, setSelectedCharity] = useState(null);
@@ -19,79 +33,119 @@ const Charity = ({ notify }) => {
   const [perPage, setPerPage] = useState(10);
   const [loading, setLoading] = useState(true);
 
+  // Modal states
+  const [showVerifyModal, setShowVerifyModal] = useState(false);
+  const [showCharityModal, setShowCharityModal] = useState(false);
+  const [showImpactStoryModal, setShowImpactStoryModal] = useState(false);
+  const [editingCharity, setEditingCharity] = useState(null);
+
   useEffect(() => {
     getData();
   }, [refreshFlag, page, perPage]);
 
-  const columns = useMemo(() => [
-    {
-      name: 'Charity Name',
-      selector: row => row.name,
-      sortable: true,
-      wrap: true
-    },
-    {
-      name: 'Category',
-      selector: row => row.category?.title || 'N/A',
-      sortable: true,
-      wrap: true
-    },
-    {
-      name: 'Total Donations',
-      selector: row => `$${row.totalDonations?.toFixed(2) || '0.00'}`,
-      sortable: true,
-      wrap: true
-    },
-    {
-      name: 'Donor Count',
-      selector: row => row.donorCount || 0,
-      sortable: true,
-      wrap: true
-    },
-    {
-      name: 'Created By',
-      selector: row => row.createdBy?.userName || 'Unknown',
-      sortable: true,
-      wrap: true
-    },
-    {
-      name: 'Verified',
-      selector: row => (
-        <span className={`font-semibold ${row.verified ? 'text-green-500' : 'text-red-500'}`}>
-          {row.verified ? 'Yes' : 'No'}
-        </span>
-      ),
-      sortable: true
-    },
-    {
-      name: "Actions",
-      selector: row => (
-        <div className="flex justify-center">
-          <Button
-            size="sm"
-            color={row.verified ? "red" : "green"}
-            onClick={() => {
-              setSelectedCharity(row);
-              document.getElementById('verifyCharityModal').classList.toggle('hidden');
-            }}
+  const columns = useMemo(
+    () => [
+      {
+        name: 'Charity Name',
+        selector: (row) => row.name,
+        sortable: true,
+        wrap: true
+      },
+      {
+        name: 'Category',
+        selector: (row) => row.category?.title || 'N/A',
+        sortable: true,
+        wrap: true
+      },
+      {
+        name: 'Total Donations',
+        selector: (row) => `$${row.totalDonations?.toFixed(2) || '0.00'}`,
+        sortable: true,
+        wrap: true
+      },
+      {
+        name: 'Donor Count',
+        selector: (row) => row.donorCount || 0,
+        sortable: true,
+        wrap: true
+      },
+      {
+        name: 'Impact Stories',
+        selector: (row) => row.impactStories?.length || 0,
+        sortable: true,
+        wrap: true
+      },
+      {
+        name: 'Created By',
+        selector: (row) => row.createdBy?.userName || 'Unknown',
+        sortable: true,
+        wrap: true
+      },
+      {
+        name: 'Verified',
+        selector: (row) => (
+          <span
+            className={`font-semibold ${
+              row.verified ? 'text-green-500' : 'text-red-500'
+            }`}
           >
-            {row.verified ? 'Unverify' : 'Verify'}
-          </Button>
-        </div>
-      ),
-      width: '150px'
-    },
-  ], []);
+            {row.verified ? 'Yes' : 'No'}
+          </span>
+        ),
+        sortable: true
+      },
+      {
+        name: 'Actions',
+        selector: (row) => (
+          <div className="flex justify-center gap-1">
+            <Button
+              size="sm"
+              color="blue"
+              variant="outlined"
+              onClick={() => handleEdit(row)}
+              className="p-2"
+            >
+              <PencilIcon className="h-4 w-4" />
+            </Button>
+            <Button
+              size="sm"
+              color="purple"
+              variant="outlined"
+              onClick={() => handleImpactStories(row)}
+              className="p-2"
+            >
+              <BookOpenIcon className="h-4 w-4" />
+            </Button>
+            <Button
+              size="sm"
+              color={row.verified ? 'red' : 'green'}
+              variant="outlined"
+              onClick={() => handleVerify(row)}
+              className="p-2"
+            >
+              {row.verified ? 'Unverify' : 'Verify'}
+            </Button>
+            <Button
+              size="sm"
+              color="red"
+              variant="outlined"
+              onClick={() => handleDelete(row)}
+              className="p-2"
+            >
+              <TrashIcon className="h-4 w-4" />
+            </Button>
+          </div>
+        ),
+        width: '250px'
+      }
+    ],
+    []
+  );
 
   const getData = async () => {
     setLoading(true);
     try {
-      const res = await getCharities(
-        '',
-        value.verified,
-        page,
-        perPage
-      );
+      const res = await getCharities('', value.verified, page, perPage);
 
       if (res.status) {
         setData(res.data);
@@ -106,6 +160,7 @@ const Charity = ({ notify }) => {
       setLoading(false);
     }
   };
+
   const handleChange = (e, name = '') => {
     const { value: inputValue, name: inputName } = e.target;
     setValue({
@@ -129,13 +184,90 @@ const Charity = ({ notify }) => {
     setPage(page);
   };
 
+  const handleCreate = () => {
+    setEditingCharity(null);
+    setShowCharityModal(true);
+  };
+
+  const handleEdit = (charity) => {
+    setEditingCharity(charity);
+    setShowCharityModal(true);
+  };
+
+  const handleDelete = async (charity) => {
+    if (
+      !window.confirm(
+        `Are you sure you want to delete "${charity.name}"? This action cannot be undone.`
+      )
+    ) {
+      return;
+    }
+
+    try {
+      const res = await deleteCharity(charity._id);
+      if (res.status) {
+        notify('success', 'Charity deleted successfully');
+        setRefreshFlag(!refreshFlag);
+      } else {
+        notify('error', res.message || 'Failed to delete charity');
+      }
+    } catch (error) {
+      console.error('Error deleting charity:', error);
+      notify('error', 'An error occurred while deleting charity');
+    }
+  };
+
+  const handleVerify = (charity) => {
+    setSelectedCharity(charity);
+    setShowVerifyModal(true);
+  };
+
+  const handleImpactStories = (charity) => {
+    setSelectedCharity(charity);
+    setShowImpactStoryModal(true);
+  };
+
+  const refreshData = () => {
+    setRefreshFlag(!refreshFlag);
+  };
+
+  const closeModals = () => {
+    setShowVerifyModal(false);
+    setShowCharityModal(false);
+    setShowImpactStoryModal(false);
+    setSelectedCharity(null);
+    setEditingCharity(null);
+  };
+
   return (
     <>
-      {selectedCharity && (
+      {/* Verify Charity Modal */}
+      {showVerifyModal && selectedCharity && (
         <VerifyCharityModal
           charity={selectedCharity}
           setSelectedCharity={setSelectedCharity}
-          refreshData={() => setRefreshFlag(!refreshFlag)}
+          refreshData={refreshData}
+          notify={notify}
+          onClose={closeModals}
+        />
+      )}
+
+      {/* Charity Create/Edit Modal */}
+      <CharityModal
+        charity={editingCharity}
+        isOpen={showCharityModal}
+        onClose={closeModals}
+        refreshData={refreshData}
+        notify={notify}
+      />
+
+      {/* Impact Story Modal */}
+      {showImpactStoryModal && selectedCharity && (
+        <ImpactStoryModal
+          charity={selectedCharity}
+          isOpen={showImpactStoryModal}
+          onClose={closeModals}
+          refreshData={refreshData}
           notify={notify}
         />
       )}
@@ -147,6 +279,15 @@ const Charity = ({ notify }) => {
               <Typography variant="h6" color="white">
                 Manage Charities
               </Typography>
+              <Button
+                color="white"
+                size="sm"
+                onClick={handleCreate}
+                className="flex items-center gap-2"
+              >
+                <PlusIcon className="h-4 w-4" />
+                Create Charity
+              </Button>
             </div>
           </CardHeader>
 
@@ -159,7 +300,12 @@ const Charity = ({ notify }) => {
                       label="Verified Status"
                       name="verified"
                       value={value.verified}
-                      onChange={(val) => handleChange({ target: { name: 'verified', value: val } }, 'verified')}
+                      onChange={(val) =>
+                        handleChange(
+                          { target: { name: 'verified', value: val } },
+                          'verified'
+                        )
+                      }
                     >
                       <Option value="">All</Option>
                       <Option value="true">Verified</Option>
