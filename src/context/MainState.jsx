@@ -2,8 +2,8 @@ import React from 'react';
 import MainContext from './MainContext';
 import { getRequest, postRequest, putRequest, deleteRequest } from '@/Api/Api';
 
-export const baseUrl = 'http://localhost:5000';
-// export const baseUrl = "https://oyster-app-k2fd9.ondigitalocean.app";
+// export const baseUrl = 'http://localhost:5000';
+export const baseUrl = 'https://oyster-app-k2fd9.ondigitalocean.app';
 // export const baseUrl = 'https://plankton-app-iajvr.ondigitalocean.app';
 
 const MainState = (props) => {
@@ -2281,6 +2281,79 @@ const MainState = (props) => {
     }
   };
 
+  // Business Verification Functions
+  const getPendingBusinessVerifications = async ({
+    page = 1,
+    perPage = 10
+  }) => {
+    try {
+      const data = await getRequest(
+        `${baseUrl}/user/admin/pendingVerifications?page=${page}&perPage=${perPage}`,
+        false,
+        props
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const verifyBusinessAccount = async ({
+    userId,
+    approved,
+    rejectionReason = ''
+  }) => {
+    try {
+      const data = await postRequest(
+        `${baseUrl}/user/admin/verifyBusiness`,
+        { userId, approved, rejectionReason },
+        true,
+        props,
+        false
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Business Contest Management Functions
+  const getBusinessContests = async ({
+    status = '',
+    businessType = '',
+    search = ''
+  }) => {
+    try {
+      const data = await getRequest(
+        `${baseUrl}/contest/admin/business-contests?status=${status}&businessType=${businessType}&search=${search}`,
+        false,
+        props
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleBusinessContestAction = async ({
+    contestId,
+    action,
+    reason = ''
+  }) => {
+    try {
+      const data = await postRequest(
+        `${baseUrl}/contest/admin/business-contest-action`,
+        { contestId, action, reason },
+        true,
+        props,
+        false
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <MainContext.Provider
       value={{
@@ -2422,7 +2495,12 @@ const MainState = (props) => {
         deleteCharity,
         addImpactStory,
         updateImpactStory,
-        deleteImpactStory
+        deleteImpactStory,
+        // Business Management Functions
+        getPendingBusinessVerifications,
+        verifyBusinessAccount,
+        getBusinessContests,
+        handleBusinessContestAction
       }}
     >
       {props.children}
