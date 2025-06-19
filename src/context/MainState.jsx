@@ -7,7 +7,7 @@ export const baseUrl = 'https://oyster-app-k2fd9.ondigitalocean.app';
 // export const baseUrl = 'https://plankton-app-iajvr.ondigitalocean.app';
 
 const MainState = (props) => {
-  const getBlogs = async (id, slug, status, query, page, perPage) => {
+  const getBlogs = async (id, slug, status, query, page, perPage, t) => {
     try {
       const data = await getRequest(
         `${baseUrl}/blog/getBlogs?id=${id}&slug=${slug}&status=${status}&query=${query}&page=${page}&perPage=${perPage}`,
