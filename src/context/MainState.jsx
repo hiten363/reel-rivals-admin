@@ -434,13 +434,14 @@ const MainState = (props) => {
     category,
     startDate,
     endDate,
-    activeOnly,
-    user,
-    isDistributed
+    contestType,
+    activeOnly = '',
+    user = '',
+    isDistributed = ''
   ) => {
     try {
       const data = await getRequest(
-        `${baseUrl}/contest/getContests?id=${id}&status=${status}&page=${page}&perPage=${perPage}&deleted=${deleted}&category=${category}&startDate=${startDate}&endDate=${endDate}&activeOnly=${activeOnly}&user=${user}&isDistributed=${isDistributed}`,
+        `${baseUrl}/contest/getContests?id=${id}&status=${status}&page=${page}&perPage=${perPage}&deleted=${deleted}&category=${category}&startDate=${startDate}&endDate=${endDate}&contestType=${contestType}&activeOnly=${activeOnly}&user=${user}&isDistributed=${isDistributed}`,
         false,
         props
       );
@@ -2298,6 +2299,24 @@ const MainState = (props) => {
     }
   };
 
+  const getAllBusinessVerifications = async ({
+    page = 1,
+    perPage = 10,
+    status = '',
+    search = ''
+  }) => {
+    try {
+      const data = await getRequest(
+        `${baseUrl}/user/admin/allVerifications?page=${page}&perPage=${perPage}&status=${status}&search=${search}`,
+        false,
+        props
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const verifyBusinessAccount = async ({
     userId,
     approved,
@@ -2344,6 +2363,39 @@ const MainState = (props) => {
       const data = await postRequest(
         `${baseUrl}/contest/admin/business-contest-action`,
         { contestId, action, reason },
+        true,
+        props,
+        false
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Payout Requests Management Functions
+  const getPayoutRequests = async (status, query, page, perPage) => {
+    try {
+      const data = await getRequest(
+        `${baseUrl}/business-wallet/admin/payouts?status=${status}&search=${query}&page=${page}&limit=${perPage}`,
+        true,
+        props
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const processPayoutRequest = async ({
+    requestId,
+    action,
+    rejectionReason = ''
+  }) => {
+    try {
+      const data = await postRequest(
+        `${baseUrl}/business-wallet/admin/payouts/${requestId}/process`,
+        { action, rejectionReason },
         true,
         props,
         false
@@ -2498,9 +2550,12 @@ const MainState = (props) => {
         deleteImpactStory,
         // Business Management Functions
         getPendingBusinessVerifications,
+        getAllBusinessVerifications,
         verifyBusinessAccount,
         getBusinessContests,
-        handleBusinessContestAction
+        handleBusinessContestAction,
+        getPayoutRequests,
+        processPayoutRequest
       }}
     >
       {props.children}
