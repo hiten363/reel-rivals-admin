@@ -1,13 +1,13 @@
-import React from "react";
-import MainContext from "./MainContext";
-import { getRequest, postRequest, putRequest, deleteRequest } from "@/Api/Api";
+import React from 'react';
+import MainContext from './MainContext';
+import { getRequest, postRequest, putRequest, deleteRequest } from '@/Api/Api';
 
 // export const baseUrl = 'http://localhost:5000';
 // export const baseUrl = "https://oyster-app-k2fd9.ondigitalocean.app";
-export const baseUrl = "https://plankton-app-iajvr.ondigitalocean.app";
+export const baseUrl = 'https://plankton-app-iajvr.ondigitalocean.app';
 
 const MainState = (props) => {
-  const getBlogs = async (id, slug, status, query, page, perPage) => {
+  const getBlogs = async (id, slug, status, query, page, perPage, t) => {
     try {
       const data = await getRequest(
         `${baseUrl}/blog/getBlogs?id=${id}&slug=${slug}&status=${status}&query=${query}&page=${page}&perPage=${perPage}`,
@@ -27,7 +27,7 @@ const MainState = (props) => {
     file,
     tags,
     desc,
-    slug,
+    slug
   }) => {
     try {
       const data = await postRequest(
@@ -51,7 +51,7 @@ const MainState = (props) => {
     file,
     tags,
     desc,
-    slug,
+    slug
   }) => {
     try {
       const data = await putRequest(
@@ -131,7 +131,7 @@ const MainState = (props) => {
     subImg2,
     subDesc2,
     subImg3,
-    subDesc3,
+    subDesc3
   }) => {
     try {
       const data = await postRequest(
@@ -145,7 +145,7 @@ const MainState = (props) => {
           subImg2,
           subDesc2,
           subImg3,
-          subDesc3,
+          subDesc3
         },
         false,
         props,
@@ -167,7 +167,7 @@ const MainState = (props) => {
     subImg2,
     subDesc2,
     subImg3,
-    subDesc3,
+    subDesc3
   }) => {
     try {
       const data = await putRequest(
@@ -181,7 +181,7 @@ const MainState = (props) => {
           subImg2,
           subDesc2,
           subImg3,
-          subDesc3,
+          subDesc3
         },
         false,
         props,
@@ -268,7 +268,7 @@ const MainState = (props) => {
     name,
     designation,
     comment,
-    file,
+    file
   }) => {
     try {
       const data = await putRequest(
@@ -372,7 +372,7 @@ const MainState = (props) => {
   const deleteCategoryImage = async (id) => {
     try {
       const data = await deleteRequest(
-        `${baseUrl}/category/deleteCategoryImage/${id.replaceAll("/", ":")}`,
+        `${baseUrl}/category/deleteCategoryImage/${id.replaceAll('/', ':')}`,
         {},
         true,
         props
@@ -434,13 +434,14 @@ const MainState = (props) => {
     category,
     startDate,
     endDate,
-    activeOnly,
-    user,
-    isDistributed
+    contestType,
+    activeOnly = '',
+    user = '',
+    isDistributed = ''
   ) => {
     try {
       const data = await getRequest(
-        `${baseUrl}/contest/getContests?id=${id}&status=${status}&page=${page}&perPage=${perPage}&deleted=${deleted}&category=${category}&startDate=${startDate}&endDate=${endDate}&activeOnly=${activeOnly}&user=${user}&isDistributed=${isDistributed}`,
+        `${baseUrl}/contest/getContests?id=${id}&status=${status}&page=${page}&perPage=${perPage}&deleted=${deleted}&category=${category}&startDate=${startDate}&endDate=${endDate}&contestType=${contestType}&activeOnly=${activeOnly}&user=${user}&isDistributed=${isDistributed}`,
         false,
         props
       );
@@ -456,7 +457,7 @@ const MainState = (props) => {
     startDate,
     endDate,
     winning,
-    category,
+    category
   }) => {
     try {
       const data = await postRequest(
@@ -495,7 +496,7 @@ const MainState = (props) => {
     endDate,
     winning,
     contestants,
-    category,
+    category
   }) => {
     try {
       const data = await putRequest(
@@ -575,7 +576,7 @@ const MainState = (props) => {
     phone,
     password,
     address,
-    file,
+    file
   }) => {
     try {
       const data = await postRequest(
@@ -631,7 +632,7 @@ const MainState = (props) => {
     role,
     userPermissions,
     address,
-    file,
+    file
   }) => {
     try {
       const data = await postRequest(
@@ -646,7 +647,7 @@ const MainState = (props) => {
           role,
           userPermissions,
           address,
-          file,
+          file
         },
         false,
         props,
@@ -817,7 +818,7 @@ const MainState = (props) => {
   const uploadImage = async ({ file }) => {
     try {
       let formdata = new FormData();
-      formdata.append("file", file);
+      formdata.append('file', file);
 
       const data = await postRequest(
         `${baseUrl}/util/uploadImage`,
@@ -1070,7 +1071,7 @@ const MainState = (props) => {
     discount,
     type,
     subType,
-    tier,
+    tier
   }) => {
     try {
       const data = await postRequest(
@@ -1087,7 +1088,7 @@ const MainState = (props) => {
           discount,
           type,
           subType,
-          tier,
+          tier
         },
         true,
         props,
@@ -1112,7 +1113,7 @@ const MainState = (props) => {
     discount,
     type,
     subType,
-    tier,
+    tier
   }) => {
     try {
       const data = await putRequest(
@@ -1129,7 +1130,7 @@ const MainState = (props) => {
           discount,
           type,
           subType,
-          tier,
+          tier
         },
         true,
         props,
@@ -1196,7 +1197,7 @@ const MainState = (props) => {
     offer,
     expiryDate,
     startDate,
-    subscription,
+    subscription
   }) => {
     try {
       const data = await postRequest(
@@ -1218,7 +1219,7 @@ const MainState = (props) => {
     startDate,
     offer,
     subscription,
-    prizeWonCount,
+    prizeWonCount
   }) => {
     try {
       const data = await postRequest(
@@ -1229,7 +1230,7 @@ const MainState = (props) => {
           startDate,
           offer,
           subscription,
-          prizeWonCount,
+          prizeWonCount
         },
         true,
         props,
@@ -1263,7 +1264,7 @@ const MainState = (props) => {
     expiryDate,
     startDate,
     subscription,
-    revealed,
+    revealed
   }) => {
     try {
       const data = await putRequest(
@@ -1766,7 +1767,7 @@ const MainState = (props) => {
           type,
           period,
           amount,
-          discount,
+          discount
         },
         true,
         props,
@@ -1824,7 +1825,7 @@ const MainState = (props) => {
     contest,
     rewards,
     countryRewards,
-    stateRewards,
+    stateRewards
   }) => {
     try {
       const data = await postRequest(
@@ -1844,7 +1845,7 @@ const MainState = (props) => {
     id,
     rewards,
     countryRewards,
-    stateRewards,
+    stateRewards
   }) => {
     try {
       const data = await putRequest(
@@ -2131,7 +2132,7 @@ const MainState = (props) => {
       console.log(error);
       return {
         status: false,
-        message: error.message || "Error fetching referral settings",
+        message: error.message || 'Error fetching referral settings'
       };
     }
   };
@@ -2150,14 +2151,14 @@ const MainState = (props) => {
       console.log(error);
       return {
         status: false,
-        message: error.message || "Error updating referral settings",
+        message: error.message || 'Error updating referral settings'
       };
     }
   };
 
   const getCharities = async (
-    id = "",
-    verified = "",
+    id = '',
+    verified = '',
     page = 1,
     perPage = 10
   ) => {
@@ -2178,6 +2179,169 @@ const MainState = (props) => {
       const data = await putRequest(
         `${baseUrl}/charity/${id}/verify`,
         { verified },
+        true,
+        props,
+        false
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const createCharity = async ({ name, description, category }) => {
+    try {
+      const data = await postRequest(
+        `${baseUrl}/charity`,
+        { name, description, category },
+        true,
+        props,
+        false
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateCharity = async ({ id, name, description, category }) => {
+    try {
+      const data = await putRequest(
+        `${baseUrl}/charity/${id}`,
+        { name, description, category },
+        true,
+        props,
+        false
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteCharity = async (id) => {
+    try {
+      const data = await deleteRequest(
+        `${baseUrl}/charity/${id}`,
+        {},
+        true,
+        props
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addImpactStory = async ({ charityId, title, description }) => {
+    try {
+      const data = await postRequest(
+        `${baseUrl}/charity/${charityId}/impact-story`,
+        { title, description },
+        true,
+        props,
+        false
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateImpactStory = async ({
+    charityId,
+    storyId,
+    title,
+    description
+  }) => {
+    try {
+      const data = await putRequest(
+        `${baseUrl}/charity/${charityId}/impact-story/${storyId}`,
+        { title, description },
+        true,
+        props,
+        false
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteImpactStory = async (charityId, storyId) => {
+    try {
+      const data = await deleteRequest(
+        `${baseUrl}/charity/${charityId}/impact-story/${storyId}`,
+        {},
+        true,
+        props
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getAllBusinessVerifications = async ({
+    page = 1,
+    perPage = 10,
+    status = '',
+    search = ''
+  }) => {
+    try {
+      const data = await getRequest(
+        `${baseUrl}/user/admin/allVerifications?page=${page}&perPage=${perPage}&status=${status}&search=${search}`,
+        false,
+        props
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const verifyBusinessAccount = async ({
+    userId,
+    approved,
+    rejectionReason = ''
+  }) => {
+    try {
+      const data = await postRequest(
+        `${baseUrl}/user/admin/verifyBusiness`,
+        { userId, approved, rejectionReason },
+        true,
+        props,
+        false
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Payout Requests Management Functions
+  const getPayoutRequests = async (status, query, page, perPage) => {
+    try {
+      const data = await getRequest(
+        `${baseUrl}/business-wallet/admin/payouts?status=${status}&search=${query}&page=${page}&limit=${perPage}`,
+        true,
+        props
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const processPayoutRequest = async ({
+    requestId,
+    action,
+    rejectionReason = ''
+  }) => {
+    try {
+      const data = await postRequest(
+        `${baseUrl}/business-wallet/admin/payouts/${requestId}/process`,
+        { action, rejectionReason },
         true,
         props,
         false
@@ -2324,6 +2488,16 @@ const MainState = (props) => {
         updateReferralSettings,
         getCharities,
         verifyCharity,
+        createCharity,
+        updateCharity,
+        deleteCharity,
+        addImpactStory,
+        updateImpactStory,
+        deleteImpactStory,
+        getAllBusinessVerifications,
+        verifyBusinessAccount,
+        getPayoutRequests,
+        processPayoutRequest
       }}
     >
       {props.children}
