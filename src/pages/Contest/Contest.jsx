@@ -85,6 +85,56 @@ const Contest = ({ notify }) => {
       wrap: true
     },
     {
+      name: 'Status',
+      selector: (row) => {
+        if (row.contestType === 'BUSINESS') {
+          // For business contests, show both contestStatus and isLive
+          const businessStatus = row.contestStatus || 'DRAFT';
+          const systemLive = row.isLive === 'true';
+
+          let statusText = businessStatus;
+          let statusColor = 'text-gray-500';
+
+          if (businessStatus === 'DRAFT') {
+            statusColor = 'text-gray-500';
+            statusText = 'Draft';
+          } else if (businessStatus === 'ACTIVE' && systemLive) {
+            statusColor = 'text-green-500';
+            statusText = 'Active';
+          } else if (businessStatus === 'ACTIVE' && !systemLive) {
+            statusColor = 'text-yellow-500';
+            statusText = 'Active (System Inactive)';
+          } else if (businessStatus === 'ENDED') {
+            statusColor = 'text-red-500';
+            statusText = 'Ended';
+          } else {
+            statusColor = 'text-gray-500';
+            statusText = 'Inactive';
+          }
+
+          return (
+            <div className="flex flex-col">
+              <span className={`font-semibold ${statusColor}`}>
+                {statusText}
+              </span>
+              <span className="text-xs text-gray-400">
+                System: {systemLive ? 'Live' : 'Inactive'}
+              </span>
+            </div>
+          );
+        } else {
+          // For admin contests, use legacy isLive field
+          return row.isLive === 'true' ? (
+            <span className="text-green-500 font-semibold">Active</span>
+          ) : (
+            <span className="text-red-500 font-semibold">Finished</span>
+          );
+        }
+      },
+      sortable: true,
+      wrap: true
+    },
+    {
       name: 'Total Winnings',
       selector: (row) => row.winning,
       // sortable: true,

@@ -40,6 +40,7 @@ import Challenges from '@/pages/Challenges/Challenges';
 import Charity from '@/pages/Charity/Charity';
 import BusinessVerification from '@/pages/User/BusinessVerification';
 import PayoutRequests from '@/pages/PayoutRequests/PayoutRequests';
+import SocialVerification from '@/pages/SocialVerification/SocialVerification';
 
 export function Dashboard({ notify }) {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -171,6 +172,10 @@ export function Dashboard({ notify }) {
           <Route
             path={'/payout-requests'}
             element={<PayoutRequests notify={notify} />}
+          />
+          <Route
+            path={'/social-verification'}
+            element={<SocialVerification notify={notify} />}
           />
         </Routes>
 

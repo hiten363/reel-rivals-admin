@@ -2352,6 +2352,45 @@ const MainState = (props) => {
     }
   };
 
+  // Social Verification functions
+  const getAllSocialVerifications = async (params) => {
+    try {
+      const queryParams = new URLSearchParams();
+      if (params.status) queryParams.append('status', params.status);
+      if (params.search) queryParams.append('search', params.search);
+      if (params.page) queryParams.append('page', params.page);
+      if (params.perPage) queryParams.append('perPage', params.perPage);
+
+      const data = await getRequest(
+        `${baseUrl}/social-verification/admin/all?${queryParams.toString()}`,
+        true,
+        props
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const reviewSocialVerification = async (params) => {
+    try {
+      const data = await putRequest(
+        `${baseUrl}/social-verification/admin/review/${params.requestId}`,
+        {
+          action: params.action,
+          rejectionReason: params.rejectionReason,
+          adminNotes: params.adminNotes
+        },
+        true,
+        props,
+        false
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <MainContext.Provider
       value={{
@@ -2497,7 +2536,9 @@ const MainState = (props) => {
         getAllBusinessVerifications,
         verifyBusinessAccount,
         getPayoutRequests,
-        processPayoutRequest
+        processPayoutRequest,
+        getAllSocialVerifications,
+        reviewSocialVerification
       }}
     >
       {props.children}

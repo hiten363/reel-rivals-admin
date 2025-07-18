@@ -55,6 +55,7 @@ import Config from './pages/Config/Config';
 import Challenges from './pages/Challenges/Challenges';
 import Charity from './pages/Charity/Charity';
 import BusinessVerification from './pages/User/BusinessVerification';
+import SocialVerification from './pages/SocialVerification/SocialVerification';
 import PayoutRequests from './pages/PayoutRequests/PayoutRequests';
 
 const icon = {
@@ -82,6 +83,12 @@ export const routes = [
         name: 'Business Verification',
         path: '/business-verification',
         element: (notify) => <BusinessVerification notify={notify} />
+      },
+      {
+        icon: <UserIcon {...icon} />,
+        name: 'Social Verification',
+        path: '/social-verification',
+        element: (notify) => <SocialVerification notify={notify} />
       },
       {
         icon: <TrophyIcon {...icon} />,
