@@ -148,7 +148,6 @@ const BusinessVerification = ({ notify }) => {
             </Typography>
           </CardHeader>
           <CardBody className="px-6 pt-0 pb-2">
-            {/* Search and Filters */}
             <div className="mb-6 flex gap-4">
               <div className="flex-1">
                 <Input
@@ -166,7 +165,6 @@ const BusinessVerification = ({ notify }) => {
               </Button>
             </div>
 
-            {/* Status Tabs */}
             <Tabs value={activeTab} className="mb-6">
               <TabsHeader>
                 <Tab value="all" onClick={() => setActiveTab('all')}>
@@ -222,6 +220,7 @@ const BusinessVerification = ({ notify }) => {
                     <tr>
                       {[
                         'Business Name',
+                        'Legal Name',
                         'Contact',
                         'Business Type',
                         'Submitted',
@@ -264,14 +263,16 @@ const BusinessVerification = ({ notify }) => {
                                 {verification.businessProfile?.businessName ||
                                   'N/A'}
                               </Typography>
-                              <Typography
-                                variant="small"
-                                color="blue-gray"
-                                className="font-normal opacity-70"
-                              >
-                                {verification.name}
-                              </Typography>
                             </div>
+                          </td>
+                          <td className={className}>
+                            <Typography
+                              variant="small"
+                              color="blue-gray"
+                              className="font-normal"
+                            >
+                              {verification.name}
+                            </Typography>
                           </td>
                           <td className={className}>
                             <Typography
