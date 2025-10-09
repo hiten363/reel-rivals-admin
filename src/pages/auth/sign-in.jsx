@@ -41,7 +41,7 @@ export function SignIn({ notify }) {
     <section className="m-8 flex gap-4">
       <div className="w-full mt-6">
         <div className="text-center">
-          <img className="mx-auto" src="/img/logo.png" />
+          <img className="mx-auto w-48" src="/img/logo.png" />
 
           <Typography variant="h4" className="font-bold mb-1 mt-6">Admin Sign In</Typography>
           <Typography variant="paragraph" color="blue-gray" className="text-lg font-normal">Enter your email and password to Sign In.</Typography>
