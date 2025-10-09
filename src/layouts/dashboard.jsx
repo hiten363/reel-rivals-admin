@@ -188,7 +188,7 @@ export function Dashboard({ notify }) {
         className="w-full py-1 text-center bg-gray-900 text-white fixed bottom-0 text-xs"
         style={{ zIndex: '999999' }}
       >
-        Copyright © 2024 Reel Rivals. All content and images are protected under
+        Copyright © 2024 ForceFoe. All content and images are protected under
         copyright law. Powered by BinaryMetrix Technologies
       </div>
     </div>

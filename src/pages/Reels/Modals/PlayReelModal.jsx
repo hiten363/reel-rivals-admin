@@ -23,7 +23,7 @@ const PlayReelModal = (props) => {
           <div className="relative bg-white rounded-lg shadow ">
             <div className="flex items-center justify-between p-5 border-b rounded-t ">
               <h3 className="text-xl font-medium text-gray-900 ">
-                Play Reel
+                Play Video
               </h3>
 
               <button type="button" onClick={() => {

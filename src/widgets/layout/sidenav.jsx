@@ -31,7 +31,7 @@ export function Sidenav({ brandImg = "", brandName = "", routes }) {
             variant="h6"
             color={sidenavType === "dark" ? "white" : "blue-gray"}
           >
-            Reel Rivals
+            ForceFoe
           </Typography>
         </Link>
 

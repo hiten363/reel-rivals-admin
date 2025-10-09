@@ -130,7 +130,7 @@ const Reels = ({ notify }) => {
           <div
             onClick={async () => {
               setId(row._id);
-              setMsg('Are you sure you want to delete selected Reel?');
+              setMsg('Are you sure you want to delete selected Video?');
               document.getElementById('deleteModal').classList.toggle('hidden');
             }}
             className="me-2 cursor-pointer"
@@ -232,7 +232,7 @@ const Reels = ({ notify }) => {
           <CardHeader variant="gradient" color="gray" className="mb-8 p-6">
             <div className="flex items-center justify-between">
               <Typography variant="h6" color="white">
-                Manage Reels
+                Manage Videos
               </Typography>
             </div>
           </CardHeader>
@@ -336,7 +336,7 @@ const Reels = ({ notify }) => {
               columns={columns}
               data={data}
               striped={true}
-              title="Reels"
+              title="Videos"
               progressPending={loadFlag}
               pagination
               paginationServer

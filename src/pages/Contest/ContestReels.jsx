@@ -190,7 +190,7 @@ const ContestReels = ({ notify }) => {
       selector: row => <div className="flex justify-center">
         <div onClick={async () => {
           setId(row._id);
-          setMsg("Are you sure you want to delete selected Reel?");
+          setMsg("Are you sure you want to delete selected Video?");
           document.getElementById('deleteModal').classList.toggle('hidden');
         }} className='me-2 cursor-pointer'>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="delete-icon bi bi-x-square" viewBox="0 0 16 16">
@@ -337,7 +337,7 @@ const ContestReels = ({ notify }) => {
               columns={columns}
               data={data}
               striped={true}
-              title={`${contestName} Reels`}
+              title={`${contestName} Videos`}
               progressPending={loadFlag}
               pagination
               paginationServer
