@@ -2,8 +2,8 @@ import React from 'react';
 import MainContext from './MainContext';
 import { getRequest, postRequest, putRequest, deleteRequest } from '@/Api/Api';
 
-// export const baseUrl = 'http://localhost:5000';
-export const baseUrl = 'https://oyster-app-k2fd9.ondigitalocean.app';
+export const baseUrl = 'http://localhost:5000';
+// export const baseUrl = 'https://oyster-app-k2fd9.ondigitalocean.app';
 // export const baseUrl = 'https://plankton-app-iajvr.ondigitalocean.app';
 
 const MainState = (props) => {
@@ -691,7 +691,7 @@ const MainState = (props) => {
 
   const deleteUser = async (id) => {
     try {
-      const data = await deleteRequest(
+      const data = await putRequest(
         `${baseUrl}/user/deleteUser/${id}`,
         {},
         false,

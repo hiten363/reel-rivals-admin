@@ -12,7 +12,7 @@ import ModalImage from "react-modal-image";
 import xlsx from "json-as-xlsx";
 
 const ContestUser1 = ({ notify }) => {
-  const { getUsers, deleteUser, updateUserStatus } = useMain();
+  const { getUsers, updateUserStatus } = useMain();
 
   const { contestName, contestId } = useParams();
 
