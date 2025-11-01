@@ -457,12 +457,14 @@ const MainState = (props) => {
     startDate,
     endDate,
     winning,
-    category
+    category,
+    isOGContest,
+    ogUsersCount
   }) => {
     try {
       const data = await postRequest(
         `${baseUrl}/contest/postContest`,
-        { title, startDate, endDate, winning, category, file },
+        { title, startDate, endDate, winning, category, file, isOGContest, ogUsersCount },
         true,
         props,
         false
@@ -496,12 +498,14 @@ const MainState = (props) => {
     endDate,
     winning,
     contestants,
-    category
+    category,
+    isOGContest,
+    ogUsersCount
   }) => {
     try {
       const data = await putRequest(
         `${baseUrl}/contest/updateContest/${id}`,
-        { title, startDate, endDate, winning, category, file, contestants },
+        { title, startDate, endDate, winning, category, file, contestants, isOGContest, ogUsersCount },
         true,
         props,
         false
@@ -2391,6 +2395,43 @@ const MainState = (props) => {
     }
   };
 
+  const assignUserBadge = async ({
+    userIds,
+    badges
+  }) => {
+    try {
+      console.log({ userIds, badges })
+      const data = await postRequest(
+        `${baseUrl}/user/assignUserBadge`,
+        { userIds, badges },
+        true,
+        props,
+        false
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const unassignUserBadge = async ({
+    userIds,
+    badges
+  }) => {
+    try {
+      const data = await postRequest(
+        `${baseUrl}/user/unassignUserBadge`,
+        { userIds, badges },
+        true,
+        props,
+        false
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <MainContext.Provider
       value={{
@@ -2538,7 +2579,9 @@ const MainState = (props) => {
         getPayoutRequests,
         processPayoutRequest,
         getAllSocialVerifications,
-        reviewSocialVerification
+        reviewSocialVerification,
+        assignUserBadge,
+        unassignUserBadge
       }}
     >
       {props.children}

@@ -56,10 +56,11 @@ const Contest = ({ notify }) => {
       selector: (row) => (
         <Link to={`/dashboard/contests/${row.title}/${row._id}`}>
           {row.title}
+          {!!row.isOGContest && <span className="bg-purple-100 text-purple-800 text-xs font-medium ml-2 px-1 py-0.5 rounded-md dark:bg-purple-900 dark:text-purple-300">OG</span>}
         </Link>
       ),
-      // sortable: true,
-      wrap: true
+      wrap: true,
+      grow: 1.4
     },
     {
       name: 'Contest Category',
@@ -72,11 +73,10 @@ const Contest = ({ notify }) => {
       name: 'Contest Type',
       selector: (row) => (
         <span
-          className={`px-2 py-1 rounded-full text-xs font-medium ${
-            row.contestType === 'BUSINESS'
-              ? 'bg-purple-100 text-purple-800'
-              : 'bg-blue-100 text-blue-800'
-          }`}
+          className={`px-2 py-1 rounded-full text-xs font-medium ${row.contestType === 'BUSINESS'
+            ? 'bg-purple-100 text-purple-800'
+            : 'bg-blue-100 text-blue-800'
+            }`}
         >
           {row.contestType === 'BUSINESS' ? 'Business' : 'Admin'}
         </span>

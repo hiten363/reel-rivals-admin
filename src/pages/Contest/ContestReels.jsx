@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
-import AddContestModal from './Modals/AddContestModal';
-import EditContestModal from './Modals/EditContestModal';
 import DeleteModal from '../../Util/DeleteModal';
 import useMain from '../../hooks/useMain';
-import { Button, Card, CardBody, CardHeader, Typography } from '@material-tailwind/react';
-import { Select, Option, Input } from "@material-tailwind/react";
-import { Link, useParams } from 'react-router-dom';
-import ModalImage from "react-modal-image";
-import xlsx from "json-as-xlsx";
+import { Card, CardBody, CardHeader, Typography } from '@material-tailwind/react';
+import { useParams } from 'react-router-dom';
 import PlayReelModal from '../Reels/Modals/PlayReelModal';
 
 const WinnerList = ({ data }) => {
@@ -95,39 +90,24 @@ const WinnerList = ({ data }) => {
 };
 
 const ContestReels = ({ notify }) => {
-  const { getVideos, getUsers, getContests, getCategorys, deleteVideo, undoVideo } = useMain();
+  const { getVideos, deleteVideo } = useMain();
 
   const { userName, userId, contestName, contestId } = useParams();
 
   const [data, setData] = useState([]);
-  const [data1, setData1] = useState([]);
   const [id, setId] = useState(0);
   const [msg, setMsg] = useState('');
   const [refreshFlag, setRefreshFlag] = useState(false);
-  const [value, setValue] = useState({
-    status: '',
-    activeFlag: '',
-    category: '',
-    contest: '',
-    user: '',
-    query: ''
-  });
+
   const [loadFlag, setLoadFlag] = useState(true);
   const [totalRows, setTotalRows] = useState(0);
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
-  const [users, setUsers] = useState([]);
-  const [contests, setContests] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [link, setLink] = useState('');
 
   useEffect(() => {
     getData();
   }, [refreshFlag, page, perPage]);
-
-  useEffect(() => {
-    getData1();
-  }, []);
 
   const columns = [
     {
@@ -206,19 +186,9 @@ const ContestReels = ({ notify }) => {
   const getData = async () => {
     setLoadFlag(true);
     const ans = await getVideos('', '', contestId, '', userId, '', '', '', page, perPage);
-    console.log(ans);
     setData(ans.data);
     setTotalRows(ans.count);
     setLoadFlag(false);
-  };
-
-  const getData1 = async () => {
-    const ans1 = await getUsers(true);
-    const ans2 = await getCategorys('', true);
-    const ans3 = await getContests('', true);
-    setUsers(ans1.data?.filter(x => x.role !== 'ADMIN'));
-    setCategories(ans2.data);
-    setContests(ans3.data);
   };
 
   const handleDelete = async () => {
@@ -233,25 +203,6 @@ const ContestReels = ({ notify }) => {
     else {
       notify('error', ans.message);
     }
-  };
-
-  const handleChange = (e, name = '') => {
-    if (name === '') {
-      setValue({ ...value, [e.target.name]: e.target.value });
-    }
-    else {
-      setValue({ ...value, [name]: e });
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(value);
-    const ans = await getVideos('', value.category, contestId, '', userId, '', value.query, value.status, 1, perPage);
-    setTotalRows(ans.count);
-    setPage(1);
-    console.log(ans);
-    setData(ans.data);
   };
 
   const handlePageChange = (page) => {

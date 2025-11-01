@@ -15,6 +15,8 @@ const EditContestModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
     endDate: '',
     category: '',
     winning: '',
+    isOGContest: false,
+    ogUsersCount: 0
   });
   const [prevImage, setPrevImage] = useState('');
   const [loadFlag, setLoadFlag] = useState(false);
@@ -34,8 +36,6 @@ const EditContestModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
 
     let ans = await getCategorys('', 'true');
     setCategories(ans.data);
-    console.log(data?.category?._id);
-
     setPrevImage(data?.img);
 
     setValue({
@@ -46,6 +46,8 @@ const EditContestModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
       endDate: new Date(Number(data?.endDate)).toISOString().split('T')[0],
       category: data?.category?._id,
       winning: data?.winning,
+      isOGContest: data?.isOGContest,
+      ogUsersCount: data?.ogUsersCount
     });
 
     setLoadFlag(false);
@@ -55,6 +57,10 @@ const EditContestModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
     if (name === "") {
       if (e.target.name !== 'img') {
         setValue({ ...value, [e.target.name]: e.target.value });
+        if (e.target.name === 'isOGContest') {
+          setValue({ ...value, [e.target.name]: e.target.checked });
+          return;
+        }
       }
       else {
         setValue({ ...value, [e.target.name]: e.target.files[0] });
@@ -67,10 +73,18 @@ const EditContestModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(value);
 
-    const ans = await updateContest({ title: value.title, file: value?.file, startDate: new Date(value?.startDate)?.getTime(), endDate: new Date(value?.endDate)?.getTime(), winning: value?.winning.trim() !== "" ? value?.winning.trim() : '0', category: value?.category, id: data?._id });
-    console.log(ans);
+    const ans = await updateContest({
+      title: value.title,
+      file: value?.file,
+      startDate: new Date(value?.startDate)?.getTime(),
+      endDate: new Date(value?.endDate)?.getTime(),
+      winning: value?.winning.trim() ?? '0',
+      category: value?.category,
+      id: data?._id,
+      isOGContest: value.isOGContest,
+      ogUsersCount: value.ogUsersCount
+    });
 
     if (ans.status) {
       notify('success', ans.message);
@@ -130,6 +144,35 @@ const EditContestModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                     </div> : <div>
                       <FileInput value={value} setValue={setValue} isRequired={false} />
                     </div>}
+
+                    <div>
+                      <label className="inline-flex items-center cursor-pointer">
+                        <input type="checkbox" value="" name="isOGContest" defaultChecked={value.isOGContest} className="sr-only peer" onChange={handleChange} />
+                        <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+                        <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Set as OG Contest</span>
+                      </label>
+                    </div>
+
+                    {!!value?.isOGContest && (
+                      <div>
+                        <label
+                          htmlFor="ogUsersCount"
+                          className="block mb-2 text-sm font-medium text-gray-900 "
+                        >
+                          OG Users Count
+                        </label>
+                        <input
+                          type="number"
+                          id="ogUsersCount"
+                          name="ogUsersCount"
+                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 "
+                          placeholder="Enter OG Users Count .."
+                          onChange={handleChange}
+                          value={value.ogUsersCount}
+                          required
+                        />
+                      </div>
+                    )}
 
                     <div>
                       <label htmlFor="startDate" className="block mb-2 text-sm font-medium text-gray-900 ">Start Date </label>

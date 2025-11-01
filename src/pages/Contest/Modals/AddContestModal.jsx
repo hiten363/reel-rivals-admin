@@ -14,7 +14,9 @@ const AddContestModal = (props) => {
     startDate: '',
     endDate: '',
     winning: '',
-    category: ''
+    category: '',
+    isOGContest: false,
+    ogUsersCount: 0
   });
   const [categories, setCategories] = useState([]);
   const [loadFlag, setLoadFlag] = useState(true);
@@ -35,6 +37,10 @@ const AddContestModal = (props) => {
   const handleChange = (e, name = '') => {
     if (name === '') {
       if (e.target.name !== 'img') {
+        if (e.target.name === 'isOGContest') {
+          setValue({ ...value, [e.target.name]: e.target.checked });
+          return;
+        }
         setValue({ ...value, [e.target.name]: e.target.value });
       } else {
         setValue({ ...value, [e.target.name]: e.target.files[0] });
@@ -47,7 +53,6 @@ const AddContestModal = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setUploadFlag(true);
-    console.log(value);
 
     const ans = await postContest({
       title: value.title,
@@ -55,9 +60,11 @@ const AddContestModal = (props) => {
       startDate: new Date(value?.startDate)?.getTime(),
       endDate: new Date(value?.endDate)?.getTime(),
       winning: value?.winning.trim() !== '' ? value?.winning.trim() : '0',
-      category: value.category
+      category: value.category,
+      isOGContest: value.isOGContest,
+      ogUsersCount: value.ogUsersCount
     });
-    console.log(ans);
+
     if (ans.status) {
       setValue({
         title: '',
@@ -140,7 +147,7 @@ const AddContestModal = (props) => {
                           htmlFor="title"
                           className="block mb-2 text-sm font-medium text-gray-900 "
                         >
-                          Title{' '}
+                          Title
                         </label>
                         <input
                           type="text"
@@ -161,11 +168,40 @@ const AddContestModal = (props) => {
                       />
 
                       <div>
+                        <label className="inline-flex items-center cursor-pointer">
+                          <input type="checkbox" value="" name="isOGContest" defaultChecked={value.isOGContest} className="sr-only peer" onChange={handleChange} />
+                          <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+                          <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Set as OG Contest</span>
+                        </label>
+                      </div>
+
+                      {!!value?.isOGContest && (
+                        <div>
+                          <label
+                            htmlFor="ogUsersCount"
+                            className="block mb-2 text-sm font-medium text-gray-900 "
+                          >
+                            OG Users Count
+                          </label>
+                          <input
+                            type="number"
+                            id="ogUsersCount"
+                            name="ogUsersCount"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-blue-500 block w-full p-2.5 "
+                            placeholder="Enter OG Users Count .."
+                            onChange={handleChange}
+                            value={value.ogUsersCount}
+                            required
+                          />
+                        </div>
+                      )}
+
+                      <div>
                         <label
                           htmlFor="startDate"
                           className="block mb-2 text-sm font-medium text-gray-900 "
                         >
-                          Start Date{' '}
+                          Start Date
                         </label>
                         <input
                           type="date"
@@ -183,7 +219,7 @@ const AddContestModal = (props) => {
                           htmlFor="endDate"
                           className="block mb-2 text-sm font-medium text-gray-900 "
                         >
-                          End Date{' '}
+                          End Date
                         </label>
                         <input
                           type="date"
@@ -194,15 +230,6 @@ const AddContestModal = (props) => {
                           value={value.endDate}
                           required
                         />
-
-                        {/* <DateTimePicker locale="en-GB" format='dd-MM-y h:mm:ss a' onChange={(e) => {
-                        let ts1 = new Date().getTime();
-                        let ts2 = new Date(e).getTime();
-                        
-                        if (ts2 > ts1 && ts2 > value.startDate) {
-                          setValue({ ...value, endDate: e });
-                        }
-                      }} value={value.endDate} required /> */}
                       </div>
 
                       <div>
@@ -210,7 +237,7 @@ const AddContestModal = (props) => {
                           htmlFor="category"
                           className="block mb-2 text-sm font-medium text-gray-900 "
                         >
-                          Contest Category{' '}
+                          Contest Category
                         </label>
                         <Select
                           label="Select Category"
@@ -239,7 +266,7 @@ const AddContestModal = (props) => {
                           htmlFor="winning"
                           className="block mb-2 text-sm font-medium text-gray-900 "
                         >
-                          Total Winnings{' '}
+                          Total Winnings
                         </label>
                         <input
                           type="number"
