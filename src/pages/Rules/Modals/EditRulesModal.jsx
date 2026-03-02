@@ -65,6 +65,8 @@ var toolbarOptions = {
   }
 };
 
+var modules = { toolbar: toolbarOptions };
+
 const EditRulesModal = ({ flag, data, setRefreshFlag, refreshFlag, notify }) => {
   const { updateRules, deleteRulesImage } = useMain();
 
@@ -96,6 +98,7 @@ const EditRulesModal = ({ flag, data, setRefreshFlag, refreshFlag, notify }) => 
   }, [data, flag]);
 
   const rteChange1 = (content, delta, source, editor) => {
+    if (source !== 'user') return;
     handleChange2({
       richText: editor.getHTML(),
       simpleText: editor.getText(),
@@ -160,7 +163,7 @@ const EditRulesModal = ({ flag, data, setRefreshFlag, refreshFlag, notify }) => 
                       ref={(el) => {
                         quillObj1 = el;
                       }}
-                      theme="snow" value={desc.richText} placeholder="Enter Description" onChange={rteChange1} modules={{ toolbar: toolbarOptions }} />
+                      theme="snow" value={desc.richText} placeholder="Enter Description" onChange={rteChange1} modules={modules} />
                   </div>
 
                   <div className='text-right'>

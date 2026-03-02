@@ -61,6 +61,8 @@ var toolbarOptions = {
   }
 };
 
+var modules = { toolbar: toolbarOptions };
+
 const AddContestDisclaimerModal = (props) => {
   const { postContestDisclaimer } = useMain();
 
@@ -73,6 +75,7 @@ const AddContestDisclaimerModal = (props) => {
   });
 
   const rteChange1 = (content, delta, source, editor) => {
+    if (source !== 'user') return;
     handleChange({
       richText: editor.getHTML(),
       simpleText: editor.getText(),
@@ -158,7 +161,7 @@ const AddContestDisclaimerModal = (props) => {
                       {/* <label className="block mb-2 text-sm font-medium text-gray-900" htmlFor="file">Description</label> */}
                       <ReactQuill ref={(el) => {
                         quillObj1 = el;
-                      }} theme="snow" value={value.desc.richText} placeholder="Enter Description" onChange={rteChange1} modules={{ toolbar: toolbarOptions }} style={{ minHeight: '200px' }} />
+                      }} theme="snow" value={value.desc.richText} placeholder="Enter Description" onChange={rteChange1} modules={modules} style={{ minHeight: '200px' }} />
                     </div>
                   </div>
 

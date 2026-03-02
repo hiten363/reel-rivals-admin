@@ -6,6 +6,25 @@ import { useEffect } from 'react';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 
+var quillObj1;
+
+var toolbarOptions = {
+  container: [
+    ['bold', 'italic', 'underline', 'strike'],
+    ['blockquote', 'code-block'],
+    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+    [{ 'script': 'sub' }, { 'script': 'super' }],
+    [{ 'indent': '-1' }, { 'indent': '+1' }],
+    [{ 'direction': 'rtl' }],
+    ['link', 'image'],
+    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+    [{ 'align': [] }],
+    ['clean']
+  ]
+};
+
+var modules = { toolbar: toolbarOptions };
+
 const EditNewsLetterModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
   const { updateNewsLetter, deleteNewsLetterImage } = useMain();
 
@@ -65,6 +84,7 @@ const EditNewsLetterModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
   }, [data]);
 
   const rteChange1 = (content, delta, source, editor) => {
+    if (source !== 'user') return;
     handleChange2({
       richText: editor.getHTML(),
       simpleText: editor.getText(),
@@ -242,8 +262,8 @@ const EditNewsLetterModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                       ref={(el) => {
                         quillObj1 = el;
                       }}
-                      // theme="snow" value={value.desc.richText} placeholder="Enter Description" onChange={rteChange1} modules={{ toolbar: toolbarOptions }} />
-                      theme="snow" value={desc.richText} placeholder="Enter Description" onChange={rteChange1} modules={{ toolbar: toolbarOptions }} />
+                      // theme="snow" value={value.desc.richText} placeholder="Enter Description" onChange={rteChange1} modules={modules} />
+                      theme="snow" value={desc.richText} placeholder="Enter Description" onChange={rteChange1} modules={modules} />
                   </div>
 
                   <div className='text-right'>

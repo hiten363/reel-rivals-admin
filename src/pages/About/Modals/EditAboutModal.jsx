@@ -90,6 +90,8 @@ var toolbarOptions = {
   }
 };
 
+var modules = { toolbar: toolbarOptions };
+
 const EditAboutModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
   const { updateAbout, uploadImage } = useMain();
 
@@ -173,6 +175,7 @@ const EditAboutModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
   }, [data]);
 
   const rteChange1 = (content, delta, source, editor) => {
+    if (source !== 'user') return;
     handleChange2({
       richText: editor.getHTML(),
       simpleText: editor.getText(),
@@ -181,6 +184,7 @@ const EditAboutModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
   };
 
   const rteChange2 = (content, delta, source, editor) => {
+    if (source !== 'user') return;
     handleChange3({
       richText: editor.getHTML(),
       simpleText: editor.getText(),
@@ -189,6 +193,7 @@ const EditAboutModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
   };
 
   const rteChange3 = (content, delta, source, editor) => {
+    if (source !== 'user') return;
     handleChange4({
       richText: editor.getHTML(),
       simpleText: editor.getText(),
@@ -197,6 +202,7 @@ const EditAboutModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
   };
 
   const rteChange4 = (content, delta, source, editor) => {
+    if (source !== 'user') return;
     handleChange5({
       richText: editor.getHTML(),
       simpleText: editor.getText(),
@@ -353,7 +359,7 @@ const EditAboutModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                       <label className="block mb-2 text-sm font-medium text-gray-900" htmlFor="file">Description</label>
                       <ReactQuill ref={(el) => {
                         quillObj1 = el;
-                      }} theme="snow" value={desc.richText} placeholder="Enter Description" onChange={rteChange1} modules={{ toolbar: toolbarOptions }} style={{ minHeight: '100px' }} />
+                      }} theme="snow" value={desc.richText} placeholder="Enter Description" onChange={rteChange1} modules={modules} style={{ minHeight: '100px' }} />
                     </div>
 
                     <div>
@@ -368,7 +374,7 @@ const EditAboutModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                       <label className="block mb-2 text-sm font-medium text-gray-900" htmlFor="file">Sub Description 1</label>
                       <ReactQuill ref={(el) => {
                         quillObj2 = el;
-                      }} theme="snow" value={desc1.richText} placeholder="Enter Description" onChange={rteChange2} modules={{ toolbar: toolbarOptions }} style={{ minHeight: '100px' }} />
+                      }} theme="snow" value={desc1.richText} placeholder="Enter Description" onChange={rteChange2} modules={modules} style={{ minHeight: '100px' }} />
                     </div>
 
                     <div>
@@ -383,7 +389,7 @@ const EditAboutModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                       <label className="block mb-2 text-sm font-medium text-gray-900" htmlFor="file">Sub Description 2</label>
                       <ReactQuill ref={(el) => {
                         quillObj3 = el;
-                      }} theme="snow" value={desc2.richText} placeholder="Enter Description" onChange={rteChange3} modules={{ toolbar: toolbarOptions }} style={{ minHeight: '100px' }} />
+                      }} theme="snow" value={desc2.richText} placeholder="Enter Description" onChange={rteChange3} modules={modules} style={{ minHeight: '100px' }} />
                     </div>
 
                     <div>
@@ -398,7 +404,7 @@ const EditAboutModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                       <label className="block mb-2 text-sm font-medium text-gray-900" htmlFor="file">Sub Description 3</label>
                       <ReactQuill ref={(el) => {
                         quillObj4 = el;
-                      }} theme="snow" value={desc3.richText} placeholder="Enter Description" onChange={rteChange4} modules={{ toolbar: toolbarOptions }} style={{ minHeight: '100px' }} />
+                      }} theme="snow" value={desc3.richText} placeholder="Enter Description" onChange={rteChange4} modules={modules} style={{ minHeight: '100px' }} />
                     </div>
                   </div>
 

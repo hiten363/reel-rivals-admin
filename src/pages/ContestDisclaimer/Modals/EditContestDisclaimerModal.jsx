@@ -62,6 +62,8 @@ var toolbarOptions = {
   }
 };
 
+var modules = { toolbar: toolbarOptions };
+
 const EditContestDisclaimerModal = ({ flag, data, setRefreshFlag, refreshFlag, notify }) => {
   const { updateContestDisclaimer, deleteContestDisclaimerImage } = useMain();
 
@@ -93,6 +95,7 @@ const EditContestDisclaimerModal = ({ flag, data, setRefreshFlag, refreshFlag, n
   }, [data, flag]);
 
   const rteChange1 = (content, delta, source, editor) => {
+    if (source !== 'user') return;
     handleChange2({
       richText: editor.getHTML(),
       simpleText: editor.getText(),
@@ -159,7 +162,7 @@ const EditContestDisclaimerModal = ({ flag, data, setRefreshFlag, refreshFlag, n
                       ref={(el) => {
                         quillObj1 = el;
                       }}
-                      theme="snow" value={desc.richText} placeholder="Enter Description" onChange={rteChange1} modules={{ toolbar: toolbarOptions }} />
+                      theme="snow" value={desc.richText} placeholder="Enter Description" onChange={rteChange1} modules={modules} />
                   </div>
 
                   <div className='text-right'>

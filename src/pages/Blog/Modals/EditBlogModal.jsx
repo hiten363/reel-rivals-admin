@@ -65,6 +65,8 @@ var toolbarOptions = {
   }
 };
 
+var modules = { toolbar: toolbarOptions };
+
 const EditBlogModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
   const { updateBlog } = useMain();
 
@@ -125,6 +127,7 @@ const EditBlogModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
   }, [data]);
 
   const rteChange1 = (content, delta, source, editor) => {
+    if (source !== 'user') return;
     handleChange2({
       richText: editor.getHTML(),
       simpleText: editor.getText(),
@@ -307,8 +310,8 @@ const EditBlogModal = ({ data, setRefreshFlag, refreshFlag, notify }) => {
                       ref={(el) => {
                         quillObj1 = el;
                       }}
-                      // theme="snow" value={value.desc.richText} placeholder="Enter Description" onChange={rteChange1} modules={{ toolbar: toolbarOptions }} />
-                      theme="snow" value={desc.richText} placeholder="Enter Description" onChange={rteChange1} modules={{ toolbar: toolbarOptions }} />
+                      // theme="snow" value={value.desc.richText} placeholder="Enter Description" onChange={rteChange1} modules={modules} />
+                      theme="snow" value={desc.richText} placeholder="Enter Description" onChange={rteChange1} modules={modules} />
                   </div>
 
                   <div className='text-right'>
